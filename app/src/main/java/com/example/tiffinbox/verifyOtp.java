@@ -114,8 +114,9 @@ public class verifyOtp extends AppCompatActivity {
 
                                                 }
                                             });
-                                            Intent intent = new Intent(getApplicationContext(), EditprofileActivity.class);
+                                            Intent intent = new Intent(getApplicationContext(), ChefmainActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                            intent.putExtra("fragment","account");
                                             startActivity(intent);
 
 
@@ -137,8 +138,9 @@ public class verifyOtp extends AppCompatActivity {
 
                                                 }
                                             });
-                                            Intent intent = new Intent(getApplicationContext(), EditprofileUserActivity.class);
+                                            Intent intent = new Intent(getApplicationContext(), UserhomeActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                            intent.putExtra("fragment","account");
                                             startActivity(intent);
                                         }
 

@@ -45,6 +45,7 @@ public class EditprofileActivity extends AppCompatActivity {
     public void back(View view) {
 
         Intent intent=new Intent(getApplicationContext(),ChefmainActivity.class);
+        intent.putExtra("fragment","account");
         startActivity(intent);
     }
 

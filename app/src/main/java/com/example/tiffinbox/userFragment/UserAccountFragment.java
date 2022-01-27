@@ -1,5 +1,6 @@
 package com.example.tiffinbox.userFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,10 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.tiffinbox.ChefmainActivity;
+import com.example.tiffinbox.EditprofileActivity;
+import com.example.tiffinbox.EditprofileUserActivity;
 import com.example.tiffinbox.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -39,6 +44,7 @@ public class UserAccountFragment extends Fragment {
     private String onlineUserID;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
+    FloatingActionButton floatingActionButton;
 
     public UserAccountFragment() {
         // Required empty public constructor
@@ -84,6 +90,16 @@ public class UserAccountFragment extends Fragment {
         userUsername = view.findViewById(R.id.username);
         userPhone = view.findViewById(R.id.user_phone);
         userEmail = view.findViewById(R.id.user_email);
+        floatingActionButton = view.findViewById(R.id.floatingbtn);
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getActivity(), EditprofileUserActivity.class);
+//                ((ChefmainActivity) getActivity()).startActivity(intent);
+                startActivity(intent);
+            }
+        });
 
         getProfile();
         // Inflate the layout for this fragment
@@ -97,8 +113,8 @@ public class UserAccountFragment extends Fragment {
                 if(task.getResult().exists()){
 
                     String email = task.getResult().getString("Email");
-                    String phone = task.getResult().getString("Phone No");
-                    String uname = task.getResult().getString("Username");
+                    String phone = task.getResult().getString("phone");
+                    String uname = task.getResult().getString("name");
 
                     username.setText(uname);
                     userType.setText("Customer");

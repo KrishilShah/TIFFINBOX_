@@ -3,6 +3,7 @@ package com.example.tiffinbox;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import com.example.tiffinbox.cheffragment.ChefAccountFragment;
 import com.example.tiffinbox.cheffragment.ChefHomeFragment;
 import com.example.tiffinbox.cheffragment.ChefOrderlistFragment;
 import com.example.tiffinbox.cheffragment.ChefPaymentFragment;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -25,6 +27,7 @@ public class ChefmainActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
+    FloatingActionButton floatingActionButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,8 +41,25 @@ public class ChefmainActivity extends AppCompatActivity {
 
         toggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.navigation_drawer_open,R.string.navigation_drawer_close);
         toggle.syncState();
+        String value = getIntent().getStringExtra("fragment");
 
-        getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefHomeFragment()).commit();
+//        if(value.equals("home")){
+            getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefHomeFragment()).commit();
+//        }
+//        else if(value.equals("account")){
+//            getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefAccountFragment()).commit();
+//        }
+
+
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(getApplicationContext(),PostdishActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
@@ -80,7 +100,7 @@ public class ChefmainActivity extends AppCompatActivity {
                         break;
 
                 }
-                toggle.syncState();
+//                toggle.syncState();
 
                 return true;
             }

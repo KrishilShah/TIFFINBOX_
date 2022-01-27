@@ -80,7 +80,7 @@ public class UserhomeActivity extends AppCompatActivity {
                         break;
 
                 }
-                toggle.syncState();
+//                toggle.syncState();
 
                 return true;
             }
