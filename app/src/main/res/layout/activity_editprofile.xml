@@ -53,15 +53,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/chef_image"
+<!--            <ImageButton-->
+<!--                android:id="@+id/chef_image"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentStart="true"-->
+<!--                android:layout_alignParentTop="true"-->
+<!--                android:layout_alignParentEnd="true"-->
+<!--                android:layout_marginStart="0dp"-->
+<!--                android:layout_marginEnd="0dp"-->
+<!--                android:backgroundTint="@color/white"-->
+<!--                android:src="@drawable/profile" />-->
+            <ImageView
+                android:id="@+id/chefImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
+
                 android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginStart="0dp"
-                android:layout_marginEnd="0dp"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="-2dp"
                 android:backgroundTint="@color/white"
                 android:src="@drawable/profile" />
 
@@ -69,7 +81,7 @@
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/chef_image"
+                android:layout_below="@+id/chefImage"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="20dp"
@@ -118,53 +130,53 @@
                 android:textColorHint="@color/grey"
                 android:textStyle="normal" />
 
-<!--            <RadioGroup-->
-<!--                android:id="@+id/radiotext"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/phone"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:gravity="center"-->
-<!--                android:orientation="horizontal">-->
+            <RadioGroup
+                android:id="@+id/radiotext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/phone"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-<!--                <TextView-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Gender :"-->
-<!--                    android:textSize="20sp" />-->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gender :"
+                    android:textSize="20sp" />
 
-<!--                <RadioButton-->
-<!--                    android:id="@+id/updatemale"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginStart="5dp"-->
-<!--                    android:layout_marginLeft="5dp"-->
-<!--                    android:text="Male"-->
-<!--                    android:textSize="20sp" />-->
+                <RadioButton
+                    android:id="@+id/updatemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:text="Male"
+                    android:textSize="20sp" />
 
-<!--                <RadioButton-->
-<!--                    android:id="@+id/updatefemale"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:layout_marginEnd="5dp"-->
-<!--                    android:layout_marginRight="5dp"-->
-<!--                    android:text="Female"-->
-<!--                    android:textSize="20sp" />-->
+                <RadioButton
+                    android:id="@+id/updatefemale"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Female"
+                    android:textSize="20sp" />
 
-<!--                <RadioButton-->
-<!--                    android:id="@+id/updateother"-->
-<!--                    android:layout_width="wrap_content"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:text="Others"-->
-<!--                    android:textSize="20sp" />-->
-<!--            </RadioGroup>-->
+                <RadioButton
+                    android:id="@+id/updateother"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Others"
+                    android:textSize="20sp" />
+            </RadioGroup>
 
             <EditText
                 android:id="@+id/address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/phone"
+                android:layout_below="@+id/radiotext"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="20dp"
@@ -172,7 +184,7 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/textbox_bg"
                 android:hint="Address"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:padding="20dp"
                 android:textColor="@color/grey"
                 android:textColorHint="@color/grey"
@@ -214,15 +226,16 @@
                 android:textColorHint="@color/grey"
                 android:textStyle="normal" />
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/confirmPassword"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="30dp"
-        android:background="@drawable/btn_bg"
-        android:text="Add" />
+            <Button
+                android:id="@+id/update"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/confirmPassword"
+                android:layout_alignParentEnd="true"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="30dp"
+                android:background="@drawable/btn_bg"
+                android:text="Update" />
         </RelativeLayout>
 
     </ScrollView>

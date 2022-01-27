@@ -27,9 +27,10 @@ public class ChefmainActivity extends AppCompatActivity {
     ActionBarDrawerToggle toggle;
     DrawerLayout drawerLayout;
     Toolbar toolbar;
-    FloatingActionButton floatingActionButton;
+//    FloatingActionButton floatingActionButton;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chefmain);
 
@@ -44,20 +45,19 @@ public class ChefmainActivity extends AppCompatActivity {
         String value = getIntent().getStringExtra("fragment");
 
 //        if(value.equals("home")){
-            getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefHomeFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefHomeFragment()).commit();
 //        }
 //        else if(value.equals("account")){
 //            getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefAccountFragment()).commit();
 //        }
 
-
-        floatingActionButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(getApplicationContext(),PostdishActivity.class);
-                startActivity(intent);
-            }
-        });
+//        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent=new Intent(getApplicationContext(),PostdishActivity.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
 

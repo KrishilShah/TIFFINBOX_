@@ -1,10 +1,12 @@
 package com.example.tiffinbox.userFragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,12 +18,16 @@ import com.example.tiffinbox.EditprofileUserActivity;
 import com.example.tiffinbox.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,12 +45,14 @@ public class UserAccountFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    TextView userUsername, userPhone, userEmail, userType, username;
+    TextView userUsername, userPhone, userEmail, userType, username, userAddress;
     FirebaseAuth firebaseAuth;
     private String onlineUserID;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
     FloatingActionButton floatingActionButton;
+    ImageView userImage;
+    StorageReference storageReference;
 
     public UserAccountFragment() {
         // Required empty public constructor
@@ -84,12 +92,15 @@ public class UserAccountFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         onlineUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         documentReference = db.collection("customers").document(firebaseAuth.getCurrentUser().getUid());
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         username = view.findViewById(R.id.userName);
         userType = view.findViewById(R.id.userType);
         userUsername = view.findViewById(R.id.username);
         userPhone = view.findViewById(R.id.user_phone);
         userEmail = view.findViewById(R.id.user_email);
+        userAddress = view.findViewById(R.id.chef_address);
+        userImage = view.findViewById(R.id.chef_image);
         floatingActionButton = view.findViewById(R.id.floatingbtn);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -112,15 +123,18 @@ public class UserAccountFragment extends Fragment {
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.getResult().exists()){
 
-                    String email = task.getResult().getString("Email");
+                    String email = task.getResult().getString("email");
                     String phone = task.getResult().getString("phone");
                     String uname = task.getResult().getString("name");
+                    String address = task.getResult().getString("address");
 
                     username.setText(uname);
                     userType.setText("Customer");
                     userUsername.setText(uname);
                     userEmail.setText(email);
                     userPhone.setText(phone);
+                    userAddress.setText(address);
+
                 }
                 else{
 
@@ -132,6 +146,13 @@ public class UserAccountFragment extends Fragment {
 
                     }
                 });
+        StorageReference profileRef = storageReference.child("customers/"+firebaseAuth.getCurrentUser().getUid()+"/customer_profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(userImage);
+            }
+        });
 
     }
 }

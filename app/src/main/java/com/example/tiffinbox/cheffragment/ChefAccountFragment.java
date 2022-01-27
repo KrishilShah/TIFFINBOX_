@@ -1,10 +1,12 @@
 package com.example.tiffinbox.cheffragment;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import com.example.tiffinbox.EditprofileActivity;
 import com.example.tiffinbox.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -22,6 +25,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -39,12 +45,15 @@ public class ChefAccountFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    TextView chefUsername, chefPhone, chefEmail, userType, username;
+    TextView chefUsername, chefPhone, chefEmail, userType, username, chefAddress;
     FirebaseAuth firebaseAuth;
     private String onlineUserID;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
     FloatingActionButton floatingActionButton;
+    ImageView chefImage;
+    StorageReference storageReference;
+
 
     public ChefAccountFragment() {
         // Required empty public constructor
@@ -85,12 +94,15 @@ public class ChefAccountFragment extends Fragment {
         firebaseAuth = FirebaseAuth.getInstance();
         onlineUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         documentReference = db.collection("chefs").document(firebaseAuth.getCurrentUser().getUid());
+        storageReference = FirebaseStorage.getInstance().getReference();
 
         username = view.findViewById(R.id.userName);
         userType = view.findViewById(R.id.userType);
         chefUsername = view.findViewById(R.id.username);
         chefPhone = view.findViewById(R.id.user_phone);
         chefEmail = view.findViewById(R.id.user_email);
+        chefAddress = view.findViewById(R.id.chef_address);
+        chefImage = view.findViewById(R.id.chef_image);
         floatingActionButton = view.findViewById(R.id.floatingbtn);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -116,12 +128,14 @@ public class ChefAccountFragment extends Fragment {
                     String email = task.getResult().getString("email");
                     String phone = task.getResult().getString("phone");
                     String uname = task.getResult().getString("name");
+                    String address = task.getResult().getString("address");
 
                     username.setText(uname);
                     userType.setText("Chef");
                     chefUsername.setText(uname);
                     chefEmail.setText(email);
                     chefPhone.setText(phone);
+                    chefAddress.setText(address);
                 }
                 else{
                     Toast.makeText(getActivity(), "No Profile Exists", Toast.LENGTH_SHORT ).show();
@@ -133,5 +147,13 @@ public class ChefAccountFragment extends Fragment {
 
                     }
                 });
+
+        StorageReference profileRef = storageReference.child("chefs/"+firebaseAuth.getCurrentUser().getUid()+"/chef_profile.jpg");
+        profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Picasso.get().load(uri).into(chefImage);
+            }
+        });
     }
 }

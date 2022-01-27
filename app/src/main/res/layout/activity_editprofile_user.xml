@@ -44,8 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageButton
-                android:id="@+id/chef_image"
+            <ImageView
+                android:id="@+id/user_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -61,7 +61,7 @@
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/chef_image"
+                android:layout_below="@+id/user_image"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="20dp"
@@ -164,7 +164,7 @@
                 android:layout_marginEnd="20dp"
                 android:background="@drawable/textbox_bg"
                 android:hint="Address"
-                android:inputType="textPassword"
+                android:inputType="text"
                 android:padding="20dp"
                 android:textColor="@color/grey"
                 android:textColorHint="@color/grey"
@@ -207,6 +207,7 @@
                 android:textStyle="normal" />
 
             <Button
+                android:id="@+id/update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/confirmPassword"
@@ -214,7 +215,7 @@
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="30dp"
                 android:background="@drawable/btn_bg"
-                android:text="Add" />
+                android:text="Update" />
         </RelativeLayout>
 
     </ScrollView>
