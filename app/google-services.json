@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "2825828693",
+    "firebase_url": "https://tiffinbox-6afad-default-rtdb.firebaseio.com",
+    "project_id": "tiffinbox-6afad",
+    "storage_bucket": "tiffinbox-6afad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:2825828693:android:23fdec48d7d638eac357dc",
+        "android_client_info": {
+          "package_name": "com.example.tiffinbox"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "2825828693-cft01dvha9cbvi8sqi31e8aod4hpjdbv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tiffinbox",
+            "certificate_hash": "740bc20f219e2ebdc1ff3bfae61e74adc838ce28"
+          }
+        },
+        {
+          "client_id": "2825828693-6r0dmrrjar04j3idiq8efp8njl63fhno.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKwSMT-D8hCXUWdf73VDd_07ZjQhKnjBg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "2825828693-6r0dmrrjar04j3idiq8efp8njl63fhno.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
