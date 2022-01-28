@@ -7,10 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tiffinbox.PostdishActivity;
 import com.example.tiffinbox.R;
+import com.example.tiffinbox.adapters.AdapterChef;
+import com.example.tiffinbox.models.ModelChef;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.database.FirebaseDatabase;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,12 +67,33 @@ public class ChefHomeFragment extends Fragment {
         }
     }
 
+    RecyclerView recview;
+    AdapterChef adapter;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View view = inflater.inflate(R.layout.fragment_chef_home, container, false);
 
+        recview=view.findViewById(R.id.recview);
+
+//        recview.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false));
+
+        recview.setLayoutManager(new LinearLayoutManager(getActivity() ));
+
         floatingActionButton = view.findViewById(R.id.floatingbtn);
+
+        FirebaseRecyclerOptions<ModelChef> options =
+                new FirebaseRecyclerOptions.Builder<ModelChef>()
+                        .setQuery(FirebaseDatabase.getInstance().getReference().child("Dish"), ModelChef.class)
+                        .build();
+
+        adapter=new AdapterChef(options);
+        recview.setAdapter(adapter);
+
+
+
 
                 floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,4 +105,18 @@ public class ChefHomeFragment extends Fragment {
         // Inflate the layout for this fragment
         return view;
     }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+    @Override
+    public void onStop() {
+        super.onStop();
+        adapter.stopListening();
+    }
+
+
 }

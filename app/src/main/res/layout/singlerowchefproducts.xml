@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="10dp"
-    >
+    android:padding="10dp">
 
-    <ImageView
+    <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/dish_image"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:scaleType="centerCrop" />
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="centerCrop"
+        app:civ_border_color="#FF000000"
+        app:civ_border_width="2dp" />
     <RelativeLayout
         android:visibility="visible"
         android:layout_below="@+id/dish_image"
@@ -18,20 +20,13 @@
         android:layout_marginTop="10sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chef name:"
-            android:textSize="16sp"
-            android:textColor="@color/purple"/>
+
 
         <TextView
             android:id="@+id/chef_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="6dp"
-            android:layout_toEndOf="@+id/name"
             android:text="Chef name:"
             android:textColor="@color/purple"
             android:textSize="16sp" />
@@ -41,20 +36,20 @@
         android:id="@+id/dish_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dish Name"
-        android:layout_marginTop="10sp"
         android:layout_below="@+id/name_text"
+        android:layout_marginTop="10sp"
+        android:text="Dish Name"
         android:textColor="@color/purple"
         android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/dish_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Price"
-        android:layout_marginTop="10sp"
         android:layout_below="@+id/dish_name"
+        android:layout_marginTop="10sp"
+        android:text="Price"
         android:textColor="@color/grey"
         android:textSize="18sp" />
 </RelativeLayout>
