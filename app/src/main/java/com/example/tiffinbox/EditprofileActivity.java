@@ -16,6 +16,10 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContract;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -54,6 +58,7 @@ public class EditprofileActivity extends AppCompatActivity {
     StorageReference storageReference;
     public static String chefPassword;
     private Uri imageUri;
+    ActivityResultLauncher<String> mGetContent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +67,7 @@ public class EditprofileActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
 
         chef_name = findViewById(R.id.username);
         chef_email = findViewById(R.id.email);
@@ -74,6 +80,15 @@ public class EditprofileActivity extends AppCompatActivity {
         female = findViewById(R.id.updatefemale);
         other = findViewById(R.id.updateother);
         chef_image = findViewById(R.id.chefImage);
+
+        mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+            @Override
+            public void onActivityResult(Uri result) {
+                imageUri = result;
+                chef_image.setImageURI(result);
+                uploadPicture(imageUri);
+            }
+        });
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -115,7 +130,7 @@ public class EditprofileActivity extends AppCompatActivity {
                     return;
                 }
                 if(TextUtils.isEmpty(address)){
-                    chef_address.setError("UserName is Required!");
+                    chef_address.setError("Address is Required!");
                     return;
                 }
                 if(TextUtils.isEmpty(password)){
@@ -177,6 +192,7 @@ public class EditprofileActivity extends AppCompatActivity {
                     }
                 });
                 startActivity(new Intent(getApplicationContext(), ChefmainActivity.class));
+                finish();
             }
         });
 
@@ -187,16 +203,16 @@ public class EditprofileActivity extends AppCompatActivity {
             }
         });
     }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode== RESULT_OK){
-            imageUri = data.getData();
+//
+//    @Override
+//    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1 && resultCode== RESULT_OK){
+//            imageUri = data.getData();
 //            chef_image.setImageURI(imageUri);
-            uploadPicture(imageUri);
-        }
-    }
+//            uploadPicture(imageUri);
+//        }
+//    }
 
     private void uploadPicture(Uri imageUri) {
         final ProgressDialog pd = new ProgressDialog(this );
@@ -231,10 +247,11 @@ public class EditprofileActivity extends AppCompatActivity {
     }
 
     private void choosePicture() {
-        Intent intent = new Intent();
+//        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 //        intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent,1);
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+        mGetContent.launch("image/*");
+
     }
 
 
