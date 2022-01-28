@@ -64,24 +64,27 @@
 <!--                android:layout_marginEnd="0dp"-->
 <!--                android:backgroundTint="@color/white"-->
 <!--                android:src="@drawable/profile" />-->
-            <ImageView
-                android:id="@+id/chefImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+           <RelativeLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_centerHorizontal="true"
+               android:layout_marginTop="10dp"
+               android:id="@+id/image_layout">
 
-                android:layout_alignParentTop="true"
-                android:layout_centerInParent="true"
-                android:layout_marginStart="2dp"
-                android:layout_marginTop="0dp"
-                android:layout_marginEnd="-2dp"
-                android:backgroundTint="@color/white"
-                android:src="@drawable/profile" />
+               <ImageView
+                   android:id="@+id/chefImage"
+                   android:layout_width="150dp"
+                   android:layout_height="150dp"
+                   android:backgroundTint="@color/white"
+                   android:scaleType="centerCrop"
+                   android:src="@drawable/profile" />
+           </RelativeLayout>
 
             <EditText
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/chefImage"
+                android:layout_below="@+id/image_layout"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="20dp"

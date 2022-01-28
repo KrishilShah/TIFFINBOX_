@@ -116,7 +116,7 @@ public class verifyOtp extends AppCompatActivity {
                                             });
                                             Intent intent = new Intent(getApplicationContext(), ChefmainActivity.class);
                                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                                            intent.putExtra("fragment","account");
+                                            intent.putExtra("fragment","home");
                                             startActivity(intent);
 
 

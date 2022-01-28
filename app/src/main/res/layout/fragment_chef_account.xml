@@ -11,31 +11,33 @@
     tools:context=".cheffragment.ChefAccountFragment">
 
     <RelativeLayout
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
         android:orientation="vertical"
         android:padding="10dp">
 
 
         <RelativeLayout
             android:id="@+id/top_account"
-            android:layout_width="match_parent"
-            android:layout_height="105dp">
+            android:layout_width="384dp"
+            android:layout_height="150dp">
 
             <ImageView
                 android:id="@+id/chef_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="161dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
                 android:src="@drawable/profile" />
 
             <LinearLayout
-                android:layout_toEndOf="@+id/chef_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_toEndOf="@+id/chef_image"
+                android:gravity="center"
                 android:orientation="vertical">
 
                 <TextView
@@ -72,7 +74,7 @@
             android:layout_below="@+id/top_account"
             android:layout_marginTop="39dp"
             android:padding="5dp"
-            android:text="Details:-------------------------------------"
+            android:text="Details:------------------------------------------"
             android:textSize="18sp"
             android:textStyle="bold" />
 
@@ -108,9 +110,9 @@
 
         <LinearLayout
             android:id="@+id/phone_linear"
-            android:layout_below="@+id/username_linear1"
             android:layout_width="match_parent"
             android:layout_height="34dp"
+            android:layout_below="@+id/username_linear1"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
@@ -195,11 +197,12 @@
                 android:textStyle="bold" />
 
         </LinearLayout>
+
         <LinearLayout
-            android:layout_below="@+id/email_linear"
             android:id="@+id/address_linear"
             android:layout_width="match_parent"
             android:layout_height="34dp"
+            android:layout_below="@+id/email_linear"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 

@@ -186,7 +186,8 @@ public class EditprofileUserActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
                     }
                 });
-                startActivity(new Intent(getApplicationContext(), UserhomeActivity.class));
+                Intent intent= new Intent(getApplicationContext(),UserhomeActivity.class);
+                startActivity(intent);
                 finish();
             }
         });

@@ -191,8 +191,11 @@ public class EditprofileActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Some Error Occured", Toast.LENGTH_SHORT).show();
                     }
                 });
-                startActivity(new Intent(getApplicationContext(), ChefmainActivity.class));
-                finish();
+                Intent intent= new Intent(getApplicationContext(),ChefmainActivity.class);
+                intent.putExtra("fragment","account");
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+//                finish();
             }
         });
 

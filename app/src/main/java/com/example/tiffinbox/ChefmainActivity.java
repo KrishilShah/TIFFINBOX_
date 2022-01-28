@@ -44,12 +44,12 @@ public class ChefmainActivity extends AppCompatActivity {
         toggle.syncState();
         String value = getIntent().getStringExtra("fragment");
 
-//        if(value.equals("home")){
+        if(value.equals("home")){
         getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefHomeFragment()).commit();
-//        }
-//        else if(value.equals("account")){
-//            getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefAccountFragment()).commit();
-//        }
+        }
+        else if(value.equals("account")){
+            getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefAccountFragment()).commit();
+        }
 
 //        floatingActionButton.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -70,26 +70,26 @@ public class ChefmainActivity extends AppCompatActivity {
                 {
                     case R.id.chef_home:
                         Toast.makeText(getApplicationContext(), "Home Fragment", Toast.LENGTH_SHORT).show();
-
+                        toolbar.setTitle("TiffinBox");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefHomeFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.chef_orderlist:
-                        Toast.makeText(getApplicationContext(), "Gallery Fragment", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), "Orderlist Fragment", Toast.LENGTH_SHORT).show();
+                        toolbar.setTitle("Orderlist");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefOrderlistFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.payment:
-                        Toast.makeText(getApplicationContext(), "Slideshow Fragment", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), "Payment Fragment", Toast.LENGTH_SHORT).show();
+                        toolbar.setTitle("Payment");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefPaymentFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
                     case R.id.chef_account:
-                        Toast.makeText(getApplicationContext(), "Slideshow Fragment", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), "Account Fragment", Toast.LENGTH_SHORT).show();
+                        toolbar.setTitle("Profile");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefAccountFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;

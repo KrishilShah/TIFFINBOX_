@@ -62,7 +62,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(value.equals("chef"))
                             {
                                 Intent intent = new Intent(getApplicationContext(),ChefmainActivity.class);
-//                                intent.putExtra("fragment","home");
+                                intent.putExtra("fragment","home");
                                 startActivity(intent);
                             }
                             else if(value.equals("user"))
