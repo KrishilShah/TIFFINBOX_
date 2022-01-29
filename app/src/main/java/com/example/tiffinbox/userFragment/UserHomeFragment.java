@@ -91,6 +91,16 @@ public class UserHomeFragment extends Fragment {
 
 
 
+        getRecyclerview();
+
+
+
+
+        // Inflate the layout for this fragment
+        return root;
+    }
+
+    private void getRecyclerview() {
         db.collection("chefs")
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -110,11 +120,5 @@ public class UserHomeFragment extends Fragment {
                         }
                     }
                 });
-
-
-
-
-        // Inflate the layout for this fragment
-        return root;
     }
 }

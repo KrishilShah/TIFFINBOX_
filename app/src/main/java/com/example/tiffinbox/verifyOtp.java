@@ -108,6 +108,7 @@ public class verifyOtp extends AppCompatActivity {
                                             chef.put("Password", password);
                                             chef.put("phone", phoneNo);
                                             chef.put("UserType", value);
+                                            chef.put("id",chefID);
                                             documentReference.set(chef).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {
@@ -132,6 +133,7 @@ public class verifyOtp extends AppCompatActivity {
                                             user.put("Password", password);
                                             user.put("phone", phoneNo);
                                             user.put("UserType", value);
+                                            user.put("id",userID);
                                             documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                                                 @Override
                                                 public void onSuccess(Void unused) {

@@ -29,6 +29,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link UserAccountFragment#newInstance} factory method to
@@ -51,7 +53,7 @@ public class UserAccountFragment extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
     FloatingActionButton floatingActionButton;
-    ImageView userImage;
+    CircleImageView userImage;
     StorageReference storageReference;
 
     public UserAccountFragment() {
@@ -99,8 +101,8 @@ public class UserAccountFragment extends Fragment {
         userUsername = view.findViewById(R.id.username);
         userPhone = view.findViewById(R.id.user_phone);
         userEmail = view.findViewById(R.id.user_email);
-        userAddress = view.findViewById(R.id.chef_address);
-        userImage = view.findViewById(R.id.chef_image);
+        userAddress = view.findViewById(R.id.user_address);
+        userImage = view.findViewById(R.id.user_image);
         floatingActionButton = view.findViewById(R.id.floatingbtn);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {

@@ -1,4 +1,4 @@
-package com.example.tiffinbox;
+package com.example.tiffinbox.models;
 
 public class DishData {
     String dname, ddes, url, id, cname;

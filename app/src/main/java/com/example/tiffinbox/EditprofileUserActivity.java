@@ -38,13 +38,18 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class EditprofileUserActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     EditText user_email, user_name, user_number, user_address, user_password, user_confirmpassword;
     RadioButton male, female, other;
     Button update_btn;
-    ImageView user_image;
+    CircleImageView user_image;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
     private String onlineUserID;
@@ -223,6 +228,8 @@ public class EditprofileUserActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         Picasso.get().load(uri).into(user_image);
+//                                String url= String.valueOf(uri);
+//                                store(url);
                     }
                 });
             }
@@ -240,6 +247,14 @@ public class EditprofileUserActivity extends AppCompatActivity {
             }
         });
     }
+
+
+//        private void store(String url) {
+//            DocumentReference documentReference = firestore.collection("customers").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+//            Map<String,Object> link = new HashMap<>();
+//            link.put("url", url);
+//            documentReference.set(link);
+//    }
 
     private void choosePicture() {
         Intent intent = new Intent();

@@ -26,12 +26,14 @@
             android:layout_width="384dp"
             android:layout_height="150dp">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/chef_image"
-                android:layout_width="161dp"
-                android:layout_height="match_parent"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/profile" />
+                android:src="@drawable/profile"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"

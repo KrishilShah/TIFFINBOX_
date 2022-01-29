@@ -41,7 +41,11 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditprofileActivity extends AppCompatActivity {
     
@@ -49,7 +53,7 @@ public class EditprofileActivity extends AppCompatActivity {
     EditText chef_email, chef_name, chef_number, chef_address, chef_password, chef_confirmpassword;
     RadioButton male, female, other;
     Button update_btn;
-    ImageView chef_image;
+    CircleImageView chef_image;
     FirebaseAuth firebaseAuth;
     FirebaseFirestore firestore;
     private String onlineUserID;
@@ -231,6 +235,8 @@ public class EditprofileActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(Uri uri) {
                         Picasso.get().load(uri).into(chef_image);
+//                        String url = String.valueOf(uri);
+//                        store(url);
                     }
                 });
             }
@@ -248,6 +254,12 @@ public class EditprofileActivity extends AppCompatActivity {
             }
         });
     }
+
+//    private void store(String url) {
+//        DocumentReference documentReference = firestore.collection("customers").document(FirebaseAuth.getInstance().getCurrentUser().getUid());
+//
+//        documentReference.update("url",url);
+//    }
 
     private void choosePicture() {
 //        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -327,6 +339,7 @@ public class EditprofileActivity extends AppCompatActivity {
     public void back(View view) {
 
         Intent intent=new Intent(getApplicationContext(),ChefmainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
         intent.putExtra("fragment","account");
         startActivity(intent);
     }

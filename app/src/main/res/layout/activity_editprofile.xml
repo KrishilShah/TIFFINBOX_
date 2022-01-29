@@ -71,13 +71,15 @@
                android:layout_marginTop="10dp"
                android:id="@+id/image_layout">
 
-               <ImageView
+               <de.hdodenhof.circleimageview.CircleImageView
                    android:id="@+id/chefImage"
                    android:layout_width="150dp"
                    android:layout_height="150dp"
                    android:backgroundTint="@color/white"
                    android:scaleType="centerCrop"
-                   android:src="@drawable/profile" />
+                   android:src="@drawable/profile"
+                   app:civ_border_color="#FF000000"
+                   app:civ_border_width="2dp" />
            </RelativeLayout>
 
             <EditText

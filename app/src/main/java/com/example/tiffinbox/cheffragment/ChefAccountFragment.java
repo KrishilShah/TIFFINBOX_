@@ -29,6 +29,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ChefAccountFragment#newInstance} factory method to
@@ -51,7 +53,7 @@ public class ChefAccountFragment extends Fragment {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
     FloatingActionButton floatingActionButton;
-    ImageView chefImage;
+    CircleImageView chefImage;
     StorageReference storageReference;
 
 
