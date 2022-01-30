@@ -46,6 +46,7 @@ public class ViewAllActivity extends AppCompatActivity {
         viewAllAdapter=new ViewAllAdapter(this,viewAllModels);
         viewAllModels=new ArrayList<>();
         recyclerView.setAdapter(viewAllAdapter);
+        String ChefID = getIntent().getStringExtra("id");
 
 //         if(chefID!=null && chefID.equalsIgnoreCase("id")){
 //             firestore.collection("dish").whereEqualTo("id","ChefID").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
@@ -59,6 +60,7 @@ public class ViewAllActivity extends AppCompatActivity {
 //                 }
 //             });
 //        }
+
 
 
 

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -28,7 +29,8 @@ import java.util.List;
  * Use the {@link UserHomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserHomeFragment extends Fragment {
+public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemClickListener {
+    public Chef_adapters.OnItemClickListener onItemClickListener;
 
     private List<Chef_list_model> chef_list_modelList;
     RecyclerView popularRec;
@@ -86,8 +88,9 @@ public class UserHomeFragment extends Fragment {
         popularRec=root.findViewById(R.id.cheflist);
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false));
         chef_list_modelList =new ArrayList<>();
-        chefAdapters=new Chef_adapters(getActivity(), chef_list_modelList);
+        chefAdapters=new Chef_adapters(getActivity(), chef_list_modelList,onItemClickListener);
         popularRec.setAdapter(chefAdapters);
+//        String id = db.collection("chefs").document().getId();
 
 
 
@@ -113,12 +116,17 @@ public class UserHomeFragment extends Fragment {
 //                                chefListModel
                                 chef_list_modelList.add(chef_list_model);
                                 chefAdapters.notifyDataSetChanged();
-                                Toast.makeText(getActivity(), "LIST DISPLAY"+task.getException(), Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(getActivity(), "LIST DISPLAY"+task.getException(), Toast.LENGTH_SHORT).show();
                             }
                         } else {
                             Toast.makeText(getActivity(), "Error"+task.getException(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+
     }
 }

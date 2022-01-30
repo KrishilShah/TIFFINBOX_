@@ -2,10 +2,21 @@ package com.example.tiffinbox.models;
 
 public class Chef_list_model {
 
-    String name, phone, email, purl;
+    String name, phone, email, purl,id;
+
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public Chef_list_model() {
     }
-    public Chef_list_model(String name, String phone, String email, String purl) {
+    public Chef_list_model(String name, String phone, String email, String purl,String id) {
+        this.id=id;
         this.name = name;
         this.phone = phone;
         this.email = email;
