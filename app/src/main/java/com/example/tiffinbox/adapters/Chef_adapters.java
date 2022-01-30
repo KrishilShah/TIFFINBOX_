@@ -1,6 +1,7 @@
 package com.example.tiffinbox.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tiffinbox.R;
+import com.example.tiffinbox.ViewAllActivity;
 import com.example.tiffinbox.models.Chef_list_model;
 
 import java.util.List;
@@ -39,6 +41,18 @@ public class Chef_adapters extends RecyclerView.Adapter<Chef_adapters.ViewHolder
         holder.name.setText(chef_list_modelList.get(position).getName());
         holder.phoneNo.setText(chef_list_modelList.get(position).getPhone());
         holder.mailid.setText(chef_list_modelList.get(position).getEmail());
+//        holder.itemView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(context, ViewAllActivity.class);
+//                intent.putExtra("email",chef_list_modelList.get(position).getEmail());
+//                context.startActivity(intent);
+//
+//
+//            }
+//        });
+
+
 
     }
 
