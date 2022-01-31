@@ -21,6 +21,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ViewHolder> {
     Context context;
+
     List<ViewAllModel> list;
 
     public ViewAllAdapter(Context context, List<ViewAllModel> list) {
@@ -46,7 +47,7 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return list.size();
+            return list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

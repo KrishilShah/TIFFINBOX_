@@ -21,6 +21,7 @@ import com.example.tiffinbox.ViewAllActivity;
 import com.example.tiffinbox.models.Chef_list_model;
 import com.google.firebase.firestore.DocumentSnapshot;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Chef_adapters extends RecyclerView.Adapter<Chef_adapters.ViewHolder> {
@@ -55,12 +56,7 @@ public Chef_adapters.OnItemClickListener onItemClickListener;
             public void onClick(View v) {
                 Intent intent = new Intent(context, ViewAllActivity.class);
                 intent.putExtra("id",chef_list_modelList.get(position).getId());
-
-
-//       Toast.makeText(context.getApplicationContext(),  Toast.LENGTH_SHORT).show();
                 context.startActivity(intent);
-
-
             }
         });
 
@@ -92,15 +88,13 @@ public Chef_adapters.OnItemClickListener onItemClickListener;
             name=itemView.findViewById(R.id.list_chef_name);
             phoneNo=itemView.findViewById(R.id.chef_list_phone);
             mailid=itemView.findViewById(R.id.chef_list_mail);
+            itemView.setOnClickListener(this);
 
         }
 
         @Override
         public void onClick(View v) {
             onItemClickListener.onClick(v,getAdapterPosition());
-
-
-
         }
 
 

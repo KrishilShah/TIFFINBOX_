@@ -1,5 +1,6 @@
 package com.example.tiffinbox.userFragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tiffinbox.R;
+import com.example.tiffinbox.ViewAllActivity;
 import com.example.tiffinbox.adapters.Chef_adapters;
 import com.example.tiffinbox.models.Chef_list_model;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,7 +34,7 @@ import java.util.List;
 public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemClickListener {
     public Chef_adapters.OnItemClickListener onItemClickListener;
 
-    private List<Chef_list_model> chef_list_modelList;
+    List<Chef_list_model> chef_list_modelList;
     RecyclerView popularRec;
     Chef_adapters chefAdapters;
     FirebaseFirestore db ;
@@ -83,7 +85,8 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
                              Bundle savedInstanceState) {
 
         View root = inflater.inflate(R.layout.fragment_user_home, container, false);
-        db=FirebaseFirestore.getInstance(); 
+        db=FirebaseFirestore.getInstance();
+
 
         popularRec=root.findViewById(R.id.cheflist);
         popularRec.setLayoutManager(new LinearLayoutManager(getActivity(),RecyclerView.VERTICAL,false));
@@ -129,4 +132,5 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
     public void onClick(View view, int position) {
 
     }
+
 }

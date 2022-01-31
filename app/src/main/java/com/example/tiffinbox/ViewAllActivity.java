@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.example.tiffinbox.adapters.ViewAllAdapter;
@@ -34,32 +35,29 @@ public class ViewAllActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_all);
 
         firestore=FirebaseFirestore.getInstance();
-
-//        String chefID;
-//
-//        chefID = mFirebaseAuth.getCurrentUser().getUid();
-//        DocumentReference documentReference = firestore.collection("chefs").document(chefID);
-
-//        String email =getIntent().getStringExtra("email");
+        String chefID = getIntent().getStringExtra("id");
         recyclerView=findViewById(R.id.view_all_rec);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        viewAllAdapter=new ViewAllAdapter(this,viewAllModels);
         viewAllModels=new ArrayList<>();
+        viewAllAdapter=new ViewAllAdapter(this,viewAllModels);
         recyclerView.setAdapter(viewAllAdapter);
-        String ChefID = getIntent().getStringExtra("id");
 
-//         if(chefID!=null && chefID.equalsIgnoreCase("id")){
-//             firestore.collection("dish").whereEqualTo("id","ChefID").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                 @Override
-//                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                     for (DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
-//                         ViewAllModel viewAllModel=documentSnapshot.toObject(ViewAllModel.class);
-//                         viewAllModels.add(viewAllModel);
-//                         viewAllAdapter.notifyDataSetChanged();
-//                     }
-//                 }
-//             });
-//        }
+
+
+         if(chefID!=null){
+             firestore.collection("dish").whereEqualTo("id",chefID).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                 @SuppressLint("NotifyDataSetChanged")
+                 @Override
+                 public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                     for (DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
+                         ViewAllModel viewAllModel=documentSnapshot.toObject(ViewAllModel.class);
+//                         viewAllModels.addAll((Collection<? extends ViewAllModel>) viewAllModel);
+                         viewAllModels.add(viewAllModel);
+                         viewAllAdapter.notifyDataSetChanged();
+                     }
+                 }
+             });
+        }
 
 
 
