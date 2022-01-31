@@ -23,22 +23,22 @@
             app:menu="@menu/updateprofile"
             app:popupTheme="@style/Theme.TiffinBox.PopupOverlay" >
 
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:onClick="back"
-                    android:contextClickable="true"
-                    android:src="@drawable/back_arrow"
-                    android:backgroundTint="@color/purple"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Update Profile"
-                            android:textSize="20sp"
-                            android:paddingLeft="10dp"
-                            android:textColor="@color/white"
-                            android:textStyle="bold|italic"
-                            />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:onClick="back"
+                android:contextClickable="true"
+                android:src="@drawable/back_arrow"
+                android:backgroundTint="@color/purple"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Update Profile"
+                android:textSize="20sp"
+                android:paddingLeft="10dp"
+                android:textColor="@color/white"
+                android:textStyle="bold|italic"
+                />
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -53,34 +53,34 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-<!--            <ImageButton-->
-<!--                android:id="@+id/chef_image"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_alignParentStart="true"-->
-<!--                android:layout_alignParentTop="true"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_marginStart="0dp"-->
-<!--                android:layout_marginEnd="0dp"-->
-<!--                android:backgroundTint="@color/white"-->
-<!--                android:src="@drawable/profile" />-->
-           <RelativeLayout
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:layout_centerHorizontal="true"
-               android:layout_marginTop="10dp"
-               android:id="@+id/image_layout">
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/chef_image"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_alignParentStart="true"-->
+            <!--                android:layout_alignParentTop="true"-->
+            <!--                android:layout_alignParentEnd="true"-->
+            <!--                android:layout_marginStart="0dp"-->
+            <!--                android:layout_marginEnd="0dp"-->
+            <!--                android:backgroundTint="@color/white"-->
+            <!--                android:src="@drawable/profile" />-->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:id="@+id/image_layout">
 
-               <de.hdodenhof.circleimageview.CircleImageView
-                   android:id="@+id/chefImage"
-                   android:layout_width="150dp"
-                   android:layout_height="150dp"
-                   android:backgroundTint="@color/white"
-                   android:scaleType="centerCrop"
-                   android:src="@drawable/profile"
-                   app:civ_border_color="#FF000000"
-                   app:civ_border_width="2dp" />
-           </RelativeLayout>
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/chefImage"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:backgroundTint="@color/white"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/profile"
+                    app:civ_border_color="#00000000"
+                    app:civ_border_width="2dp" />
+            </RelativeLayout>
 
             <EditText
                 android:id="@+id/email"

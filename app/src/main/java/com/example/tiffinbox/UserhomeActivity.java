@@ -50,26 +50,26 @@ public class UserhomeActivity extends AppCompatActivity {
                 {
                     case R.id.user_home:
                         Toast.makeText(getApplicationContext(), "Home Fragment", Toast.LENGTH_SHORT).show();
-
+                        toolbar.setTitle("TiffinBox");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new UserHomeFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.user_orderlist:
-                        Toast.makeText(getApplicationContext(), "Gallery Fragment", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), "Orderlist Fragment", Toast.LENGTH_SHORT).show();
+                        toolbar.setTitle("OrderList");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new UserOrderlistFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.user_cart:
-                        Toast.makeText(getApplicationContext(), "Slideshow Fragment", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), "Cart Fragment", Toast.LENGTH_SHORT).show();
+                        toolbar.setTitle("Cart");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new UserCartFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
 
                     case R.id.user_account:
-                        Toast.makeText(getApplicationContext(), "Slideshow Fragment", Toast.LENGTH_SHORT).show();
-
+                        Toast.makeText(getApplicationContext(), "Account Fragment", Toast.LENGTH_SHORT).show();
+                        toolbar.setTitle("Profile");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new UserAccountFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;

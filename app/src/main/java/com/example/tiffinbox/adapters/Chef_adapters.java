@@ -6,33 +6,28 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.view.menu.MenuView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tiffinbox.R;
-import com.example.tiffinbox.ViewAllActivity;
-import com.example.tiffinbox.models.Chef_list_model;
-import com.google.firebase.firestore.DocumentSnapshot;
+import com.example.tiffinbox.DisplayFoodActivity;
+import com.example.tiffinbox.models.ChefData;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Chef_adapters extends RecyclerView.Adapter<Chef_adapters.ViewHolder> {
 //   private AdapterView.OnItemClickListener listener;
 public Chef_adapters.OnItemClickListener onItemClickListener;
     private Context context;
-    private List<Chef_list_model> chef_list_modelList;
+    private List<ChefData> chefData;
 
-    public Chef_adapters(Context context, List<Chef_list_model> Chef_list_models,OnItemClickListener onItemClickListener) {
+    public Chef_adapters(Context context, List<ChefData> chefData, OnItemClickListener onItemClickListener) {
         this.context = context;
-        this.chef_list_modelList = Chef_list_models;
+        this.chefData = chefData;
         this.onItemClickListener=onItemClickListener;
     }
 
@@ -45,17 +40,17 @@ public Chef_adapters.OnItemClickListener onItemClickListener;
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        Glide.with(context).load(chef_list_modelList.get(position).getPurl()).into(holder.chefimage);
-        holder.name.setText(chef_list_modelList.get(position).getName());
-        holder.phoneNo.setText(chef_list_modelList.get(position).getPhone());
-        holder.mailid.setText(chef_list_modelList.get(position).getEmail());
+//        Glide.with(context).load(chefData.get(position).getPurl()).into(holder.chefimage);
+        holder.name.setText(chefData.get(position).getName());
+        holder.phoneNo.setText(chefData.get(position).getPhone());
+        holder.mailid.setText(chefData.get(position).getEmail());
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, ViewAllActivity.class);
-                intent.putExtra("id",chef_list_modelList.get(position).getId());
+                Intent intent = new Intent(context, DisplayFoodActivity.class);
+                intent.putExtra("id",chefData.get(position).getId());
                 context.startActivity(intent);
             }
         });
@@ -66,7 +61,7 @@ public Chef_adapters.OnItemClickListener onItemClickListener;
 
     @Override
     public int getItemCount() {
-        return chef_list_modelList.size();
+        return chefData.size();
     }
 
     public interface OnItemClickListener {

@@ -1,19 +1,19 @@
 package com.example.tiffinbox.models;
 
 public class DishData {
-    String dname, ddes, url, id, cname;
-    Double dprice;
+    String dname, ddes, url, chefId, cname , dishId, dprice;
 
     public DishData() {
 
     }
 
-    public DishData(String dname, String ddes, double dprice, String url, String id, String cname) {
+    public DishData(String dname, String ddes, String dprice, String url, String chefId, String dishId, String cname) {
         this.dname = dname;
         this.cname = cname;
         this.ddes = ddes;
         this.dprice = dprice;
-        this.id = id;
+        this.chefId=chefId;
+        this.dishId = dishId;
         this.url = url;
     }
 
@@ -25,12 +25,20 @@ public class DishData {
         this.cname = cname;
     }
 
-    public String getId() {
-        return id;
+    public String getChefId() {
+        return chefId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setChefId(String chefId) {
+        this.chefId = chefId;
+    }
+
+    public String getDishId() {
+        return dishId;
+    }
+
+    public void setDishId(String dishId) {
+        this.dishId = dishId;
     }
 
     public String getUrl() {
@@ -41,11 +49,11 @@ public class DishData {
         this.url = url;
     }
 
-    public Double getDprice() {
+    public String  getDprice() {
         return dprice;
     }
 
-    public void setDprice(Double dprice) {
+    public void setDprice(String dprice) {
         this.dprice = dprice;
     }
 

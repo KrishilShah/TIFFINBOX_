@@ -13,18 +13,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tiffinbox.R;
-import com.example.tiffinbox.models.ViewAllModel;
+import com.example.tiffinbox.models.DishData;
 
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ViewHolder> {
+public class DisplayFoodAdapter extends RecyclerView.Adapter<DisplayFoodAdapter.ViewHolder> {
     Context context;
 
-    List<ViewAllModel> list;
+    List<DishData> list;
 
-    public ViewAllAdapter(Context context, List<ViewAllModel> list) {
+    public DisplayFoodAdapter(Context context, List<DishData> list) {
         this.context = context;
         this.list = list;
     }
@@ -32,15 +32,15 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ViewHold
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.view_all_item,parent,false));
+        return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.singlerowchefproducts,parent,false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
         holder.udishname.setText(list.get(position).getDname());
-        holder.uchefname.setText(list.get(position).getDdes());
-        holder.udishprice.setText(String.valueOf(list.get(position).getDprice()));
+        holder.udishdes.setText(list.get(position).getDdes());
+        holder.udishprice.setText(list.get(position).getDprice());
         Glide.with(context).load(list.get(position).getUrl()).into(holder.udishimg);
 
     }
@@ -52,15 +52,15 @@ public class ViewAllAdapter extends RecyclerView.Adapter<ViewAllAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         CircleImageView udishimg;
-        TextView uchefname,udishprice,udishname;
+        TextView udishdes,udishprice,udishname;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
-            udishimg=itemView.findViewById(R.id.u_dish_image);
-            udishname=itemView.findViewById(R.id.u_dish_name);
-            uchefname=itemView.findViewById(R.id.u_chef_name);
-            udishprice=itemView.findViewById(R.id.u_dish_price);
+            udishimg=itemView.findViewById(R.id.dish_image);
+            udishname=itemView.findViewById(R.id.dish_name);
+            udishdes=itemView.findViewById(R.id.dish_description);
+            udishprice=itemView.findViewById(R.id.dish_price);
 
 
         }

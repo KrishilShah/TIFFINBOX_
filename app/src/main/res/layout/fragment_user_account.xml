@@ -28,11 +28,13 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_image"
-                android:layout_width="150dp"
-                android:layout_height="150dp"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/profile"
-                app:civ_border_color="#FF000000"
+                app:civ_border_color="@color/grey"
                 app:civ_border_width="2dp" />
 
             <LinearLayout
@@ -45,25 +47,26 @@
                 <TextView
                     android:id="@+id/userName"
                     android:layout_width="match_parent"
-                    android:layout_height="37dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:clickable="false"
+                    android:textAllCaps="true"
                     android:gravity="left"
                     android:padding="5dp"
                     android:text="User Name"
-                    android:textColor="@color/grey"
+                    android:textColor="@color/purple"
                     android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/userType"
                     android:layout_width="match_parent"
-                    android:layout_height="37dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:gravity="left"
                     android:padding="5dp"
                     android:text="User Type"
-                    android:textColor="@color/grey"
-                    android:textSize="18sp" />
+                    android:textColor="@color/purple"
+                    android:textSize="16sp" />
 
             </LinearLayout>
 
@@ -85,6 +88,7 @@
             android:layout_width="match_parent"
             android:layout_height="34dp"
             android:layout_below="@+id/detail_text"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="14dp"
             android:orientation="horizontal">
 
@@ -115,6 +119,7 @@
             android:layout_width="match_parent"
             android:layout_height="34dp"
             android:layout_below="@+id/username_linear1"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
@@ -175,6 +180,7 @@
             android:layout_width="match_parent"
             android:layout_height="34dp"
             android:layout_below="@+id/phone_linear"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
@@ -205,6 +211,7 @@
             android:layout_width="match_parent"
             android:layout_height="34dp"
             android:layout_below="@+id/email_linear"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 

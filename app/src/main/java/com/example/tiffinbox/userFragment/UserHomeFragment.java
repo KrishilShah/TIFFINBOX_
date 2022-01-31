@@ -1,11 +1,9 @@
 package com.example.tiffinbox.userFragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,9 +12,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.tiffinbox.R;
-import com.example.tiffinbox.ViewAllActivity;
 import com.example.tiffinbox.adapters.Chef_adapters;
-import com.example.tiffinbox.models.Chef_list_model;
+import com.example.tiffinbox.models.ChefData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -34,7 +31,7 @@ import java.util.List;
 public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemClickListener {
     public Chef_adapters.OnItemClickListener onItemClickListener;
 
-    List<Chef_list_model> chef_list_modelList;
+    List<ChefData> chef_list_modelList;
     RecyclerView popularRec;
     Chef_adapters chefAdapters;
     FirebaseFirestore db ;
@@ -115,9 +112,9 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
 
-                                Chef_list_model chef_list_model = document.toObject(Chef_list_model.class);
+                                ChefData chefData = document.toObject(ChefData.class);
 //                                chefListModel
-                                chef_list_modelList.add(chef_list_model);
+                                chef_list_modelList.add(chefData);
                                 chefAdapters.notifyDataSetChanged();
 //                                Toast.makeText(getActivity(), "LIST DISPLAY"+task.getException(), Toast.LENGTH_SHORT).show();
                             }

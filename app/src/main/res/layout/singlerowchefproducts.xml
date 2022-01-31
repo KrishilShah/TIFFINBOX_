@@ -23,8 +23,9 @@
         android:visibility="visible"
         android:layout_marginLeft="10dp"
         android:layout_toEndOf="@id/dish_image"
-        android:id="@+id/name_text"
-        android:layout_marginTop="10sp"
+        android:id="@+id/des_text"
+        android:layout_below="@+id/dish_name"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
@@ -32,39 +33,38 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Chef name:"
+            android:text="Description:"
             android:textColor="@color/purple"
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/chef_name"
+            android:id="@+id/dish_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@+id/name"
             android:layout_marginLeft="6dp"
-            android:text="Chef name:"
+            android:layout_toEndOf="@+id/name"
+            android:text="dish description"
             android:textColor="@color/purple"
             android:textSize="16sp" />
     </RelativeLayout>
 
-    <TextView
-        android:id="@+id/dish_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/name_text"
-        android:layout_marginTop="10sp"
-        android:layout_marginLeft="10dp"
-        android:layout_toEndOf="@+id/dish_image"
-        android:text="Dish Name"
-        android:textColor="@color/purple"
-        android:textSize="20sp"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/dish_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10sp"
+            android:layout_toEndOf="@+id/dish_image"
+            android:text="Dish Name"
+            android:textColor="@color/purple"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     <TextView
         android:id="@+id/price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dish_name"
+        android:layout_below="@+id/des_text"
         android:layout_marginTop="10sp"
         android:layout_toEndOf="@+id/dish_image"
         android:text="Price:  "
@@ -75,7 +75,7 @@
         android:id="@+id/dish_price"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/dish_name"
+        android:layout_below="@+id/des_text"
         android:layout_marginTop="10sp"
         android:layout_marginLeft="5dp"
         android:layout_toEndOf="@+id/price"
@@ -83,13 +83,13 @@
         android:textColor="@color/grey"
         android:textSize="18sp" />
 
-    <View
-        android:id="@+id/view1"
-        android:layout_width="fill_parent"
-        android:layout_height="2dp"
-        android:layout_below="@+id/dish_image"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="20dp"
-        android:background="@color/grey" />
+        <View
+            android:id="@+id/view1"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_below="@+id/dish_image"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="20dp"
+            android:background="@color/grey" />
     </RelativeLayout>
 </androidx.cardview.widget.CardView>

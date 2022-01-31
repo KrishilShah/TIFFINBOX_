@@ -1,12 +1,16 @@
 package com.example.tiffinbox;
 
+import static android.content.ContentValues.TAG;
+
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,6 +26,7 @@ import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -29,7 +34,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -108,6 +118,9 @@ public class EditprofileActivity extends AppCompatActivity {
             }
         });
 
+        String oldEmail=chef_email.getText().toString().trim();
+        String oldPassword = chef_password.getText().toString().trim();
+
         update_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -163,6 +176,34 @@ public class EditprofileActivity extends AppCompatActivity {
                     gender = "Other";
                 }
                 String finalGender = gender;
+
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                //if user update email for authentication
+                if(oldEmail!=email) {
+                    user.updateEmail(email)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "User email address updated.");
+                                    }
+                                }
+                            });
+                }
+                //if user update password for authentication
+                if(oldPassword!=confirmpassword) {
+                    user.updatePassword(confirmpassword)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Log.d(TAG, "User password updated.");
+                                    }
+                                }
+                            });
+                }
+
                 //updation of user info
                 final DocumentReference sfDocRef = db.collection("chefs").document(firebaseAuth.getCurrentUser().getUid());
 
@@ -326,14 +367,88 @@ public class EditprofileActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.account_delete:
-                Toast.makeText(this , "Delete Profile", Toast.LENGTH_SHORT).show();
-                         //delete profile
+//                Toast.makeText(this , "Delete Profile", Toast.LENGTH_SHORT).show();
+                //delete profile
+                ShowDialog();
 
                 break;
             default:
                 break;
         }
         return true;
+    }
+
+    private void ShowDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(EditprofileActivity.this);
+        builder.setTitle("Delete");
+        builder.setMessage("Are you sure to delete Profile?");
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                documentReference.delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+
+                                deleteuser(chef_email.getText().toString(), chef_password.getText().toString());
+
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+                                Toast.makeText(EditprofileActivity.this, "Error Occurred: "+e, Toast.LENGTH_SHORT);
+
+                            }
+                        });
+            }
+        });
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
+
+    //delete the account (user cannot login again with this email and password)
+    private void deleteuser(String email, String password) {
+
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference dishRef;
+        dishRef= FirebaseDatabase.getInstance().getReference("Dish").child(onlineUserID);
+
+        // Get auth credentials from the user for re-authentication. The example below shows
+        // email and password credentials but there are multiple possible providers,
+        // such as GoogleAuthProvider or FacebookAuthProvider.
+        AuthCredential credential = EmailAuthProvider.getCredential(email, password);
+
+        // Prompt the user to re-provide their sign-in credentials
+        if (user != null) {
+            user.reauthenticate(credential)
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            dishRef.removeValue();
+                            user.delete()
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Log.d("TAG", "User account deleted.");
+                                                Toast.makeText(EditprofileActivity.this, "Profile Deleted", Toast.LENGTH_SHORT);
+                                                Intent intent=new Intent(getApplicationContext(),LoginActivity.class);
+                                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                                startActivity(intent);
+                                            }
+                                        }
+                                    });
+                        }
+                    });
+        }
     }
 
     public void back(View view) {

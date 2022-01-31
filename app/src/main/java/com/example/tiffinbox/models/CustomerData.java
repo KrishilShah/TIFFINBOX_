@@ -1,16 +1,17 @@
-package com.example.tiffinbox;
+package com.example.tiffinbox.models;
 
-public class Customer_Data {
-    String username,email,password,confirmPassword,phone;
-    public Customer_Data(){
+public class CustomerData {
+    String username,email,password,confirmPassword,phone,id;
+    public CustomerData(){
 
     }
-    public Customer_Data(String username, String email, String password, String confirmPassword, String phone) {
+    public CustomerData(String username, String email, String password, String confirmPassword, String phone, String id) {
         this.username = username;
         this.email = email;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.phone = phone;
+        this.id = id;
     }
 
     public String getUsername() {
@@ -51,5 +52,13 @@ public class Customer_Data {
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

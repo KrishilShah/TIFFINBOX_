@@ -14,7 +14,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TiffinBox">
         <activity
-            android:name=".ViewAllActivity"
+            android:name=".OrderFoodActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DisplayFoodActivity"
             android:exported="true" />
         <activity
             android:name=".PostdishActivity"

@@ -189,18 +189,22 @@ public class PostdishActivity extends AppCompatActivity {
 //            uploadPicture();
 
 
-                    String ruid=dishRef.push().getKey();
+                    String ruid=dishRef.push().getKey();        //dish id
                     DocumentReference docref=droot.collection("dish").document(ruid);
                     //** to store dish details in database
                     HashMap<String, String> dish = new HashMap<>();
                     dish.put("dname", dishname);
                     dish.put("ddes", dishdes);
                     dish.put("dprice", dishprice);
+                    dish.put("chefId",chefId);
+                    dish.put("dishId",ruid);
                     dish.put("url", url);
                     dish.put("cname", cname.getText().toString().trim());
 
+
+                    DishData dishData=new DishData(dishname,dishdes,dishprice,url,chefId,ruid,cname.getText().toString().trim());
+
                     //store data in realtime database
-                    DishData dishData=new DishData(dishname,dishdes,Double.parseDouble(dishprice),url,ruid,cname.getText().toString().trim());
                     dishRef.child(ruid).setValue(dishData).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {

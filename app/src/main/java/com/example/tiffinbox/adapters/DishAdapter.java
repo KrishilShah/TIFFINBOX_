@@ -41,7 +41,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             holder.dishname.setText(dishData.get(position).getDname());
             holder.chefname.setText(dishData.get(position).getDdes());
-            holder.dishprice.setText(String.valueOf(dishData.get(position).getDprice()));
+            holder.dishprice.setText(dishData.get(position).getDprice());
             Glide.with(holder.itemView)
                 .load(dishData.get(position).getUrl())
                 .into(holder.dishimg);
