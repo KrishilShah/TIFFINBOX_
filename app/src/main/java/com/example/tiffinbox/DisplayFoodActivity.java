@@ -22,13 +22,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DisplayFoodActivity extends AppCompatActivity {
+public class DisplayFoodActivity extends AppCompatActivity implements DisplayFoodAdapter.OnItemClickListener {
     FirebaseFirestore firestore;
     RecyclerView recyclerView;
     DisplayFoodAdapter displayFoodAdapter;
     Toolbar toolbar;
     List<DishData> dishData;
     FirebaseAuth mFirebaseAuth;
+    DisplayFoodAdapter.OnItemClickListener onItemClickListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class DisplayFoodActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         dishData=new ArrayList<>();
-        displayFoodAdapter =new DisplayFoodAdapter(this,dishData);
+        displayFoodAdapter =new DisplayFoodAdapter(this,dishData,onItemClickListener);
         recyclerView.setAdapter(displayFoodAdapter);
 
 
@@ -74,5 +75,10 @@ public class DisplayFoodActivity extends AppCompatActivity {
 
     public void back(View view) {
         finish();
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+
     }
 }

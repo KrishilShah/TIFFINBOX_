@@ -3,6 +3,7 @@ package com.example.tiffinbox.adapters;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.tiffinbox.DisplayFoodActivity;
+import com.example.tiffinbox.OrderFoodActivity;
 import com.example.tiffinbox.R;
 import com.example.tiffinbox.models.DishData;
 
@@ -23,10 +26,12 @@ public class DisplayFoodAdapter extends RecyclerView.Adapter<DisplayFoodAdapter.
     Context context;
 
     List<DishData> list;
+    public DisplayFoodAdapter.OnItemClickListener onItemClickListener;
 
-    public DisplayFoodAdapter(Context context, List<DishData> list) {
+    public DisplayFoodAdapter(Context context, List<DishData> list, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.list = list;
+        this.onItemClickListener=onItemClickListener;
     }
 
     @NonNull
@@ -43,26 +48,49 @@ public class DisplayFoodAdapter extends RecyclerView.Adapter<DisplayFoodAdapter.
         holder.udishprice.setText(list.get(position).getDprice());
         Glide.with(context).load(list.get(position).getUrl()).into(holder.udishimg);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, OrderFoodActivity.class);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
             return list.size();
     }
+    public interface OnItemClickListener {
+        void onClick(View view,int position);
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         CircleImageView udishimg;
         TextView udishdes,udishprice,udishname;
+        DisplayFoodAdapter.OnItemClickListener onItemClickListener;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
+            this.onItemClickListener=onItemClickListener;
             udishimg=itemView.findViewById(R.id.dish_image);
             udishname=itemView.findViewById(R.id.dish_name);
             udishdes=itemView.findViewById(R.id.dish_description);
             udishprice=itemView.findViewById(R.id.dish_price);
+            itemView.setOnClickListener(this);
 
 
         }
+
+
+
+        @Override
+        public void onClick(View v) {
+            onItemClickListener.onClick(v,getAdapterPosition());
+        }
     }
+
 }
