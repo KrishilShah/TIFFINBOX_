@@ -2,6 +2,7 @@ package com.example.tiffinbox.adapters;
 
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -13,7 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.tiffinbox.DisplayFoodActivity;
 import com.example.tiffinbox.OrderFoodActivity;
 import com.example.tiffinbox.R;
 import com.example.tiffinbox.models.DishData;
@@ -41,7 +41,7 @@ public class DisplayFoodAdapter extends RecyclerView.Adapter<DisplayFoodAdapter.
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         holder.udishname.setText(list.get(position).getDname());
         holder.udishdes.setText(list.get(position).getDdes());
@@ -52,6 +52,10 @@ public class DisplayFoodAdapter extends RecyclerView.Adapter<DisplayFoodAdapter.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, OrderFoodActivity.class);
+                intent.putExtra("dishname",list.get(position).getDname());
+                intent.putExtra("dishdes",list.get(position).getDdes());
+                intent.putExtra("dishurl",list.get(position).getUrl());
+                intent.putExtra("dishprice",list.get(position).getDprice());
                 context.startActivity(intent);
             }
         });

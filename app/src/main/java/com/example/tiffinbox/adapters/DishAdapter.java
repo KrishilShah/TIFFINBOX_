@@ -40,7 +40,7 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             holder.dishname.setText(dishData.get(position).getDname());
-            holder.chefname.setText(dishData.get(position).getDdes());
+            holder.dishdes.setText(dishData.get(position).getDdes());
             holder.dishprice.setText(dishData.get(position).getDprice());
             Glide.with(holder.itemView)
                 .load(dishData.get(position).getUrl())
@@ -54,13 +54,13 @@ public class DishAdapter extends RecyclerView.Adapter<DishAdapter.ViewHolder>{
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         CircleImageView dishimg;
-        TextView chefname,dishprice,dishname;
+        TextView dishdes,dishprice,dishname;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             dishimg=itemView.findViewById(R.id.dish_image);
             dishname=itemView.findViewById(R.id.dish_name);
-            chefname=itemView.findViewById(R.id.chef_name);
+            dishdes=itemView.findViewById(R.id.dish_description);
             dishprice=itemView.findViewById(R.id.dish_price);
 
 
