@@ -32,26 +32,27 @@
             android:textSize="20sp"
             android:textStyle="bold" />
 
+        <!--        <TextView-->
+        <!--            android:id="@+id/chef_list_mail"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@id/list_chef_name"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:layout_toRightOf="@id/img1"-->
+        <!--            android:text="Mail id"-->
+        <!--            android:textColor="#000"-->
+        <!--            android:textSize="16sp" />-->
+
+
         <TextView
-            android:id="@+id/chef_list_mail"
+            android:id="@+id/chef_list_speciality"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/list_chef_name"
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/img1"
-            android:text="Mail id"
-            android:textColor="#000"
-            android:textSize="16sp" />
-
-
-        <TextView
-            android:id="@+id/chef_list_phone"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/chef_list_mail"
-            android:layout_marginLeft="10dp"
-            android:layout_toRightOf="@id/img1"
-            android:text="XXXXXXXXXX"
+            android:maxLines="2"
+            android:text="Chef's Speciality"
             android:textColor="#000"
             android:textSize="18sp" />
 

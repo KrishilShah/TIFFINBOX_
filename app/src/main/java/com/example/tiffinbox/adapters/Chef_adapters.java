@@ -20,8 +20,8 @@ import com.example.tiffinbox.models.ChefData;
 import java.util.List;
 
 public class Chef_adapters extends RecyclerView.Adapter<Chef_adapters.ViewHolder> {
-//   private AdapterView.OnItemClickListener listener;
-public Chef_adapters.OnItemClickListener onItemClickListener;
+    //   private AdapterView.OnItemClickListener listener;
+    public Chef_adapters.OnItemClickListener onItemClickListener;
     private Context context;
     private List<ChefData> chefData;
 
@@ -42,8 +42,8 @@ public Chef_adapters.OnItemClickListener onItemClickListener;
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 //        Glide.with(context).load(chefData.get(position).getPurl()).into(holder.chefimage);
         holder.name.setText(chefData.get(position).getName());
-        holder.phoneNo.setText(chefData.get(position).getPhone());
-        holder.mailid.setText(chefData.get(position).getEmail());
+//        holder.phoneNo.setText(chefData.get(position).getPhone());
+//        holder.mailid.setText(chefData.get(position).getEmail());
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -81,8 +81,8 @@ public Chef_adapters.OnItemClickListener onItemClickListener;
             itemView.setOnClickListener(this);
             chefimage=itemView.findViewById(R.id.img1);
             name=itemView.findViewById(R.id.list_chef_name);
-            phoneNo=itemView.findViewById(R.id.chef_list_phone);
-            mailid=itemView.findViewById(R.id.chef_list_mail);
+//            phoneNo=itemView.findViewById(R.id.chef_list_phone);
+//            mailid=itemView.findViewById(R.id.chef_list_mail);
             itemView.setOnClickListener(this);
 
         }

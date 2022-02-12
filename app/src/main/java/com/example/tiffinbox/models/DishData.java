@@ -8,26 +8,15 @@ public class DishData {
     String cname;
     String dishId;
     String dprice;
-
-    public DishData(String thali) {
-        Thali = thali;
-    }
-
-    String Thali;
-
-    public String getThali() {
-        return Thali;
-    }
-
-    public void setThali(String thali) {
-        Thali = thali;
-    }
+    String DishType;
 
     public DishData() {
 
     }
 
-    public DishData(String dname, String ddes, String dprice, String url, String chefId, String dishId, String cname) {
+
+
+    public DishData(String dname, String ddes, String dprice, String url, String chefId, String dishId, String cname , String DishType) {
         this.dname = dname;
         this.cname = cname;
         this.ddes = ddes;
@@ -35,6 +24,7 @@ public class DishData {
         this.chefId=chefId;
         this.dishId = dishId;
         this.url = url;
+        this.DishType=DishType;
     }
 
     public String getCname() {
@@ -91,5 +81,12 @@ public class DishData {
 
     public void setDname(String dname) {
         this.dname = dname;
+    }
+    public String getDishType() {
+        return DishType;
+    }
+
+    public void setDishType(String dishType) {
+        DishType = dishType;
     }
 }

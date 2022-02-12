@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,13 +46,15 @@ public class PostdishActivity extends AppCompatActivity {
     public int picnme=1;
     String i=Integer.toString(picnme);
     Button post;
-    String chefId,url;
+    String chefId,url, dishType;
     FirebaseFirestore droot;
     FirebaseAuth mFirebaseAuth;
     DocumentReference dref;
     DatabaseReference dishRef;
     private FirebaseStorage storage;
     private StorageReference sref;
+
+    RadioButton thali , item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,9 @@ public class PostdishActivity extends AppCompatActivity {
         dprice=findViewById(R.id.dish_price);
         cname=findViewById(R.id.chef_name);
         post=findViewById(R.id.post_dish);
+        thali = findViewById(R.id.thali);
+        item = findViewById(R.id.item);
+
 
         storage = FirebaseStorage.getInstance();
         sref=storage.getReference().child("dish");
@@ -168,6 +174,11 @@ public class PostdishActivity extends AppCompatActivity {
 
         picnme++;
 
+        if(!(thali.isChecked() || item.isChecked()))
+        {
+            Toast.makeText(getApplicationContext(),"Select a dish Type", Toast.LENGTH_LONG).show();
+            return;
+        }
         if(TextUtils.isEmpty(dishname)){
             dname.setError("DishData name is required!");
             return;
@@ -180,53 +191,63 @@ public class PostdishActivity extends AppCompatActivity {
             dprice.setError("DishData Price is necessary!");
             return;
         }
+
         else if(imageUrl == null){
             Toast.makeText(getApplicationContext(), "Add dish photo", Toast.LENGTH_LONG).show();
             return;
         }
+
         else {
 
 //            uploadPicture();
 
-
-                    String ruid=dishRef.push().getKey();        //dish id
-                    DocumentReference docref=droot.collection("dish").document(ruid);
-                    //** to store dish details in database
-                    HashMap<String, String> dish = new HashMap<>();
-                    dish.put("dname", dishname);
-                    dish.put("ddes", dishdes);
-                    dish.put("dprice", dishprice);
-                    dish.put("chefId",chefId);
-                    dish.put("dishId",ruid);
-                    dish.put("url", url);
-                    dish.put("cname", cname.getText().toString().trim());
+            if(thali.isChecked()){
+                dishType = "Thali";
+            }
+            else if(item.isChecked()){
+                dishType = "Item";
+            }
+            String finalDishType = dishType;
 
 
-                    DishData dishData=new DishData(dishname,dishdes,dishprice,url,chefId,ruid,cname.getText().toString().trim());
+            String ruid=dishRef.push().getKey();        //dish id
+            DocumentReference docref=droot.collection("dish").document(ruid);
+            //** to store dish details in database
+            HashMap<String, String> dish = new HashMap<>();
+            dish.put("dname", dishname);
+            dish.put("ddes", dishdes);
+            dish.put("dprice", dishprice);
+            dish.put("chefId",chefId);
+            dish.put("dishId",ruid);
+            dish.put("url", url);
+            dish.put("cname", cname.getText().toString().trim());
 
-                    //store data in realtime database
-                    dishRef.child(ruid).setValue(dishData).addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()){ }
-                            else{ }
-                        }});
+
+            DishData dishData=new DishData(dishname,dishdes,dishprice,url,chefId,ruid,cname.getText().toString().trim(),finalDishType);
+
+            //store data in realtime database
+            dishRef.child(ruid).setValue(dishData).addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()){ }
+                    else{ }
+                }});
 
 
-                    //store data in cloud firestore
-                    docref.set(dishData).addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void unused) {
-                            Log.d(String.valueOf(this),"Opening new activity  "+url);
-                            Toast.makeText(getApplicationContext(), "Dish added successfully", Toast.LENGTH_SHORT).show();
-                            Intent intent= new Intent(getApplicationContext(),ChefmainActivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                            intent.putExtra("fragment","home");
-                            startActivity(intent);
-                        }
-                    });
-                    //**
+            //store data in cloud firestore
+            docref.set(dishData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    Log.d(String.valueOf(this),"Opening new activity  "+url);
+                    Toast.makeText(getApplicationContext(), "Dish added successfully", Toast.LENGTH_SHORT).show();
+                    Intent intent= new Intent(getApplicationContext(),ChefmainActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    intent.putExtra("fragment","home");
+                    startActivity(intent);
                 }
+            });
+            //**
+        }
 
     }
 

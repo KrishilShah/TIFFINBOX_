@@ -58,7 +58,7 @@ import java.util.UUID;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditprofileActivity extends AppCompatActivity {
-    
+
     Toolbar toolbar;
     EditText chef_email, chef_name, chef_number, chef_address, chef_password, chef_confirmpassword;
     RadioButton male, female, other;
@@ -87,8 +87,8 @@ public class EditprofileActivity extends AppCompatActivity {
         chef_email = findViewById(R.id.email);
         chef_number = findViewById(R.id.phone);
         chef_address = findViewById(R.id.address);
-        chef_password = findViewById(R.id.password);
-        chef_confirmpassword= findViewById(R.id.confirmPassword);
+//        chef_password = findViewById(R.id.password);
+//        chef_confirmpassword= findViewById(R.id.confirmPassword);
         update_btn = findViewById(R.id.update);
         male = findViewById(R.id.updatemale);
         female = findViewById(R.id.updatefemale);
@@ -119,7 +119,7 @@ public class EditprofileActivity extends AppCompatActivity {
         });
 
         String oldEmail=chef_email.getText().toString().trim();
-        String oldPassword = chef_password.getText().toString().trim();
+//        String oldPassword = chef_password.getText().toString().trim();
 
         update_btn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,11 +128,11 @@ public class EditprofileActivity extends AppCompatActivity {
                 String email = chef_email.getText().toString().trim();
                 String number = chef_number.getText().toString();
                 String address = chef_address.getText().toString().trim();
-                String password= chef_password.getText().toString().trim();
-                String confirmpassword = chef_confirmpassword.getText().toString().trim();
+//                String password= chef_password.getText().toString().trim();
+//                String confirmpassword = chef_confirmpassword.getText().toString().trim();
                 String gender = "";
 
-                chefPassword = confirmpassword;
+//                chefPassword = confirmpassword;
 
                 if(TextUtils.isEmpty(name)){
                     chef_name.setError("Name is Required!");
@@ -150,22 +150,22 @@ public class EditprofileActivity extends AppCompatActivity {
                     chef_address.setError("Address is Required!");
                     return;
                 }
-                if(TextUtils.isEmpty(password)){
-                    chef_password.setError("Password is Required!");
-                    return;
-                }
-                if(password.length() < 6){
-                    chef_password.setError("Password must contain atleast 6 characters");
-                    return;
-                }
-                if(TextUtils.isEmpty(confirmpassword)){
-                    chef_confirmpassword.setError("Password Confirmation Required!");
-                    return;
-                }
-                if(!(TextUtils.equals(password, confirmpassword))){
-                    chef_password.setError("Passwords Do not Match");
-                    return;
-                }
+//                if(TextUtils.isEmpty(password)){
+//                    chef_password.setError("Password is Required!");
+//                    return;
+//                }
+//                if(password.length() < 6){
+//                    chef_password.setError("Password must contain atleast 6 characters");
+//                    return;
+//                }
+//                if(TextUtils.isEmpty(confirmpassword)){
+//                    chef_confirmpassword.setError("Password Confirmation Required!");
+//                    return;
+//                }
+//                if(!(TextUtils.equals(password, confirmpassword))){
+//                    chef_password.setError("Passwords Do not Match");
+//                    return;
+//                }
                 if(male.isChecked()){
                     gender = "Male";
                 }
@@ -192,17 +192,17 @@ public class EditprofileActivity extends AppCompatActivity {
                             });
                 }
                 //if user update password for authentication
-                if(oldPassword!=confirmpassword) {
-                    user.updatePassword(confirmpassword)
-                            .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        Log.d(TAG, "User password updated.");
-                                    }
-                                }
-                            });
-                }
+//                if(oldPassword!=confirmpassword) {
+//                    user.updatePassword(confirmpassword)
+//                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+//                                @Override
+//                                public void onComplete(@NonNull Task<Void> task) {
+//                                    if (task.isSuccessful()) {
+//                                        Log.d(TAG, "User password updated.");
+//                                    }
+//                                }
+//                            });
+//                }
 
                 //updation of user info
                 final DocumentReference sfDocRef = db.collection("chefs").document(firebaseAuth.getCurrentUser().getUid());
@@ -216,7 +216,7 @@ public class EditprofileActivity extends AppCompatActivity {
 
                         transaction.update(sfDocRef, "name", name);
                         transaction.update(sfDocRef, "phone", number);
-                        transaction.update(sfDocRef, "Password", password);
+//                        transaction.update(sfDocRef, "Password", password);
                         transaction.update(sfDocRef, "gender", finalGender);
                         transaction.update(sfDocRef, "address", address);
 
@@ -328,8 +328,9 @@ public class EditprofileActivity extends AppCompatActivity {
                     chef_name.setText(name);
                     chef_email.setText(email);
                     chef_number.setText(phone);
-                    chef_password.setText(password1);
-                    chef_confirmpassword.setText(password1);
+//                    chef_password.setText(password1);
+//                    chef_confirmpassword.setText(password1);
+
 //                    if(gender.equals("Male")){
 //                        male.setSelected(true);
 //                        female.setSelected(false);

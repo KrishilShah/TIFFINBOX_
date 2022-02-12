@@ -99,8 +99,8 @@ public class ChefAccountFragment extends Fragment {
         storageReference = FirebaseStorage.getInstance().getReference();
 
         username = view.findViewById(R.id.userName);
-        userType = view.findViewById(R.id.userType);
-        chefUsername = view.findViewById(R.id.username);
+//        userType = view.findViewById(R.id.userType);
+//        chefUsername = view.findViewById(R.id.username);
         chefPhone = view.findViewById(R.id.user_phone);
         chefEmail = view.findViewById(R.id.user_email);
         chefAddress = view.findViewById(R.id.chef_address);
@@ -133,8 +133,8 @@ public class ChefAccountFragment extends Fragment {
                     String address = task.getResult().getString("address");
 
                     username.setText(uname);
-                    userType.setText("Chef");
-                    chefUsername.setText(uname);
+//                    userType.setText("Chef");
+//                    chefUsername.setText(uname);
                     chefEmail.setText(email);
                     chefPhone.setText(phone);
                     chefAddress.setText(address);

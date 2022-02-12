@@ -53,7 +53,7 @@ public class DisplayFoodActivity extends AppCompatActivity implements DisplayFoo
         dishData=new ArrayList<>();
         displayFoodAdapter =new DisplayFoodAdapter(this,dishData,onItemClickListener);
         recyclerView.setAdapter(displayFoodAdapter);
-        Query a =firestore.collection("dish").whereEqualTo("chefId",chefID).whereEqualTo("DishType",DishType);
+        Query a =firestore.collection("dish").whereEqualTo("chefId",chefID).whereEqualTo("dishType",DishType);
          if(chefID!=null ){
              a.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                  @SuppressLint("NotifyDataSetChanged")

@@ -20,11 +20,19 @@
             android:background="@color/purple"/>
     </androidx.appcompat.widget.Toolbar>
 
+    <ScrollView
+        android:layout_below="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
     <RelativeLayout
         android:id="@+id/dish_image_layout"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_below="@+id/toolbar"
         android:layout_marginTop="20dp"
         android:background="@drawable/textbox_bg">
 
@@ -45,19 +53,57 @@
         android:layout_marginRight="20dp">
 
         <TextView
+            android:id="@+id/chef_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/chef_name"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
-        <EditText
-            android:id="@+id/dish_name"
+
+        <RadioGroup
+            android:id="@+id/radiotext"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="30dp"
-            android:hint="Add dish name"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Type :"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/thali"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:text="Thali/Tiffin"
+                android:textSize="20sp" />
+
+            <RadioButton
+                android:id="@+id/item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="5dp"
+                android:text="Dish item"
+                android:textSize="20sp" />
+
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/dish_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radiotext"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="15dp"
+            android:hint="Add dish name / Thali name"
             android:padding="20dp"
             android:textColor="@color/grey"
             android:textColorHint="@color/grey" />
@@ -84,6 +130,7 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="15dp"
             android:hint="Add price"
+            android:maxLines="1"
             android:padding="20dp"
             android:textColor="@color/grey"
             android:textColorHint="@color/grey" />
@@ -98,5 +145,7 @@
             android:text="Post" />
 
     </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>
