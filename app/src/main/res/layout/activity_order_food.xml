@@ -154,11 +154,11 @@
                 android:layout_height="wrap_content">
 
                 <Button
+                    android:id="@+id/increase"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/increase"
                     android:text="+"
-                    android:textSize="25sp"/>
+                    android:textSize="25sp" />
                 <View
                     android:id="@+id/view"
                     android:layout_width="2dp"
@@ -201,6 +201,20 @@
             android:textSize="16sp" />
 
         <Button
+            android:id="@+id/addmore"
+            android:layout_width="151dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="125dp"
+            android:layout_marginEnd="134dp"
+            android:layout_marginBottom="79dp"
+            android:background="@drawable/btn_bg"
+            android:text="ADD MORE ITEMS"
+            android:textSize="16sp" />
+
+        <Button
             android:id="@+id/add2cart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -211,6 +225,7 @@
             android:background="@drawable/btn_bg"
             android:text="Add to Cart"
             android:textSize="16sp" />
+
 
 
     </RelativeLayout>

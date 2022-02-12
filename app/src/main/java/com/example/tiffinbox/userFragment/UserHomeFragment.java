@@ -1,9 +1,12 @@
 package com.example.tiffinbox.userFragment;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,6 +19,7 @@ import com.example.tiffinbox.adapters.Chef_adapters;
 import com.example.tiffinbox.models.ChefData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
@@ -35,6 +39,16 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
     RecyclerView popularRec;
     Chef_adapters chefAdapters;
     FirebaseFirestore db ;
+    EditText search_box;
+//    private List<ChefData>/
+    private RecyclerView recyclerViewSearch;
+
+
+
+
+
+
+
 
 
     // TODO: Rename parameter arguments, choose names that match
@@ -95,12 +109,69 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
 
 
         getRecyclerview();
+        recyclerViewSearch=root.findViewById(R.id.search_rec);
+        search_box =root.findViewById(R.id.search_box);
 
 
+        recyclerViewSearch.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewSearch.setAdapter(chefAdapters);
+        recyclerViewSearch.setHasFixedSize(true);
+        search_box.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if(s.toString().isEmpty()){
+                    chef_list_modelList.clear();
+                    chefAdapters.notifyDataSetChanged();
+                }else{
+                    searchChefByName(s.toString());
+                }
+
+            }
+        });
 
         // Inflate the layout for this fragment
         return root;
+    }
+
+    private void searchChefByName(String name) {
+        if(!name.isEmpty()){
+            db.collection("chefs").whereEqualTo("name",name).get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()&& task.getResult()!=null){
+                                chef_list_modelList.clear();
+                                chefAdapters.notifyDataSetChanged();
+//                                List<ChefData> chef_list_modelList;
+//                                RecyclerView popularRec;
+//                                Chef_adapters chefAdapters;
+//                                FirebaseFirestore db ;
+//                                EditText search_box;
+//    private List<ChefData>/
+//                                private RecyclerView recyclerViewSearch;
+                                for(DocumentSnapshot doc:task.getResult().getDocuments()){
+                                    ChefData chefData = doc.toObject(ChefData.class);
+                                    chef_list_modelList.add(chefData);
+                                    chefAdapters.notifyDataSetChanged();;
+                                }
+
+                            }
+
+                        }
+                    });
+        }
+
+
     }
 
     private void getRecyclerview() {

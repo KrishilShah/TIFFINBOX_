@@ -1,7 +1,27 @@
 package com.example.tiffinbox.models;
 
 public class DishData {
-    String dname, ddes, url, chefId, cname , dishId, dprice;
+    String dname;
+    String ddes;
+    String url;
+    String chefId;
+    String cname;
+    String dishId;
+    String dprice;
+
+    public DishData(String thali) {
+        Thali = thali;
+    }
+
+    String Thali;
+
+    public String getThali() {
+        return Thali;
+    }
+
+    public void setThali(String thali) {
+        Thali = thali;
+    }
 
     public DishData() {
 

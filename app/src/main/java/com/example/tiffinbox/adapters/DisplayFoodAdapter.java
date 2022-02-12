@@ -56,6 +56,7 @@ public class DisplayFoodAdapter extends RecyclerView.Adapter<DisplayFoodAdapter.
                 intent.putExtra("dishdes",list.get(position).getDdes());
                 intent.putExtra("dishurl",list.get(position).getUrl());
                 intent.putExtra("dishprice",list.get(position).getDprice());
+//                intent.putExtra("Thali",list.get(position).getThali());
                 context.startActivity(intent);
             }
         });
