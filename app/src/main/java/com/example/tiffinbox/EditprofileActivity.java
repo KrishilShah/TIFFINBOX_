@@ -60,7 +60,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class EditprofileActivity extends AppCompatActivity {
 
     Toolbar toolbar;
-    EditText chef_email, chef_name, chef_number, chef_address, chef_password, chef_confirmpassword;
+    EditText chef_email, chef_name, chef_number, chef_address, chef_speciality, chef_about;
     RadioButton male, female, other;
     Button update_btn;
     CircleImageView chef_image;
@@ -89,6 +89,8 @@ public class EditprofileActivity extends AppCompatActivity {
         chef_address = findViewById(R.id.address);
 //        chef_password = findViewById(R.id.password);
 //        chef_confirmpassword= findViewById(R.id.confirmPassword);
+        chef_speciality = findViewById(R.id.speciality);
+        chef_about = findViewById(R.id.about);
         update_btn = findViewById(R.id.update);
         male = findViewById(R.id.updatemale);
         female = findViewById(R.id.updatefemale);
@@ -130,6 +132,8 @@ public class EditprofileActivity extends AppCompatActivity {
                 String address = chef_address.getText().toString().trim();
 //                String password= chef_password.getText().toString().trim();
 //                String confirmpassword = chef_confirmpassword.getText().toString().trim();
+                String speciality = chef_speciality.getText().toString().trim();
+                String about = chef_about.getText().toString().trim();
                 String gender = "";
 
 //                chefPassword = confirmpassword;
@@ -150,18 +154,18 @@ public class EditprofileActivity extends AppCompatActivity {
                     chef_address.setError("Address is Required!");
                     return;
                 }
-//                if(TextUtils.isEmpty(password)){
-//                    chef_password.setError("Password is Required!");
-//                    return;
-//                }
+                if(TextUtils.isEmpty(speciality)){
+                    chef_speciality.setError("Password is Required!");
+                    return;
+                }
 //                if(password.length() < 6){
 //                    chef_password.setError("Password must contain atleast 6 characters");
 //                    return;
 //                }
-//                if(TextUtils.isEmpty(confirmpassword)){
-//                    chef_confirmpassword.setError("Password Confirmation Required!");
-//                    return;
-//                }
+                if(TextUtils.isEmpty(about)){
+                    chef_about.setError("Password Confirmation Required!");
+                    return;
+                }
 //                if(!(TextUtils.equals(password, confirmpassword))){
 //                    chef_password.setError("Passwords Do not Match");
 //                    return;
@@ -217,6 +221,8 @@ public class EditprofileActivity extends AppCompatActivity {
                         transaction.update(sfDocRef, "name", name);
                         transaction.update(sfDocRef, "phone", number);
 //                        transaction.update(sfDocRef, "Password", password);
+                        transaction.update(sfDocRef, "speciality", speciality);
+                        transaction.update(sfDocRef, "about", about);
                         transaction.update(sfDocRef, "gender", finalGender);
                         transaction.update(sfDocRef, "address", address);
 
@@ -321,13 +327,17 @@ public class EditprofileActivity extends AppCompatActivity {
                     String email = task.getResult().getString("email");
                     String phone = task.getResult().getString("phone");
                     String gender = task.getResult().getString("gender");
-                    String password1 = task.getResult().getString("Password");
+//                    String password1 = task.getResult().getString("Password");
+                    String speciality = task.getResult().getString("speciality");
+                    String about = task.getResult().getString("about");
                     String address1= task.getResult().getString("address");
 
                     chef_address.setText(address1);
                     chef_name.setText(name);
                     chef_email.setText(email);
                     chef_number.setText(phone);
+                    chef_speciality.setText(speciality);
+                    chef_about.setText(about);
 //                    chef_password.setText(password1);
 //                    chef_confirmpassword.setText(password1);
 
@@ -391,7 +401,7 @@ public class EditprofileActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void unused) {
 
-                                deleteuser(chef_email.getText().toString(), chef_password.getText().toString());
+//                                deleteuser(chef_email.getText().toString(), chef_password.getText().toString());
 
                             }
                         })

@@ -151,9 +151,14 @@
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_postdish.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_signup_chef.xml" value="0.1359375" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_userhome.xml" value="0.19270833333333334" />
+        <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/chef_list_display.xml" value="0.264" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/fragment_chef_account.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/fragment_chef_home.xml" value="0.1" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/fragment_user_account.xml" value="0.19270833333333334" />
+        <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/singlerowchefproducts.xml" value="0.2" />
+        <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/menu/activity_chefmain_drawer.xml" value="0.1414965986394558" />
+        <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/menu/chefmain.xml" value="0.1" />
+        <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/menu/updateprofile.xml" value="0.1" />
       </map>
     </option>
   </component>

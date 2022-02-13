@@ -29,21 +29,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-    <RelativeLayout
-        android:id="@+id/dish_image_layout"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_marginTop="20dp"
-        android:background="@drawable/textbox_bg">
+            <RelativeLayout
+                android:id="@+id/dish_image_layout"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/textbox_bg">
 
-        <ImageView
-            android:id="@+id/dish_image"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_menu_camera" />
-    </RelativeLayout>
+                <ImageView
+                    android:id="@+id/dish_image"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_menu_camera" />
+            </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"

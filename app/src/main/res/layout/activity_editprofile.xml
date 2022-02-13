@@ -249,7 +249,7 @@
                 android:textStyle="normal" />
 
             <EditText
-                android:id="@+id/About"
+                android:id="@+id/about"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/speciality"
@@ -269,7 +269,7 @@
                 android:id="@+id/update"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/About"
+                android:layout_below="@+id/about"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="28dp"
                 android:layout_marginEnd="30dp"

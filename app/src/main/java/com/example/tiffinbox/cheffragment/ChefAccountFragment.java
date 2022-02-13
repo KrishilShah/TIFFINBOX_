@@ -47,7 +47,7 @@ public class ChefAccountFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    TextView chefUsername, chefPhone, chefEmail, userType, username, chefAddress;
+    TextView chefUsername, chefPhone, chefEmail, userType, username, chefAddress, chefSpeciality, chefAbout;
     FirebaseAuth firebaseAuth;
     private String onlineUserID;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -106,6 +106,9 @@ public class ChefAccountFragment extends Fragment {
         chefAddress = view.findViewById(R.id.chef_address);
         chefImage = view.findViewById(R.id.chef_image);
         floatingActionButton = view.findViewById(R.id.floatingbtn);
+        chefSpeciality = view.findViewById(R.id.chef_speciality);
+        chefAbout = view.findViewById(R.id.chef_about);
+
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,6 +134,8 @@ public class ChefAccountFragment extends Fragment {
                     String phone = task.getResult().getString("phone");
                     String uname = task.getResult().getString("name");
                     String address = task.getResult().getString("address");
+                    String speciality = task.getResult().getString("speciality");
+                    String about = task.getResult().getString("about");
 
                     username.setText(uname);
 //                    userType.setText("Chef");
@@ -138,6 +143,8 @@ public class ChefAccountFragment extends Fragment {
                     chefEmail.setText(email);
                     chefPhone.setText(phone);
                     chefAddress.setText(address);
+                    chefSpeciality.setText(speciality);
+                    chefAbout.setText(about);
                 }
                 else{
                     Toast.makeText(getActivity(), "No Profile Exists", Toast.LENGTH_SHORT ).show();

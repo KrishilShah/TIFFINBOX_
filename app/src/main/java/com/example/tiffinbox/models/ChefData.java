@@ -2,7 +2,7 @@ package com.example.tiffinbox.models;
 
 public class ChefData {
 
-    String name, phone, email, purl,id, userType, password;
+    String name, phone, email, purl,id, userType, password, speciality, about;
 
 
     public String getId() {
@@ -15,7 +15,7 @@ public class ChefData {
 
     public ChefData() {
     }
-    public ChefData(String name, String phone, String email, String purl, String id, String userType, String password) {
+    public ChefData(String name, String phone, String email, String purl, String id, String userType, String password, String speciality, String about) {
         this.id=id;
         this.name = name;
         this.phone = phone;
@@ -23,6 +23,8 @@ public class ChefData {
         this.purl = purl;
         this.userType= userType;
         this.password=password;
+        this.speciality = speciality;
+        this.about = about;
     }
 
     public String getName() {
@@ -72,6 +74,14 @@ public class ChefData {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String getSpeciality() { return speciality; }
+
+    public void setSpeciality(String speciality) { this.speciality = speciality; }
+
+    public String getAbout() { return about; }
+
+    public void setAbout(String about) { this.about = about; }
 }
 
 

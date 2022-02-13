@@ -42,6 +42,7 @@ public class Chef_adapters extends RecyclerView.Adapter<Chef_adapters.ViewHolder
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
 //        Glide.with(context).load(chefData.get(position).getPurl()).into(holder.chefimage);
         holder.name.setText(chefData.get(position).getName());
+        holder.speciality.setText(chefData.get(position).getSpeciality());
 //        holder.phoneNo.setText(chefData.get(position).getPhone());
 //        holder.mailid.setText(chefData.get(position).getEmail());
 
@@ -71,7 +72,7 @@ public class Chef_adapters extends RecyclerView.Adapter<Chef_adapters.ViewHolder
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         ImageView chefimage;
-        TextView name,phoneNo,mailid,id;
+        TextView name,phoneNo,mailid,id, speciality;
         OnItemClickListener onItemClickListener;
 
         public ViewHolder(@NonNull View itemView) {
@@ -81,6 +82,7 @@ public class Chef_adapters extends RecyclerView.Adapter<Chef_adapters.ViewHolder
             itemView.setOnClickListener(this);
             chefimage=itemView.findViewById(R.id.img1);
             name=itemView.findViewById(R.id.list_chef_name);
+            speciality = itemView.findViewById(R.id.chef_list_speciality);
 //            phoneNo=itemView.findViewById(R.id.chef_list_phone);
 //            mailid=itemView.findViewById(R.id.chef_list_mail);
             itemView.setOnClickListener(this);

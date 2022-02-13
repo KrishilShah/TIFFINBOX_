@@ -305,11 +305,12 @@
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/chef_speciality"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/speciality_text"
                         android:paddingLeft="15dp"
-                        android:text="Gujarati Thali | Bengauli Thali"
+                        android:text="Gujarati Thali | Bengali Thali"
                         android:textSize="16sp"
                         android:textStyle="italic" />
                 </RelativeLayout>
@@ -329,11 +330,12 @@
                         android:textSize="17sp" />
 
                     <TextView
+                        android:id="@+id/chef_about"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/about_text"
                         android:paddingLeft="15dp"
-                        android:text="Gujarati Thali | Bengauli Thali"
+                        android:text="Gujarati Thali | Bengali Thali"
                         android:textSize="16sp"
                         android:textStyle="normal" />
                 </RelativeLayout>
