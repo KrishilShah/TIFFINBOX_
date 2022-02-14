@@ -109,7 +109,7 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
 
 
         getRecyclerview();
-        recyclerViewSearch=root.findViewById(R.id.search_rec);
+        recyclerViewSearch =root.findViewById(R.id.search_rec);
         search_box =root.findViewById(R.id.search_box);
 
 
@@ -134,6 +134,7 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
                     chefAdapters.notifyDataSetChanged();
                 }else{
                     searchChefByName(s.toString());
+
                 }
 
             }
@@ -150,6 +151,9 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
                             if(task.isSuccessful()&& task.getResult()!=null){
+                                recyclerViewSearch.setVisibility(View.VISIBLE);
+                                popularRec.setVisibility(View.INVISIBLE);
+
                                 chef_list_modelList.clear();
                                 chefAdapters.notifyDataSetChanged();
 //                                List<ChefData> chef_list_modelList;
