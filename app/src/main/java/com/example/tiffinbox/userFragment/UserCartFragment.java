@@ -89,6 +89,7 @@ public class UserCartFragment extends Fragment {
         auth = FirebaseAuth.getInstance();
         recyclerView=root.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setHasFixedSize(true);
 
         cartModelList=new ArrayList<>();
         cartAdapter=new MyCartAdapter(getActivity(),cartModelList);

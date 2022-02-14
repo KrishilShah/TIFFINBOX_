@@ -201,13 +201,17 @@ import java.util.SimpleTimeZone;
 
 public class OrderFoodActivity extends AppCompatActivity {
 
+    TextView view;
+    int totalView=1;
     Button addToCart;
+    Button addMore;
     FirebaseFirestore firestore;
     int totalPrice=0;
     FirebaseAuth auth;
     String dname,ddes,dprice,durl;
     int Dprice;
     DishData dishData;
+    Button increase, decrease;
 
     ImageView dishimage;
     TextView dishdes,dishprice,dishname,quantity;
@@ -219,12 +223,24 @@ public class OrderFoodActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order_food);
         toolbar=(Toolbar) findViewById(R.id.toolbar);
 
+        addMore=findViewById(R.id.addmore);
+
+        addMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(OrderFoodActivity.this, DishesActivity.class);
+                intent.putExtra("cid",getIntent().getStringExtra("cid"));
+                startActivity(intent);
+            }
+        });
+
         dishimage=findViewById(R.id.dish_image);
         dishdes=findViewById(R.id.dish_des);
         dishprice=findViewById(R.id.dish_price);
         dishname=findViewById(R.id.dish_name);
         quantity=findViewById(R.id.quantity);
-
+        increase=findViewById(R.id.increase);
+        decrease=findViewById(R.id.decrease);
 
 
         dname=getIntent().getStringExtra("dishname");
@@ -238,54 +254,78 @@ public class OrderFoodActivity extends AppCompatActivity {
         auth=FirebaseAuth.getInstance();
         addToCart= findViewById(R.id.add2cart);
 
-        addToCart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                addedToCart();
-            }
-        });
-
         dishname.setText(dname);
         dishprice.setText(dprice);
         dishdes.setText(ddes);
         Picasso.get().load(durl).into(dishimage);
 
-    }
-    private void addedToCart(){
-        String saveCurrentDate,saveCurrentTime;
-        Calendar calForDate= Calendar.getInstance();
-
-        SimpleDateFormat currentDate = new SimpleDateFormat("MM dd, yyyy");
-        saveCurrentDate= currentDate.format(calForDate.getTime());
-
-        SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
-        saveCurrentTime= currentTime.format(calForDate.getTime());
-
-        final HashMap<String,Object> cartMap = new HashMap<>();
-
-        cartMap.put("dishName", dname);
-        cartMap.put("dishDescription", ddes);
-        cartMap.put("dishDate", saveCurrentDate);
-        cartMap.put("dishTime", saveCurrentTime);
-        cartMap.put("dishPrice",dprice);
-        cartMap.put("totalQuantity", quantity.getText().toString());
-        cartMap.put("totalPrice", totalPrice);
-        cartMap.put("durl",durl);
-
-        firestore.collection("AddToCart").document(Objects.requireNonNull(auth.getCurrentUser()).getUid())
-                .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onComplete(@NonNull Task<DocumentReference> task) {
-                Toast.makeText(OrderFoodActivity.this,"Added To Cart", Toast.LENGTH_SHORT).show();
-                Intent intent= new Intent(getApplicationContext(),UserhomeActivity.class);
-                startActivity(intent);
-                finish();
+            public void onClick(View v) {
+                addedToCart();
+
+            }
+
+            private void addedToCart() {
+                String saveCurrentDate, saveCurrentTime;
+                Calendar calForDate = Calendar.getInstance();
+
+                SimpleDateFormat currentDate = new SimpleDateFormat("MM dd, yyyy");
+                saveCurrentDate = currentDate.format(calForDate.getTime());
+
+                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+                saveCurrentTime = currentTime.format(calForDate.getTime());
+
+                final HashMap<String, Object> cartMap = new HashMap<>();
+
+                cartMap.put("dishName", dname);
+                cartMap.put("dishDescription", ddes);
+                cartMap.put("dishDate", saveCurrentDate);
+                cartMap.put("dishTime", saveCurrentTime);
+                cartMap.put("dishPrice", dprice);
+                cartMap.put("totalQuantity", quantity.getText().toString());
+                cartMap.put("totalPrice", totalPrice);
+                cartMap.put("durl", durl);
+
+                firestore.collection("AddToCart").document(Objects.requireNonNull(auth.getCurrentUser()).getUid())
+                        .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                    @Override
+                    public void onComplete(@NonNull Task<DocumentReference> task) {
+                        Toast.makeText(OrderFoodActivity.this, "Added To Cart", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(), UserhomeActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
             }
         });
+        increase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    totalView++;
+                    quantity.setText(String.valueOf(totalView));
+                    totalPrice= Integer.parseInt(dprice)*Integer.parseInt(quantity.getText().toString());
+                    dishprice.setText(String.valueOf(totalPrice));
+
+            }
+        });
+
+        decrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(totalView>1){
+                    totalView--;
+                    quantity.setText(String.valueOf(totalView));
+                    totalPrice= Integer.parseInt(dprice)*Integer.parseInt(quantity.getText().toString());
+                    dishprice.setText(String.valueOf(totalPrice));
+                }
+
+            }
+        });
+
     }
-
     public void back(View view) {
-
         finish();
+
     }
 }

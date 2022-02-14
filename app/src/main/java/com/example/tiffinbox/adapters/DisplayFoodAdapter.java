@@ -56,6 +56,7 @@ public class DisplayFoodAdapter extends RecyclerView.Adapter<DisplayFoodAdapter.
                 intent.putExtra("dishdes",list.get(position).getDdes());
                 intent.putExtra("dishurl",list.get(position).getUrl());
                 intent.putExtra("dishprice",list.get(position).getDprice());
+                intent.putExtra("cid",list.get(position).getChefId());
 //                intent.putExtra("Thali",list.get(position).getThali());
                 context.startActivity(intent);
             }
@@ -65,7 +66,7 @@ public class DisplayFoodAdapter extends RecyclerView.Adapter<DisplayFoodAdapter.
 
     @Override
     public int getItemCount() {
-            return list.size();
+        return list.size();
     }
     public interface OnItemClickListener {
         void onClick(View view,int position);
