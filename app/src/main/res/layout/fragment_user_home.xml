@@ -6,34 +6,47 @@
     android:background="@color/white"
     tools:context=".userFragment.UserHomeFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <EditText
+            android:id="@+id/search_box"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/search_box"
-            android:layout_margin="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:drawableLeft="@drawable/search_box"
-            android:padding="13dp"
             android:drawablePadding="3dp"
+            android:elevation="3dp"
             android:hint="Search your chef here"
-            android:elevation="3dp">
-        </EditText>
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:id="@+id/search_rec"
-            android:layout_marginRight="10dp"
-            android:visibility="gone"/>
+            android:padding="13dp" />
 
+        <!--        <androidx.recyclerview.widget.RecyclerView-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="match_parent"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:id="@+id/search_rec"-->
+        <!--            android:layout_marginRight="10dp"/>-->
+
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="18dp"
+            android:layout_below="@+id/search_box"
+            android:padding="3dp" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
+            android:layout_below="@+id/spinner"
             android:id="@+id/cheflist"
             android:layout_marginTop="8dp">
 
@@ -41,7 +54,7 @@
         </androidx.recyclerview.widget.RecyclerView>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 
