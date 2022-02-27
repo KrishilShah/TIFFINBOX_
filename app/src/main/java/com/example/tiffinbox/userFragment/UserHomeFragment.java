@@ -21,6 +21,7 @@ import com.example.tiffinbox.R;
 import com.example.tiffinbox.adapters.Chef_adapters;
 import com.example.tiffinbox.models.ChefData;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -188,6 +189,32 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
 
         if(!name.isEmpty()){
             db.collection("chefs").orderBy("speciality").startAt(name).endAt(name+"\uf8ff").get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if (task.isSuccessful() && task.getResult()!=null) {
+                                for (DocumentSnapshot doc : task.getResult().getDocuments()) {
+                                    ChefData chefData = doc.toObject(ChefData.class);
+//                                    chef_list_modelList.add(chefData);
+                                    chef_list_modelList.clear();
+                                    chef_list_modelList.add(chefData);
+//                                    chefAdapters=new Chef_adapters(getActivity(), chef_list_modelList,onItemClickListener);
+//                                    popularRec.setAdapter(chefAdapters);
+                                    chefAdapters.notifyDataSetChanged();
+                                }
+                            }
+                        }
+
+                    });
+        }
+    }
+
+    private void searchNearDelivery(String name) {
+
+
+
+        if(!name.isEmpty()){
+            db.collection("chefs").orderBy("dpin").get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {

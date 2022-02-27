@@ -44,11 +44,24 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <Button
+        android:id="@+id/update"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="30dp"
+        android:background="@drawable/btn_bg"
+        android:text="Save" />
+
     <ScrollView
+        android:layout_above="@+id/update"
         android:layout_below="@+id/appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <RelativeLayout
+            android:id="@+id/update_scroll"
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -232,10 +245,27 @@
             <!--                android:textStyle="normal" />-->
 
             <EditText
-                android:id="@+id/speciality"
+                android:id="@+id/pincode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/address"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/textbox_bg"
+                android:hint="Pincode"
+                android:padding="20dp"
+                android:textColor="@color/grey"
+                android:textColorHint="@color/grey"
+                android:textStyle="normal" />
+
+            <EditText
+                android:id="@+id/speciality"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pincode"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginStart="20dp"
@@ -265,19 +295,29 @@
                 android:textColorHint="@color/grey"
                 android:textStyle="normal" />
 
-            <Button
-                android:id="@+id/update"
+            <EditText
+                android:id="@+id/deliverypin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/about"
+                android:layout_alignParentStart="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginTop="28dp"
-                android:layout_marginEnd="30dp"
-                android:background="@drawable/btn_bg"
-                android:text="Update" />
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="20dp"
+                android:background="@drawable/textbox_bg"
+                android:hint="Enter all delivery pincode"
+                android:padding="20dp"
+                android:textColor="@color/grey"
+                android:textColorHint="@color/grey"
+                android:textStyle="normal" />
+
+
         </RelativeLayout>
 
     </ScrollView>
+
+
 
 
 </RelativeLayout>

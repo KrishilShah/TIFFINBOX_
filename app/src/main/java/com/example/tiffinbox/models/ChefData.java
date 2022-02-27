@@ -2,7 +2,7 @@ package com.example.tiffinbox.models;
 
 public class ChefData {
 
-    String name, phone, email, purl,id, userType, password, speciality, about;
+    String name, phone, email, purl,id, userType, password, speciality, about, pincode, dpin;
 
 
     public String getId() {
@@ -25,6 +25,22 @@ public class ChefData {
         this.password=password;
         this.speciality = speciality;
         this.about = about;
+    }
+
+    public String getDpin() {
+        return dpin;
+    }
+
+    public void setDpin(String dpin) {
+        this.dpin = dpin;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
     }
 
     public String getName() {

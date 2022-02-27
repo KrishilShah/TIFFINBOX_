@@ -31,8 +31,9 @@
     <ScrollView
 
         android:id="@+id/detail_scroll"
+        android:layout_above="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar">
 
         <RelativeLayout
@@ -190,29 +191,28 @@
     <RelativeLayout
         android:id="@+id/bottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="125dp"
         android:layout_alignParentBottom="true">
 
         <Button
             android:id="@+id/orderfood"
-            android:layout_width="120dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentBottom="true"
             android:layout_marginStart="40dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/btn_bg"
-            android:text="Order"
+            android:text="   Order    "
             android:textSize="16sp" />
 
         <Button
             android:id="@+id/addmore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_marginBottom="79dp"
+            android:layout_above="@+id/add2cart"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="18dp"
             android:background="@drawable/btn_bg"
             android:text="ADD MORE ITEMS"
             android:textSize="16sp" />
@@ -223,6 +223,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
+
             android:layout_marginEnd="35dp"
             android:layout_marginBottom="8dp"
             android:background="@drawable/btn_bg"

@@ -1,7 +1,7 @@
 package com.example.tiffinbox.models;
 
 public class CustomerData {
-    String username,email,password,confirmPassword,phone,id;
+    String username,email,password,confirmPassword,phone,id,pincode;
     public CustomerData(){
 
     }
@@ -12,6 +12,14 @@ public class CustomerData {
         this.confirmPassword = confirmPassword;
         this.phone = phone;
         this.id = id;
+    }
+
+    public String getPincode() {
+        return pincode;
+    }
+
+    public void setPincode(String pincode) {
+        this.pincode = pincode;
     }
 
     public String getUsername() {

@@ -4,11 +4,19 @@ import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
@@ -29,6 +37,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -52,15 +62,18 @@ import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class EditprofileActivity extends AppCompatActivity {
+public class EditprofileActivity extends AppCompatActivity implements LocationListener {
 
+    LocationManager locationManager;
     Toolbar toolbar;
-    EditText chef_email, chef_name, chef_number, chef_address, chef_speciality, chef_about;
+    EditText chef_email, chef_name, chef_number, chef_address, chef_speciality, chef_about, chef_pincode, chef_deliverypin;
     RadioButton male, female, other;
     Button update_btn;
     CircleImageView chef_image;
@@ -82,6 +95,14 @@ public class EditprofileActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        //grant permission
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(getApplicationContext(),
+                android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+        }
+
 
         chef_name = findViewById(R.id.username);
         chef_email = findViewById(R.id.email);
@@ -91,6 +112,8 @@ public class EditprofileActivity extends AppCompatActivity {
 //        chef_confirmpassword= findViewById(R.id.confirmPassword);
         chef_speciality = findViewById(R.id.speciality);
         chef_about = findViewById(R.id.about);
+        chef_deliverypin = findViewById(R.id.deliverypin);
+        chef_pincode = findViewById(R.id.pincode);
         update_btn = findViewById(R.id.update);
         male = findViewById(R.id.updatemale);
         female = findViewById(R.id.updatefemale);
@@ -134,6 +157,8 @@ public class EditprofileActivity extends AppCompatActivity {
 //                String confirmpassword = chef_confirmpassword.getText().toString().trim();
                 String speciality = chef_speciality.getText().toString().trim();
                 String about = chef_about.getText().toString().trim();
+                String pincode = chef_pincode.getText().toString().trim();
+                String dpin = chef_deliverypin.getText().toString().trim();
                 String gender = "";
 
 //                chefPassword = confirmpassword;
@@ -170,6 +195,14 @@ public class EditprofileActivity extends AppCompatActivity {
 //                    chef_password.setError("Passwords Do not Match");
 //                    return;
 //                }
+                if(TextUtils.isEmpty(pincode)){
+                    chef_pincode.setError("Pin code is required");
+                    return;
+                }
+                if(TextUtils.isEmpty(dpin)){
+                    chef_deliverypin.setError("Delivery pins are required!");
+                    return;
+                }
                 if(male.isChecked()){
                     gender = "Male";
                 }
@@ -225,6 +258,8 @@ public class EditprofileActivity extends AppCompatActivity {
                         transaction.update(sfDocRef, "about", about);
                         transaction.update(sfDocRef, "gender", finalGender);
                         transaction.update(sfDocRef, "address", address);
+                        transaction.update(sfDocRef, "pincode", pincode);
+                        transaction.update(sfDocRef, "dpin", dpin);
 
 
                         return null;
@@ -331,6 +366,8 @@ public class EditprofileActivity extends AppCompatActivity {
                     String speciality = task.getResult().getString("speciality");
                     String about = task.getResult().getString("about");
                     String address1= task.getResult().getString("address");
+                    String pincode = task.getResult().getString("pincode");
+                    String dpin = task.getResult().getString("dpin");
 
                     chef_address.setText(address1);
                     chef_name.setText(name);
@@ -338,6 +375,8 @@ public class EditprofileActivity extends AppCompatActivity {
                     chef_number.setText(phone);
                     chef_speciality.setText(speciality);
                     chef_about.setText(about);
+                    chef_pincode.setText(pincode);
+                    chef_deliverypin.setText(dpin);
 //                    chef_password.setText(password1);
 //                    chef_confirmpassword.setText(password1);
 
@@ -460,6 +499,75 @@ public class EditprofileActivity extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+
+    private void locationEnabled() {
+        LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
+        try {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        try {
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (!gps_enabled && !network_enabled) {
+            new AlertDialog.Builder(EditprofileActivity.this)
+                    .setTitle("Enable GPS Service")
+                    .setMessage("We need your GPS location to show Near Places around you.")
+                    .setCancelable(false)
+                    .setPositiveButton("Enable", new
+                            DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface paramDialogInterface, int paramInt) {
+                                    startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                                }
+                            })
+                    .setNegativeButton("Cancel", null)
+                    .show();
+        }
+    }
+
+    void getLocation() {
+        try {
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 5, (LocationListener) this);
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        try {
+            Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
+            List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
+
+            chef_pincode.setText(addresses.get(0).getPostalCode());
+            chef_address.setText(addresses.get(0).getAddressLine(0));
+
+        } catch (Exception e) {
+        }
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+
     }
 
     public void back(View view) {
