@@ -1,9 +1,19 @@
 package com.example.tiffinbox.models;
 
+import java.util.List;
+
 public class ChefData {
 
-    String name, phone, email, purl,id, userType, password, speciality, about, pincode, dpin;
+    String name, phone, email, purl,id, userType, password, speciality, about, pincode;
+    List<String> dpin;
 
+    public List<String> getDpin() {
+        return dpin;
+    }
+
+    public void setDpin(List<String> dpin) {
+        this.dpin = dpin;
+    }
 
     public String getId() {
         return id;
@@ -15,7 +25,7 @@ public class ChefData {
 
     public ChefData() {
     }
-    public ChefData(String name, String phone, String email, String purl, String id, String userType, String password, String speciality, String about) {
+    public ChefData(String name, String phone, String email, String purl, String id, String userType, String password, String speciality, String about, List<String> dpin) {
         this.id=id;
         this.name = name;
         this.phone = phone;
@@ -25,13 +35,6 @@ public class ChefData {
         this.password=password;
         this.speciality = speciality;
         this.about = about;
-    }
-
-    public String getDpin() {
-        return dpin;
-    }
-
-    public void setDpin(String dpin) {
         this.dpin = dpin;
     }
 

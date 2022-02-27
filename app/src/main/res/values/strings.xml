@@ -18,5 +18,6 @@
     <string-array name="search_filter">
         <item>Search by name</item>
         <item>Search by Thali type</item>
+        <item>Search by Pincode</item>
     </string-array>
 </resources>

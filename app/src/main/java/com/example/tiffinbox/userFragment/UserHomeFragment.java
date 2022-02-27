@@ -176,6 +176,10 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
                         chef_list_modelList.clear();
                         searchChefByThali(s.toString());
                     }
+                    else if(spinnerInput.equals("Search by Pincode")){
+                        chef_list_modelList.clear();
+                        searchNearDelivery(s.toString());
+                    }
                 }
 
             }
@@ -214,7 +218,7 @@ public class UserHomeFragment extends Fragment implements Chef_adapters.OnItemCl
 
 
         if(!name.isEmpty()){
-            db.collection("chefs").orderBy("dpin").get()
+            db.collection("chefs").whereArrayContains("dpin", name).get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {

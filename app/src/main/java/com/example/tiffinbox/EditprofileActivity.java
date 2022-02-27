@@ -14,6 +14,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -34,6 +35,7 @@ import androidx.activity.result.contract.ActivityResultContract;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -61,11 +63,14 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -159,6 +164,8 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
                 String about = chef_about.getText().toString().trim();
                 String pincode = chef_pincode.getText().toString().trim();
                 String dpin = chef_deliverypin.getText().toString().trim();
+                String[] dpinArray = dpin.split("\\s*,\\s*");
+                List<String> dpinList = Arrays.asList(dpinArray);
                 String gender = "";
 
 //                chefPassword = confirmpassword;
@@ -259,7 +266,7 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
                         transaction.update(sfDocRef, "gender", finalGender);
                         transaction.update(sfDocRef, "address", address);
                         transaction.update(sfDocRef, "pincode", pincode);
-                        transaction.update(sfDocRef, "dpin", dpin);
+                        transaction.update(sfDocRef, "dpin", dpinList);
 
 
                         return null;
@@ -355,9 +362,11 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
     protected void onStart(){
         super.onStart();
         documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.getResult().exists()){
+                    String dpinList = "";
                     String name = task.getResult().getString("name");
                     String email = task.getResult().getString("email");
                     String phone = task.getResult().getString("phone");
@@ -367,7 +376,8 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
                     String about = task.getResult().getString("about");
                     String address1= task.getResult().getString("address");
                     String pincode = task.getResult().getString("pincode");
-                    String dpin = task.getResult().getString("dpin");
+                    List<String> dpin1 = (List<String>) task.getResult().get("dpin");
+                    String dpin = String.join("," , dpin1);
 
                     chef_address.setText(address1);
                     chef_name.setText(name);
