@@ -55,6 +55,7 @@ public class Dishes_Adapter extends RecyclerView.Adapter<Dishes_Adapter.ViewHold
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                totalView= Integer.parseInt(holder.quantity.getText().toString());
                 if(totalView>1){
                     totalView--;
                     holder.quantity.setText(String.valueOf(totalView));
@@ -67,6 +68,7 @@ public class Dishes_Adapter extends RecyclerView.Adapter<Dishes_Adapter.ViewHold
         holder.add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                totalView= Integer.parseInt(holder.quantity.getText().toString());
                 totalView++;
                 holder.quantity.setText(String.valueOf(totalView));
                 totalPrice= Integer.parseInt(dishData.get(position).getDprice())*Integer.parseInt(holder.quantity.getText().toString());

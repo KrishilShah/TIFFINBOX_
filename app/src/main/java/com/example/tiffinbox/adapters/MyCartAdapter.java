@@ -1,28 +1,54 @@
 package com.example.tiffinbox.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.util.*;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.tiffinbox.R;
 import com.example.tiffinbox.models.MyCartModel;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.List;
+import com.example.tiffinbox.userFragment.UserCartFragment;
+import com.google.firebase.firestore.Transaction;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder> {
 
-
+    FirebaseFirestore db= FirebaseFirestore.getInstance();
+    FirebaseAuth auth = FirebaseAuth.getInstance();
+    DocumentReference documentReference;
     Context context;
     List<MyCartModel> cartModelList;
-    public MyCartAdapter(Context context, List<MyCartModel> cartModelList){
+    int totalView=1;
+    int totalPrice=0;
+    public OnItemClickListener onItemClickListener;
+
+    String name,dishDate,durl,totalQuantity,dishPrice;
+
+    public MyCartAdapter(Context context, List<MyCartModel> cartModelList, MyCartAdapter.OnItemClickListener onItemClickListener){
         this.context = context;
         this.cartModelList = cartModelList;
     }
@@ -30,22 +56,127 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.my_cart_item,parent, Boolean.parseBoolean("false")));
+        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.my_cart_item,parent, Boolean.parseBoolean("false")),onItemClickListener);
 
     }
 
+
+
     @Override
-    public void onBindViewHolder(@NonNull viewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull viewHolder holder, @SuppressLint("RecyclerView") int position) {
+
+        durl=cartModelList.get(position).getDurl();
 
           Glide.with(holder.itemView)
-                .load(cartModelList.get(position).getdurl())
+                .load(durl)
                 .into(holder.dishImage);
 
-        holder.name.setText(cartModelList.get(position).getDishName());
-        holder.totalPrice.setText(String.valueOf(cartModelList.get(position).getTotalPrice()));
-        holder.totalQuantity.setText(String.valueOf(cartModelList.get(position).gettotalQuantity()));
-        holder.date.setText(cartModelList.get(position).getdishDate());
 
+          name=cartModelList.get(position).getDishName();
+          dishPrice=cartModelList.get(position).getDishPrice();
+          dishDate=cartModelList.get(position).getDishDate();
+
+
+        holder.name.setText(name);
+        holder.totalPrice.setText("$"+cartModelList.get(position).getTotalPrice());
+        holder.dishPrice.setText("$"+dishPrice);
+        holder.totalQuantity.setText(String.valueOf(cartModelList.get(position).getTotalQuantity()));
+        holder.date.setText(dishDate);
+
+        holder.removeItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                if(onItemClickListener!=null) {
+                    Toast.makeText(context, "Listner not null", Toast.LENGTH_SHORT).show();
+        if(position != RecyclerView.NO_POSITION){
+            Toast.makeText(context,"No position",Toast.LENGTH_SHORT).show();
+            onItemClickListener.onDelete(position);}
+    }
+
+                db.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                        .collection("CurrentUser").document(cartModelList.get(position).getId()).
+                        delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+//                        Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(getActivity(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+
+//                cartModelList.remove(position);
+            }
+        });
+
+        holder.remove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                totalView= Integer.parseInt(holder.totalQuantity.getText().toString());
+                if(totalView>1){
+                    totalView--;
+                    holder.totalQuantity.setText(String.valueOf(totalView));
+                    totalPrice= Integer.parseInt(cartModelList.get(position).getDishPrice())*Integer.parseInt(holder.totalQuantity.getText().toString());
+                    holder.totalPrice.setText("$"+totalPrice);
+
+                    update(name,totalPrice,dishDate,cartModelList.get(position).getDishTime(),durl,holder.totalQuantity.getText().
+                            toString(),dishPrice,cartModelList.get(position).getDishDescription(),cartModelList.get(position).getId());
+
+//                    onItemClickListener.changed();
+
+                }
+            }
+        });
+
+        holder.add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                totalView= Integer.parseInt(holder.totalQuantity.getText().toString());
+                totalView++;
+                holder.totalQuantity.setText(String.valueOf(totalView));
+                totalPrice= Integer.parseInt(cartModelList.get(position).getDishPrice())*Integer.parseInt(holder.totalQuantity.getText().toString());
+                holder.totalPrice.setText("$"+totalPrice);
+                update(name,totalPrice,dishDate,cartModelList.get(position).getDishTime(),durl,holder.totalQuantity.getText().
+                        toString(),dishPrice,cartModelList.get(position).getDishDescription(),cartModelList.get(position).getId());
+
+//                onItemClickListener.changed();
+            }
+        });
+
+    }
+
+    private void update(String dishName, int totalPrice, String dishDate, String dishTime, String durl, String totalQuantity, String dishPrice, String dishDescription, String id){
+
+         MyCartModel cartModel= new MyCartModel(dishName,totalPrice,dishDate,dishTime,durl,totalQuantity,dishPrice,dishDescription,id);
+
+        db.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                .collection("CurrentUser").document(id).
+                set(cartModel)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+//                        Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(getActivity(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+    }
+
+    public interface OnItemClickListener {
+        void onDelete(int position);
+        void changed();
+        void onClick(View v);
     }
 
     @Override
@@ -53,20 +184,38 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
         return cartModelList.size();
     }
 
-    public class viewHolder extends RecyclerView.ViewHolder {
+    public class viewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
-        TextView name,date,totalPrice,totalQuantity;
+        TextView name,date,totalPrice,totalQuantity,dishPrice,removeItem;
         CircleImageView dishImage;
+        ImageView add,remove;
+        MyCartAdapter.OnItemClickListener onItemClickListener;
 
-        public viewHolder(@NonNull View itemView) {
+        public viewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
             super(itemView);
+
+            this.onItemClickListener=onItemClickListener;
             dishImage=itemView.findViewById(R.id.dish_image);
             name=itemView.findViewById(R.id.dish_name);
             date=itemView.findViewById(R.id.dish_date);
             totalPrice=itemView.findViewById(R.id.dish_totalPrice);
             totalQuantity=itemView.findViewById(R.id.dish_QTY);
+            dishPrice=itemView.findViewById(R.id.dish_Price);
+            add=itemView.findViewById(R.id.add_item_1);
+            remove=itemView.findViewById(R.id.remove_item_1);
+            removeItem=itemView.findViewById(R.id.remove);
+
+            removeItem.setOnClickListener(this);
 
 
         }
+
+
+
+        @Override
+        public void onClick(View v) {
+            onItemClickListener.onDelete(getAdapterPosition());
+        }
+
     }
 }

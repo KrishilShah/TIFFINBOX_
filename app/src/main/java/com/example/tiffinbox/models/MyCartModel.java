@@ -1,23 +1,71 @@
 package com.example.tiffinbox.models;
 
 public class MyCartModel {
-    String dishName;
+    String dishName,dishTime,dishPrice,dishDate,id,totalQuantity,durl,dishDescription;
     int totalPrice;
-    String dishDate;
-    String durl;
-    String totalQuantity;
 
     public MyCartModel(){
 
     }
-    public MyCartModel(String dishName, int totalPrice, String dishDate, String durl, String totalQuantity) {
+    public MyCartModel(String dishName, int totalPrice, String dishDate, String dishTime, String durl, String totalQuantity, String dishPrice, String dishDescription, String id) {
         this.dishName = dishName;
         this.totalPrice = totalPrice;
         this.dishDate = dishDate;
+        this.dishDescription = dishDescription;
+        this.dishTime = dishTime;
+        this.id = id;
         this.durl = durl;
+        this.totalQuantity = totalQuantity;
+        this.dishPrice = dishPrice;
+    }
+
+    public String getDishDescription() {
+        return dishDescription;
+    }
+
+    public void setDishDescription(String dishDescription) {
+        this.dishDescription = dishDescription;
+    }
+
+    public String getDurl() {
+        return durl;
+    }
+
+    public void setDurl(String durl) {
+        this.durl = durl;
+    }
+
+    public String getTotalQuantity() {
+        return totalQuantity;
+    }
+
+    public void setTotalQuantity(String totalQuantity) {
         this.totalQuantity = totalQuantity;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDishTime() {
+        return dishTime;
+    }
+
+    public void setDishTime(String dishTime) {
+        this.dishTime = dishTime;
+    }
+
+    public String getDishPrice() {
+        return dishPrice;
+    }
+
+    public void setDishPrice(String dishPrice) {
+        this.dishPrice = dishPrice;
+    }
 
     public String getDishName() {
         return dishName;
@@ -35,27 +83,15 @@ public class MyCartModel {
         this.totalPrice = totalPrice;
     }
 
-    public String getdishDate() {
+    public String getDishDate() {
         return dishDate;
     }
 
-    public void setdishDate(String dishDate) {
-        dishDate = dishDate;
+    public void setDishDate(String dishDate) {
+        this.dishDate = dishDate;
     }
 
-    public String getdurl() {
-        return durl;
-    }
 
-    public void setdurl(String durl) {
-        this.durl = durl;
-    }
 
-    public String gettotalQuantity() {
-        return totalQuantity;
-    }
 
-    public void settotalQuantity(String totalQuantity) {
-        this.totalQuantity = totalQuantity;
-    }
 }

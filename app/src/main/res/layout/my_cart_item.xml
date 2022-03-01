@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_margin="5dp"
     app:cardCornerRadius="7dp"
-    app:cardElevation="5dp"  >
+    app:cardElevation="5dp" >
 
     <RelativeLayout
         android:layout_width="wrap_content"
@@ -27,90 +27,139 @@
 
 
             <TextView
-                android:id="@+id/QTY"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/dish_name"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="10sp"
-                android:layout_toEndOf="@id/dish_image"
-                android:text="QTY:"
-                android:textColor="@color/purple"
-                android:textSize="16sp" />
-
-            <TextView
                 android:id="@+id/dish_QTY"
                 android:layout_width="wrap_content"
                 android:layout_height="20dp"
+
+                android:layout_below="@+id/dish_name"
+                android:layout_marginStart="0dp"
                 android:layout_marginLeft="3dp"
-                android:layout_marginTop="45dp"
-                android:layout_toEndOf="@+id/QTY"
-                android:text="Quantity"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@+id/add_item_1"
+                android:text="Qty"
                 android:textColor="@color/purple"
                 android:textSize="16sp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/add_item_1"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/dish_name"
+
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="0dp"
+                android:layout_toEndOf="@+id/dish_image"
+                android:src="@drawable/increase_1" />
+
+            <ImageView
+                android:id="@+id/remove_item_1"
+                android:layout_width="20dp"
+                android:layout_height="30dp"
+                android:layout_below="@+id/dish_name"
+                android:layout_marginLeft="3dp"
+                android:layout_toEndOf="@+id/dish_QTY"
+                android:src="@drawable/decrease" />
 
 
             <TextView
                 android:id="@+id/dish_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10sp"
+                android:layout_toStartOf="@+id/dish_Price"
                 android:layout_toEndOf="@+id/dish_image"
                 android:text="Dish Name"
                 android:textColor="@color/purple"
-                android:textSize="20sp"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="75dp"
-                android:layout_toEndOf="@+id/dish_image"
-                android:text="Date: "
-                android:textColor="@color/purple"
-                android:textSize="18sp" />
+<!--            <TextView-->
+<!--                android:id="@+id/date"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:layout_marginTop="75dp"-->
+<!--                android:layout_toEndOf="@+id/dish_image"-->
+<!--                android:text="Date: "-->
+<!--                android:textColor="@color/purple"-->
+<!--                android:textSize="18sp" />-->
+
 
             <TextView
                 android:id="@+id/dish_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="75sp"
-                android:layout_toEndOf="@+id/date"
-                android:text="DD:MM:YY"
-                android:textColor="@color/purple"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_below="@+id/dish_QTY"
 
-            <TextView
-                android:id="@+id/price"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginTop="45dp"
-                android:layout_toEndOf="@+id/dish_QTY"
-                android:text="Total Price:"
-                android:textColor="@color/purple"
-                android:textSize="18sp" />
+                android:layout_marginStart="13dp"
+
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="15dp"
+                android:layout_toEndOf="@+id/dish_image"
+                android:text="DD:MM:YY"
+                android:textColor="@color/grey"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/dish_totalPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:layout_marginStart="10dp"
-                android:layout_marginLeft="0dp"
                 android:layout_marginTop="45dp"
-                android:layout_toEndOf="@+id/price"
                 android:gravity="center"
-                android:text="Price"
+                android:paddingRight="10dp"
+                android:text="$0"
+                android:textColor="@color/purple"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/remove"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="75dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginRight="40dp"
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:text="Remove"
+                android:textColor="#D14136"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/dish_Price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:text="$0"
                 android:textColor="@color/purple"
                 android:textSize="15sp"
                 android:textStyle="bold" />
+
+            <!--            <TextView-->
+            <!--                android:id="@+id/price"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_marginStart="30dp"-->
+            <!--                android:layout_marginLeft="30dp"-->
+            <!--                android:layout_marginTop="45dp"-->
+            <!--                android:layout_toStartOf="@+id/dish_totalPrice"-->
+            <!--                android:text="Total Price:"-->
+            <!--                android:textColor="@color/purple"-->
+            <!--                android:textSize="18sp" />-->
 
 
         </RelativeLayout>
@@ -123,201 +172,6 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="10dp"
             android:background="@color/grey" />
+
     </RelativeLayout>
-
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:background="#B3FB9F"-->
-<!--        android:padding="8dp"-->
-<!--        android:orientation="vertical"> -->
-
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="2">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Image"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/d_url"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Image"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="2">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Name"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/food_Name"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Name"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="2">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Description"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/food_Description"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Description"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="2">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Price"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/food_Price"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Price"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="2">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Quantity"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/total_Quantity"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Quantity"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="2">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Total Price"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/total_Price"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Food Total Price"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="2">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Current Date"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/current_Date"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Current Date"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--        </LinearLayout>-->
-<!--        <LinearLayout-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:orientation="horizontal"-->
-<!--            android:weightSum="2">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Current Time"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/current_Time"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_weight="1"-->
-<!--                android:text="Current Time"-->
-<!--                android:textStyle="bold"-->
-<!--                android:textSize="16sp"/>-->
-
-<!--        </LinearLayout>-->
-
-<!--         </LinearLayout>-->
-
 </androidx.cardview.widget.CardView>

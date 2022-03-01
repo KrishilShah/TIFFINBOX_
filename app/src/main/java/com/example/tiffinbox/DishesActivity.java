@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class DishesActivity extends AppCompatActivity implements Dishes_Adapter.
     RecyclerView recyclerView;
     Dishes_Adapter Dishes_Adapter;
     Toolbar toolbar;
+    Button save;
     List<DishData> dishData;
     FirebaseAuth mFirebaseAuth;
     Dishes_Adapter.OnItemClickListener onItemClickListener;
@@ -61,6 +63,8 @@ public class DishesActivity extends AppCompatActivity implements Dishes_Adapter.
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
+        save=findViewById(R.id.buy_now);
+
         dishData=new ArrayList<>();
         Dishes_Adapter =new Dishes_Adapter(this,dishData,onItemClickListener);
         recyclerView.setAdapter(Dishes_Adapter);
@@ -79,26 +83,6 @@ public class DishesActivity extends AppCompatActivity implements Dishes_Adapter.
                 }
             }) ;
         }
-//        add_item_1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(totalView<10) {
-//                    totalView++;
-//                    view.setText(String.valueOf(totalView));
-//                }
-//
-//            }
-//        });
-//
-//        remove_item.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if(totalView>0) {
-//                    totalView--;
-//                    view.setText(String.valueOf(totalView));
-//                }
-//            }
-//        });
     }
 
     public void back(View view) {

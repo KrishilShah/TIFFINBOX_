@@ -170,10 +170,15 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tiffinbox.models.MyCartModel;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -206,8 +211,9 @@ public class OrderFoodActivity extends AppCompatActivity {
     Button addToCart;
     Button addMore;
     FirebaseFirestore firestore;
-    int totalPrice=0;
     FirebaseAuth auth;
+    int totalPrice=0;
+
     String dname,ddes,dprice,durl;
     int Dprice;
     DishData dishData;
@@ -287,12 +293,36 @@ public class OrderFoodActivity extends AppCompatActivity {
                 cartMap.put("totalPrice", totalPrice);
                 cartMap.put("durl", durl);
 
-                firestore.collection("AddToCart").document(Objects.requireNonNull(auth.getCurrentUser()).getUid())
-                        .collection("CurrentUser").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+
+//                String ruid=cartRef.push().getKey();        //cart id
+                String ruid = firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                        .collection("CurrentUser").document().getId();
+
+                cartMap.put("id",ruid);
+                //** to store dish details in database
+
+                MyCartModel cartModel= new MyCartModel(dname,totalPrice,saveCurrentDate,saveCurrentTime,durl,quantity.getText().toString(),dprice,ddes,ruid);
+
+//                firestore.collection("AddToCart").document(Objects.requireNonNull(auth.getCurrentUser()).getUid())
+//                        .collection("CurrentUser").document(ruid).set(cartModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<DocumentReference> task) {
+//                        Toast.makeText(OrderFoodActivity.this, "Added To Cart", Toast.LENGTH_SHORT).show();
+//                        Intent intent = new Intent(getApplicationContext(), UserhomeActivity.class);
+//                        startActivity(intent);
+//                        finish();
+//                    }
+//                });
+
+                firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                        .collection("CurrentUser").document(ruid).set(cartModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
-                    public void onComplete(@NonNull Task<DocumentReference> task) {
-                        Toast.makeText(OrderFoodActivity.this, "Added To Cart", Toast.LENGTH_SHORT).show();
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getApplicationContext(), "Dish added successfully", Toast.LENGTH_SHORT).show();
+
+
                         Intent intent = new Intent(getApplicationContext(), UserhomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     }
