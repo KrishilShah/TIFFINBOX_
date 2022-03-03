@@ -39,7 +39,7 @@ import java.util.Map;
  * Use the {@link UserCartFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemClickListener{
+public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemClickListener {
 
     FirebaseFirestore db;
     FirebaseAuth auth;
@@ -124,7 +124,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
     }
 
 
-    private void getRecyclerView(){
+    public void getRecyclerView(){
 
         cartModelList=new ArrayList<>();
         cartAdapter=new MyCartAdapter(getActivity(),cartModelList, onItemClickListener);
@@ -186,32 +186,17 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         double percentax = 0.02;
         double delivery = 10;
         double tax;
+        int size=cartModelList.size();
+
+        Toast.makeText(getActivity(), "list size "+size, Toast.LENGTH_SHORT).show();
 
 
-//        db.collection("AddToCart").document(auth.getCurrentUser().getUid())
-//                .collection("CurrentUser").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//            @Override
-//            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                if(task.isSuccessful()){
-//                    for(DocumentSnapshot documentSnapshot : task.getResult().getDocuments()){
-//                        MyCartModel cartModel=documentSnapshot.toObject(MyCartModel.class);
-//                        cartModelList.add(cartModel);
-                        int size=cartModelList.size();
-                        Toast.makeText(getActivity(), "list size "+size, Toast.LENGTH_SHORT).show();
-
-
-                        double price;
-                        for(int i=0; i<size;i++)
-                        {
-                            price=cartModelList.get(i).getTotalPrice();
-                            total_price=total_price+price;
-                        }
-//
-//                    }
-//                }
-//            }
-//        });
-
+        double price;
+        for(int i=0; i<size;i++)
+        {
+            price=cartModelList.get(i).getTotalPrice();
+            total_price=total_price+price;
+        }
 
         tax=Math.round((total_price * percentax) * 100.0) / 100.0;
         double total= Math.round((total_price + tax + delivery)* 100.0) / 100.0 ;
@@ -222,22 +207,12 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         totalBill.setText("$ "+total);
     }
 
-    public void removeItem(int position){
-        cartModelList.remove(position);
-        cartAdapter.notifyItemRemoved(position);
 
-        Toast.makeText(getActivity(), "Item "+position+" removed", Toast.LENGTH_SHORT).show();
-    }
-//if(onItemClickListener!=null) {
-//
-//        if(position != RecyclerView.NO_POSITION)
-//            onItemClickListener.onDelete(position);
-//    }
 
 
     @Override
-    public void onDelete(int position) {
-            removeItem(position);
+    public void onDelete() {
+            getRecyclerView();
     }
 
     @Override
@@ -247,6 +222,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
 
     @Override
     public void onClick(View v) {
+        getRecyclerView();
 
     }
 

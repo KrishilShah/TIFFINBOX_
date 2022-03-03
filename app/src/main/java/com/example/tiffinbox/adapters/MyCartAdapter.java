@@ -9,6 +9,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.tiffinbox.cheffragment.*;
+
 import java.util.*;
 
 import androidx.annotation.NonNull;
@@ -51,19 +53,21 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
     public MyCartAdapter(Context context, List<MyCartModel> cartModelList, MyCartAdapter.OnItemClickListener onItemClickListener){
         this.context = context;
         this.cartModelList = cartModelList;
+        this.onItemClickListener = onItemClickListener;
     }
 
     @NonNull
     @Override
     public viewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new viewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.my_cart_item,parent, Boolean.parseBoolean("false")),onItemClickListener);
+        View view=LayoutInflater.from(parent.getContext()).inflate(R.layout.my_cart_item,parent, Boolean.parseBoolean("false"));
+        return new viewHolder(view).linkAdapter(this);
 
     }
 
 
 
     @Override
-    public void onBindViewHolder(@NonNull viewHolder holder, @SuppressLint("RecyclerView") int position) {
+    public void onBindViewHolder(@NonNull viewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         durl=cartModelList.get(position).getDurl();
 
@@ -83,37 +87,14 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
         holder.totalQuantity.setText(String.valueOf(cartModelList.get(position).getTotalQuantity()));
         holder.date.setText(dishDate);
 
-        holder.removeItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+//        holder.removeItem.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
 
-                if(onItemClickListener!=null) {
-                    Toast.makeText(context, "Listner not null", Toast.LENGTH_SHORT).show();
-        if(position != RecyclerView.NO_POSITION){
-            Toast.makeText(context,"No position",Toast.LENGTH_SHORT).show();
-            onItemClickListener.onDelete(position);}
-    }
-
-                db.collection("AddToCart").document(auth.getCurrentUser().getUid())
-                        .collection("CurrentUser").document(cartModelList.get(position).getId()).
-                        delete()
-                        .addOnSuccessListener(new OnSuccessListener<Void>() {
-                            @Override
-                            public void onSuccess(Void unused) {
-//                        Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
-                            }
-                        }).addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-//                Toast.makeText(getActivity(), "Some Error Occured", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
-
-//                cartModelList.remove(position);
-            }
-        });
+////                cartModelList.remove(position);
+//            }
+//        });
 
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -174,7 +155,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
     }
 
     public interface OnItemClickListener {
-        void onDelete(int position);
+        void onDelete();
         void changed();
         void onClick(View v);
     }
@@ -191,10 +172,14 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
         ImageView add,remove;
         MyCartAdapter.OnItemClickListener onItemClickListener;
 
-        public viewHolder(@NonNull View itemView, OnItemClickListener onItemClickListener) {
+        private MyCartAdapter myCartAdapter;
+
+
+
+        public viewHolder(@NonNull View itemView) {
             super(itemView);
 
-            this.onItemClickListener=onItemClickListener;
+//            this.onItemClickListener=onItemClickListener;
             dishImage=itemView.findViewById(R.id.dish_image);
             name=itemView.findViewById(R.id.dish_name);
             date=itemView.findViewById(R.id.dish_date);
@@ -205,17 +190,55 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
             remove=itemView.findViewById(R.id.remove_item_1);
             removeItem=itemView.findViewById(R.id.remove);
 
-            removeItem.setOnClickListener(this);
+            removeItem.setOnClickListener(view -> {
 
 
+
+
+                                db.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                        .collection("CurrentUser").document(cartModelList.get(getAdapterPosition()).getId()).
+                        delete()
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void unused) {
+//                        Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+//                Toast.makeText(getActivity(), "Some Error Occured", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                myCartAdapter.cartModelList.remove(getAdapterPosition());
+                myCartAdapter.notifyItemRemoved(getAdapterPosition());
+
+                //onItemClickListener.changed();
+
+
+
+//                UserCartFragment userCartFragment = new UserCartFragment();
+//                userCartFragment.getRecyclerView();
+//                userCartFragment.calculateCart();
+
+            });
+
+
+        }
+
+        public viewHolder linkAdapter(MyCartAdapter myCartAdapter){
+            this.myCartAdapter=myCartAdapter;
+            return this;
         }
 
 
 
         @Override
         public void onClick(View v) {
-            onItemClickListener.onDelete(getAdapterPosition());
+//            onItemClickListener.onDelete(getAdapterPosition());
         }
 
     }
+
+
 }
