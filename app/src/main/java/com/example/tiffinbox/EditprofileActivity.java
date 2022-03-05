@@ -2,6 +2,7 @@ package com.example.tiffinbox;
 
 import static android.content.ContentValues.TAG;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -90,6 +91,7 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
     StorageReference storageReference;
     public static String chefPassword;
     private Uri imageUri;
+    double longitude,latitude;
     ActivityResultLauncher<String> mGetContent;
 
     @Override
@@ -107,6 +109,10 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
                     android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
         }
+//        if (ContextCompat.checkSelfPermission(EditprofileActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+//            ActivityCompat.requestPermissions(EditprofileActivity.this,new String[]{
+//                    Manifest.permission.ACCESS_FINE_LOCATION},100);
+//        }
 
 
         chef_name = findViewById(R.id.username);
@@ -540,13 +546,14 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
                             })
                     .setNegativeButton("Cancel", null)
                     .show();
+
         }
     }
 
     void getLocation() {
         try {
             locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 5, (LocationListener) this);
+            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, (LocationListener) this);
         } catch (SecurityException e) {
             e.printStackTrace();
         }
@@ -554,12 +561,23 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
 
     @Override
     public void onLocationChanged(Location location) {
+        Toast.makeText(this, ""+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
+
         try {
             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 
+            Log.d(TAG, "onLocationChanged: "+latitude+""+longitude);
+//            Toast.makeText(this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
+
+
+
             chef_pincode.setText(addresses.get(0).getPostalCode());
             chef_address.setText(addresses.get(0).getAddressLine(0));
+            latitude = addresses.get(0).getLatitude();
+            longitude =addresses.get(0).getLongitude();
+            Toast.makeText(this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
         }
@@ -587,6 +605,7 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
         intent.putExtra("fragment","account");
         startActivity(intent);
     }
+
 
 
 }
