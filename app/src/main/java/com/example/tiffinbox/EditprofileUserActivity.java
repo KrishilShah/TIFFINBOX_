@@ -63,7 +63,7 @@ import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class EditprofileUserActivity extends AppCompatActivity implements LocationListener {
+public class EditprofileUserActivity<string> extends AppCompatActivity implements LocationListener {
 
     LocationManager locationManager;
     Toolbar toolbar;
@@ -79,6 +79,7 @@ public class EditprofileUserActivity extends AppCompatActivity implements Locati
     StorageReference storageReference;
     public static String userPassword;
     private Uri imageUri;
+    double latitude, longitude;
     ActivityResultLauncher<String> mGetContent;
 
 
@@ -92,11 +93,13 @@ public class EditprofileUserActivity extends AppCompatActivity implements Locati
 
 
         //grant permission
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(getApplicationContext(),
                 android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+            ActivityCompat.requestPermissions(this, new String[]{
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
         }
 
         user_name = findViewById(R.id.username);
@@ -246,6 +249,9 @@ public class EditprofileUserActivity extends AppCompatActivity implements Locati
                         transaction.update(sfDocRef, "gender", finalGender);
                         transaction.update(sfDocRef, "address", address);
                         transaction.update(sfDocRef, "pincode",pincode);
+                        transaction.update(sfDocRef, "lon",longitude);
+                        transaction.update(sfDocRef, "lat",latitude);
+
 
 
                         return null;
@@ -349,6 +355,7 @@ public class EditprofileUserActivity extends AppCompatActivity implements Locati
                     String password1 = task.getResult().getString("Password");
                     String address1= task.getResult().getString("address");
                     String pincode = task.getResult().getString("pincode");
+
 
                     user_address.setText(address1);
                     user_name.setText(name);
@@ -504,8 +511,8 @@ public class EditprofileUserActivity extends AppCompatActivity implements Locati
 
     void getLocation() {
         try {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 500, 5, (LocationListener) this);
+            locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, (LocationListener) this);
         } catch (SecurityException e) {
             e.printStackTrace();
         }
@@ -513,15 +520,23 @@ public class EditprofileUserActivity extends AppCompatActivity implements Locati
 
     @Override
     public void onLocationChanged(Location location) {
+
         try {
             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 
             user_pincode.setText(addresses.get(0).getPostalCode());
             user_address.setText(addresses.get(0).getAddressLine(0));
+            latitude=location.getLatitude();
+            longitude=location.getLongitude();
+
+
+
+//            Toast.makeText(this, "latitude:"+location.getLatitude()+",longitude:"+location.getLongitude(), Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
         }
+//        Toast.makeText(this, "latitude:"+location.getLatitude()+",longitude:"+location.getLongitude(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

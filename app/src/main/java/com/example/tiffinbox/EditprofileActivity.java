@@ -102,17 +102,14 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //grant permission
-        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(getApplicationContext(),
                 android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+            ActivityCompat.requestPermissions(this, new String[]{
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_COARSE_LOCATION}, 100);
         }
-//        if (ContextCompat.checkSelfPermission(EditprofileActivity.this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-//            ActivityCompat.requestPermissions(EditprofileActivity.this,new String[]{
-//                    Manifest.permission.ACCESS_FINE_LOCATION},100);
-//        }
 
 
         chef_name = findViewById(R.id.username);
@@ -139,6 +136,10 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
                 uploadPicture(imageUri);
             }
         });
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        locationEnabled();
+        getLocation();
 
         firebaseAuth = FirebaseAuth.getInstance();
         firestore = FirebaseFirestore.getInstance();
@@ -273,6 +274,8 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
                         transaction.update(sfDocRef, "address", address);
                         transaction.update(sfDocRef, "pincode", pincode);
                         transaction.update(sfDocRef, "dpin", dpinList);
+                        transaction.update(sfDocRef, "lon",longitude);
+                        transaction.update(sfDocRef, "lat",latitude);
 
 
                         return null;
@@ -552,8 +555,8 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
 
     void getLocation() {
         try {
-            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-            locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 5000, 5, (LocationListener) this);
+            locationManager = (LocationManager) getApplicationContext().getSystemService(Context.LOCATION_SERVICE);
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 5, (LocationListener) this);
         } catch (SecurityException e) {
             e.printStackTrace();
         }
@@ -561,23 +564,21 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
 
     @Override
     public void onLocationChanged(Location location) {
-        Toast.makeText(this, ""+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(this, ""+location.getLatitude()+","+location.getLongitude(), Toast.LENGTH_SHORT).show();
 //        Toast.makeText(this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
 
         try {
             Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(), location.getLongitude(), 1);
 
-            Log.d(TAG, "onLocationChanged: "+latitude+""+longitude);
-//            Toast.makeText(this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
-
-
-
             chef_pincode.setText(addresses.get(0).getPostalCode());
             chef_address.setText(addresses.get(0).getAddressLine(0));
-            latitude = addresses.get(0).getLatitude();
-            longitude =addresses.get(0).getLongitude();
-            Toast.makeText(this, latitude+" "+longitude, Toast.LENGTH_SHORT).show();
+            latitude=location.getLatitude();
+            longitude=location.getLongitude();
+
+
+
+//            Toast.makeText(this, "latitude:"+location.getLatitude()+",longitude:"+location.getLongitude(), Toast.LENGTH_SHORT).show();
 
         } catch (Exception e) {
         }
