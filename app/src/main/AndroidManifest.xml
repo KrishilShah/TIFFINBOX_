@@ -45,6 +45,8 @@
         <activity
             android:name=".UserhomeActivity"
             android:exported="false" />
+
+
         <activity
             android:name=".SplashActivity"
             android:exported="true">

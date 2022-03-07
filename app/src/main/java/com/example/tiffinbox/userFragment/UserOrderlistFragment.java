@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -60,6 +61,13 @@ public class UserOrderlistFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user_orderlist, container, false);
+        View root= inflater.inflate(R.layout.fragment_user_orderlist, container, false);
+
+        Bundle bundle=this.getArguments();
+        String total_price=bundle.getString("price");
+        String userid=bundle.getString("userid");
+//        Toast.makeText(getContext(), ""+total_price+""+userid, Toast.LENGTH_SHORT).show();
+        return root;
+
     }
 }

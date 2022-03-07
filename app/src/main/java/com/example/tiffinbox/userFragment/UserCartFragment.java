@@ -2,6 +2,7 @@ package com.example.tiffinbox.userFragment;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +37,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -42,9 +47,12 @@ import java.util.Map;
  * create an instance of this fragment.
  */
 public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemClickListener {
-
-    FirebaseFirestore db;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    DocumentReference documentReference;
     FirebaseAuth auth;
+    double myLatitude,myLongitude;
+    private ProgressDialog progressDialog;
+
 
     TextView totalCharge,taxCharge,deliveryService,totalBill;
 
@@ -53,7 +61,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
     RecyclerView recyclerView;
     MyCartAdapter cartAdapter;
     List<MyCartModel> cartModelList;
-    Button button;
+    Button btn_buynow;
 
     private double totalAmountIncome = 0;
     double total_price=0;
@@ -114,16 +122,52 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         totalCharge=root.findViewById(R.id.totalCharge);
         totalBill=root.findViewById(R.id.totalBill);
         deliveryService=root.findViewById(R.id.deliveryService);
-        button=root.findViewById(R.id.buy_now);
+        btn_buynow=root.findViewById(R.id.buy_now);
+        auth=FirebaseAuth.getInstance();
+        progressDialog=new ProgressDialog(getContext());
+        progressDialog.setTitle("PLease Wait......");
+        progressDialog.setCanceledOnTouchOutside(false);
 
-        button.setOnClickListener(new View.OnClickListener() {
+
+        documentReference = db.collection("customers").document(auth.getCurrentUser().getUid());
+
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.getResult().exists()){
+                    myLatitude=task.getResult().getDouble("lat");
+                    myLongitude=task.getResult().getDouble("lon");
+                }
+                else{
+                    Toast.makeText(getActivity(),"No Profile Exists", Toast.LENGTH_SHORT);
+                }
+            }
+        });
+
+        btn_buynow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(getActivity(),UserOrderlistFragment.class);
-                intent.putExtra("price",total_price);
-                intent.putExtra("userid",auth.getCurrentUser().getUid());
+//                Intent intent=new Intent(getActivity(),UserOrderlistFragment.class);
+//                intent.putExtra("price",total_price);
+//                intent.putExtra("userid",auth.getCurrentUser().getUid());
 
-                startActivity(intent);
+//                startActivity(intent);
+                if (myLatitude==0 || myLatitude==0 || myLongitude==0 || myLongitude==0){
+                //user didn't enter address in profile
+                Toast.makeText( getActivity(), "Please enter your address in you profile before placing order...", Toast.LENGTH_SHORT). show() ;
+                return; }
+
+
+
+
+                Bundle bundle=new Bundle();
+                bundle.putString("price", String.valueOf(total_price));
+                bundle.putString("userid",auth.getCurrentUser().getUid());
+                Fragment UserOrdlist=new UserOrderlistFragment();
+                UserOrdlist.setArguments(bundle);
+                FragmentTransaction fm=getActivity().getSupportFragmentManager().beginTransaction();
+                fm.replace(R.id.container,UserOrdlist).commit();
+
 
             }
         });
@@ -139,6 +183,8 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         return root;
 
     }
+
+
 
 
     public void getRecyclerView(){
