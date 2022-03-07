@@ -176,9 +176,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.tiffinbox.models.MyCartModel;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.squareup.picasso.Picasso;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -207,12 +209,16 @@ import java.util.SimpleTimeZone;
 public class OrderFoodActivity extends AppCompatActivity {
 
     TextView view;
+    String longitude,latitude;
     int totalView=1;
     Button addToCart;
     Button addMore;
     FirebaseFirestore firestore;
     FirebaseAuth auth;
     int totalPrice=0;
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    DocumentReference documentReference;
+    FirebaseAuth firebaseAuth;
 
     String dname,ddes,dprice,durl;
     int Dprice;
@@ -258,12 +264,37 @@ public class OrderFoodActivity extends AppCompatActivity {
 
         firestore= FirebaseFirestore.getInstance();
         auth=FirebaseAuth.getInstance();
+
+        documentReference = db.collection("customers").document(firebaseAuth.getCurrentUser().getUid());
         addToCart= findViewById(R.id.add2cart);
 
         dishname.setText(dname);
         dishprice.setText(dprice);
         dishdes.setText(ddes);
         Picasso.get().load(durl).into(dishimage);
+
+        documentReference.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.getResult().exists()){
+
+                    latitude=task.getResult().getString("lat");
+                    longitude=task.getResult().getString("lon");
+
+
+
+
+                }
+                else{
+                    Toast.makeText(getApplicationContext(),"No Profile Exists", Toast.LENGTH_SHORT);
+                }
+            }
+        })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override public void onFailure(@NonNull Exception e) {
+
+                    }
+                });
 
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -301,7 +332,7 @@ public class OrderFoodActivity extends AppCompatActivity {
                 cartMap.put("id",ruid);
                 //** to store dish details in database
 
-                MyCartModel cartModel= new MyCartModel(dname,totalPrice,saveCurrentDate,saveCurrentTime,durl,quantity.getText().toString(),dprice,ddes,ruid);
+                MyCartModel cartModel= new MyCartModel(dname,totalPrice,saveCurrentDate,saveCurrentTime,durl,quantity.getText().toString(),dprice,ddes,ruid,getIntent().getStringExtra("cid"));
 
 //                firestore.collection("AddToCart").document(Objects.requireNonNull(auth.getCurrentUser()).getUid())
 //                        .collection("CurrentUser").document(ruid).set(cartModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

@@ -357,6 +357,7 @@ public class EditprofileUserActivity<string> extends AppCompatActivity implement
                     String pincode = task.getResult().getString("pincode");
 
 
+
                     user_address.setText(address1);
                     user_name.setText(name);
                     user_email.setText(email);

@@ -2,11 +2,13 @@ package com.example.tiffinbox.userFragment;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,6 +53,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
     RecyclerView recyclerView;
     MyCartAdapter cartAdapter;
     List<MyCartModel> cartModelList;
+    Button button;
 
     private double totalAmountIncome = 0;
     double total_price=0;
@@ -111,6 +114,20 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         totalCharge=root.findViewById(R.id.totalCharge);
         totalBill=root.findViewById(R.id.totalBill);
         deliveryService=root.findViewById(R.id.deliveryService);
+        button=root.findViewById(R.id.buy_now);
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(),UserOrderlistFragment.class);
+                intent.putExtra("price",total_price);
+                intent.putExtra("userid",auth.getCurrentUser().getUid());
+
+                startActivity(intent);
+
+            }
+        });
+
 
         getRecyclerView();
 

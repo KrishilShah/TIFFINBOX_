@@ -107,7 +107,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
                     holder.totalPrice.setText("$"+totalPrice);
 
                     update(name,totalPrice,dishDate,cartModelList.get(position).getDishTime(),durl,holder.totalQuantity.getText().
-                            toString(),dishPrice,cartModelList.get(position).getDishDescription(),cartModelList.get(position).getId());
+                            toString(),dishPrice,cartModelList.get(position).getDishDescription(),cartModelList.get(position).getId(),cartModelList.get(position).getChefID());
 
 //                    onItemClickListener.changed();
 
@@ -124,7 +124,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
                 totalPrice= Integer.parseInt(cartModelList.get(position).getDishPrice())*Integer.parseInt(holder.totalQuantity.getText().toString());
                 holder.totalPrice.setText("$"+totalPrice);
                 update(name,totalPrice,dishDate,cartModelList.get(position).getDishTime(),durl,holder.totalQuantity.getText().
-                        toString(),dishPrice,cartModelList.get(position).getDishDescription(),cartModelList.get(position).getId());
+                        toString(),dishPrice,cartModelList.get(position).getDishDescription(),cartModelList.get(position).getId(),cartModelList.get(position).getChefID());
 
 //                onItemClickListener.changed();
             }
@@ -132,9 +132,9 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
 
     }
 
-    private void update(String dishName, int totalPrice, String dishDate, String dishTime, String durl, String totalQuantity, String dishPrice, String dishDescription, String id){
+    private void update(String dishName, int totalPrice, String dishDate, String dishTime, String durl, String totalQuantity, String dishPrice, String dishDescription, String id, String chefID){
 
-         MyCartModel cartModel= new MyCartModel(dishName,totalPrice,dishDate,dishTime,durl,totalQuantity,dishPrice,dishDescription,id);
+         MyCartModel cartModel= new MyCartModel(dishName,totalPrice,dishDate,dishTime,durl,totalQuantity,dishPrice,dishDescription,id,chefID);
 
         db.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("CurrentUser").document(id).
