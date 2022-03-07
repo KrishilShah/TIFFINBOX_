@@ -209,16 +209,16 @@ import java.util.SimpleTimeZone;
 public class OrderFoodActivity extends AppCompatActivity {
 
     TextView view;
-    String longitude,latitude;
+    Double longitude;
+    Double latitude;
     int totalView=1;
     Button addToCart;
     Button addMore;
-    FirebaseFirestore firestore;
     FirebaseAuth auth;
     int totalPrice=0;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
-    FirebaseAuth firebaseAuth;
+
 
     String dname,ddes,dprice,durl;
     int Dprice;
@@ -262,10 +262,10 @@ public class OrderFoodActivity extends AppCompatActivity {
 
         totalPrice= Integer.parseInt(dprice)*Integer.parseInt(quantity.getText().toString());
 
-        firestore= FirebaseFirestore.getInstance();
+//        db= FirebaseFirestore.getInstance();
         auth=FirebaseAuth.getInstance();
 
-        documentReference = db.collection("customers").document(firebaseAuth.getCurrentUser().getUid());
+        documentReference = db.collection("customers").document(auth.getCurrentUser().getUid());
         addToCart= findViewById(R.id.add2cart);
 
         dishname.setText(dname);
@@ -277,13 +277,8 @@ public class OrderFoodActivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 if(task.getResult().exists()){
-
-                    latitude=task.getResult().getString("lat");
-                    longitude=task.getResult().getString("lon");
-
-
-
-
+                    latitude=task.getResult().getDouble("lat");
+                    longitude=task.getResult().getDouble("lon");
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"No Profile Exists", Toast.LENGTH_SHORT);
@@ -326,7 +321,7 @@ public class OrderFoodActivity extends AppCompatActivity {
 
 
 //                String ruid=cartRef.push().getKey();        //cart id
-                String ruid = firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                String ruid = db.collection("AddToCart").document(auth.getCurrentUser().getUid())
                         .collection("CurrentUser").document().getId();
 
                 cartMap.put("id",ruid);
@@ -345,7 +340,7 @@ public class OrderFoodActivity extends AppCompatActivity {
 //                    }
 //                });
 
-                firestore.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                db.collection("AddToCart").document(auth.getCurrentUser().getUid())
                         .collection("CurrentUser").document(ruid).set(cartModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
