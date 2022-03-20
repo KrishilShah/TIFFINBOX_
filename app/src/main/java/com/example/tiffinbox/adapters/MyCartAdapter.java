@@ -48,7 +48,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
     int totalPrice=0;
     public OnItemClickListener onItemClickListener;
 
-    String name,dishDate,durl,totalQuantity,dishPrice;
+    String name,dishDate,durl,totalQuantity,dishPrice,orderStatus;
 
     public MyCartAdapter(Context context, List<MyCartModel> cartModelList, MyCartAdapter.OnItemClickListener onItemClickListener){
         this.context = context;
@@ -79,6 +79,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
           name=cartModelList.get(position).getDishName();
           dishPrice=cartModelList.get(position).getDishPrice();
           dishDate=cartModelList.get(position).getDishDate();
+          orderStatus="In Progress";
 
 
         holder.name.setText(name);
@@ -107,7 +108,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
                     holder.totalPrice.setText("$"+totalPrice);
 
                     update(name,totalPrice,dishDate,cartModelList.get(position).getDishTime(),durl,holder.totalQuantity.getText().
-                            toString(),dishPrice,cartModelList.get(position).getDishDescription(),cartModelList.get(position).getId(),cartModelList.get(position).getChefID());
+                            toString(),dishPrice,cartModelList.get(position).getDishDescription(),cartModelList.get(position).getId(),cartModelList.get(position).getChefID(),orderStatus);
 
 //                    onItemClickListener.changed();
 
@@ -124,7 +125,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
                 totalPrice= Integer.parseInt(cartModelList.get(position).getDishPrice())*Integer.parseInt(holder.totalQuantity.getText().toString());
                 holder.totalPrice.setText("$"+totalPrice);
                 update(name,totalPrice,dishDate,cartModelList.get(position).getDishTime(),durl,holder.totalQuantity.getText().
-                        toString(),dishPrice,cartModelList.get(position).getDishDescription(),cartModelList.get(position).getId(),cartModelList.get(position).getChefID());
+                        toString(),dishPrice,cartModelList.get(position).getDishDescription(),cartModelList.get(position).getId(),cartModelList.get(position).getChefID(),orderStatus);
 
 //                onItemClickListener.changed();
             }
@@ -132,9 +133,9 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
 
     }
 
-    private void update(String dishName, int totalPrice, String dishDate, String dishTime, String durl, String totalQuantity, String dishPrice, String dishDescription, String id, String chefID){
+    private void update(String dishName, int totalPrice, String dishDate, String dishTime, String durl, String totalQuantity, String dishPrice, String dishDescription, String id, String chefID, String orderStatus){
 
-         MyCartModel cartModel= new MyCartModel(dishName,totalPrice,dishDate,dishTime,durl,totalQuantity,dishPrice,dishDescription,id,chefID);
+         MyCartModel cartModel= new MyCartModel(dishName,totalPrice,dishDate,dishTime,durl,totalQuantity,dishPrice,dishDescription,id,chefID,orderStatus);
 
         db.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("CurrentUser").document(id).

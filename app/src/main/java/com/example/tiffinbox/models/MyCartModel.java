@@ -1,13 +1,13 @@
 package com.example.tiffinbox.models;
 
 public class MyCartModel {
-    String dishName,dishTime,dishPrice,dishDate,id,totalQuantity,durl,dishDescription,chefID;
+    String dishName,dishTime,dishPrice,dishDate,id,totalQuantity,durl,dishDescription,chefID,orderStatus;
     int totalPrice;
 
     public MyCartModel(){
 
     }
-    public MyCartModel(String dishName, int totalPrice, String dishDate, String dishTime, String durl, String totalQuantity, String dishPrice, String dishDescription, String id, String chefID) {
+    public MyCartModel(String dishName, int totalPrice, String dishDate, String dishTime, String durl, String totalQuantity, String dishPrice, String dishDescription, String id, String chefID, String orderStatus) {
         this.dishName = dishName;
         this.totalPrice = totalPrice;
         this.dishDate = dishDate;
@@ -18,6 +18,7 @@ public class MyCartModel {
         this.totalQuantity = totalQuantity;
         this.dishPrice = dishPrice;
         this.chefID=chefID;
+        this.orderStatus=orderStatus;
     }
 
     public String getChefID() {
@@ -99,6 +100,15 @@ public class MyCartModel {
     public void setDishDate(String dishDate) {
         this.dishDate = dishDate;
     }
+
+    public String getOrderStatus() {
+        return orderStatus;
+    }
+
+    public void setOrderStatus(String orderStatus) {
+        this.orderStatus = orderStatus;
+    }
+
 
 
 

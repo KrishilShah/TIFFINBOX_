@@ -72,7 +72,6 @@ public class EditprofileUserActivity<string> extends AppCompatActivity implement
     Button update_btn;
     CircleImageView user_image;
     FirebaseAuth firebaseAuth;
-    FirebaseFirestore firestore;
     private String onlineUserID;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
@@ -129,7 +128,7 @@ public class EditprofileUserActivity<string> extends AppCompatActivity implement
         getLocation();
 
         firebaseAuth = FirebaseAuth.getInstance();
-        firestore = FirebaseFirestore.getInstance();
+//        firestore = FirebaseFirestore.getInstance();
         onlineUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
         documentReference = db.collection("customers").document(firebaseAuth.getCurrentUser().getUid());
         storageReference = FirebaseStorage.getInstance().getReference();

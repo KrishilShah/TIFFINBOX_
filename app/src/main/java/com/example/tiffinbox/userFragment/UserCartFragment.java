@@ -51,6 +51,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
     DocumentReference documentReference;
     FirebaseAuth auth;
     double myLatitude,myLongitude;
+    String myPhone;
     private ProgressDialog progressDialog;
 
 
@@ -137,9 +138,10 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
                 if(task.getResult().exists()){
                     myLatitude=task.getResult().getDouble("lat");
                     myLongitude=task.getResult().getDouble("lon");
+                    myPhone=task.getResult().getString("phone");
                 }
                 else{
-                    Toast.makeText(getActivity(),"No Profile Exists", Toast.LENGTH_SHORT);
+                    Toast.makeText(getActivity(),"No Profile Exists", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -155,7 +157,21 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
                 if (myLatitude==0 || myLatitude==0 || myLongitude==0 || myLongitude==0){
                 //user didn't enter address in profile
                 Toast.makeText( getActivity(), "Please enter your address in you profile before placing order...", Toast.LENGTH_SHORT). show() ;
-                return; }
+                return;
+                }
+
+                if (myPhone.equals("")|| myPhone.equals("null")) {
+                    //user didn't enter phone number in profile
+                    Toast.makeText(getActivity(), "Please enter your address in you profile before placing order...", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(cartModelList.size() == 0){
+                    //cart list is empty
+                    Toast.makeText(getActivity(), "No items in cart", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+               // submitOrder();
 
 
 
@@ -183,6 +199,11 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         return root;
 
     }
+//
+//    private void submitOrder(){
+//        progressDialog.setMessage("Placing Order....");
+//        progressDialog.show();
+//    }
 
 
 

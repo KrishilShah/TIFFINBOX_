@@ -227,6 +227,7 @@ public class OrderFoodActivity extends AppCompatActivity {
 
     ImageView dishimage;
     TextView dishdes,dishprice,dishname,quantity;
+    String orderStatus = "In Progress";
     Toolbar toolbar;
 
     @Override
@@ -318,6 +319,7 @@ public class OrderFoodActivity extends AppCompatActivity {
                 cartMap.put("totalQuantity", quantity.getText().toString());
                 cartMap.put("totalPrice", totalPrice);
                 cartMap.put("durl", durl);
+                cartMap.put("orderStatus", orderStatus);
 
 
 //                String ruid=cartRef.push().getKey();        //cart id
@@ -327,7 +329,7 @@ public class OrderFoodActivity extends AppCompatActivity {
                 cartMap.put("id",ruid);
                 //** to store dish details in database
 
-                MyCartModel cartModel= new MyCartModel(dname,totalPrice,saveCurrentDate,saveCurrentTime,durl,quantity.getText().toString(),dprice,ddes,ruid,getIntent().getStringExtra("cid"));
+                MyCartModel cartModel= new MyCartModel(dname,totalPrice,saveCurrentDate,saveCurrentTime,durl,quantity.getText().toString(),dprice,ddes,ruid,getIntent().getStringExtra("cid"),orderStatus);
 
 //                firestore.collection("AddToCart").document(Objects.requireNonNull(auth.getCurrentUser()).getUid())
 //                        .collection("CurrentUser").document(ruid).set(cartModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {

@@ -76,15 +76,15 @@
                 android:src="@drawable/decrease"
                 android:visibility="visible" />
 
-<!--            <Button-->
-<!--                android:id="@+id/add"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:layout_below="@+id/price"-->
-<!--                android:layout_alignParentEnd="true"-->
-<!--                android:layout_marginTop="0dp"-->
-<!--                android:text="Add"-->
-<!--                android:visibility="visible" />-->
+            <!--            <Button-->
+            <!--                android:id="@+id/add"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:layout_below="@+id/price"-->
+            <!--                android:layout_alignParentEnd="true"-->
+            <!--                android:layout_marginTop="0dp"-->
+            <!--                android:text="Add"-->
+            <!--                android:visibility="visible" />-->
 
 
             <TextView
