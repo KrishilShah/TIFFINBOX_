@@ -178,12 +178,15 @@
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_dishes.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_editprofile.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_editprofile_user.xml" value="0.176" />
+        <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_order_details_chef.xml" value="0.21754385964912282" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_postdish.xml" value="0.19270833333333334" />
+        <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_shop_details.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_signup_chef.xml" value="0.1359375" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/activity_userhome.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/chef_list_display.xml" value="0.264" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/fragment_chef_account.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/fragment_chef_home.xml" value="0.1" />
+        <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/fragment_chef_orderlist.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/fragment_chef_payment.xml" value="0.21145833333333333" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/fragment_user_account.xml" value="0.19270833333333334" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/fragment_user_cart.xml" value="0.196875" />
@@ -192,6 +195,7 @@
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/item_design.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/my_cart_item.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/nav_header_main.xml" value="0.23229166666666667" />
+        <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/row_order_chef.xml" value="0.2" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/row_order_user.xml" value="0.264" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/layout/singlerowchefproducts.xml" value="0.2" />
         <entry key="..\:/Users/swara/OneDrive/Desktop/TIFFINBOXNEW/app/src/main/res/menu/accountedit.xml" value="0.23229166666666667" />

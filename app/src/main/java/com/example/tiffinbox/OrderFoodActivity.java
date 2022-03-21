@@ -175,6 +175,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.tiffinbox.models.ChefOrderData;
 import com.example.tiffinbox.models.MyCartModel;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -218,6 +219,7 @@ public class OrderFoodActivity extends AppCompatActivity {
     int totalPrice=0;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     DocumentReference documentReference;
+    String ruid, onlineUserID, chefID;
 
 
     String dname,ddes,dprice,durl;
@@ -266,6 +268,7 @@ public class OrderFoodActivity extends AppCompatActivity {
 //        db= FirebaseFirestore.getInstance();
         auth=FirebaseAuth.getInstance();
 
+        onlineUserID = auth.getCurrentUser().getUid();
         documentReference = db.collection("customers").document(auth.getCurrentUser().getUid());
         addToCart= findViewById(R.id.add2cart);
 
@@ -296,6 +299,7 @@ public class OrderFoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addedToCart();
+                sendOrdertoChef();
 
             }
 
@@ -323,13 +327,13 @@ public class OrderFoodActivity extends AppCompatActivity {
 
 
 //                String ruid=cartRef.push().getKey();        //cart id
-                String ruid = db.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                ruid = db.collection("AddToCart").document(auth.getCurrentUser().getUid())
                         .collection("CurrentUser").document().getId();
 
                 cartMap.put("id",ruid);
                 //** to store dish details in database
-
-                MyCartModel cartModel= new MyCartModel(dname,totalPrice,saveCurrentDate,saveCurrentTime,durl,quantity.getText().toString(),dprice,ddes,ruid,getIntent().getStringExtra("cid"),orderStatus);
+                chefID = getIntent().getStringExtra("cid");
+                MyCartModel cartModel= new MyCartModel(dname,totalPrice,saveCurrentDate,saveCurrentTime,durl,quantity.getText().toString(),dprice,ddes,ruid,chefID,orderStatus);
 
 //                firestore.collection("AddToCart").document(Objects.requireNonNull(auth.getCurrentUser()).getUid())
 //                        .collection("CurrentUser").document(ruid).set(cartModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -349,12 +353,58 @@ public class OrderFoodActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Dish added successfully", Toast.LENGTH_SHORT).show();
 
 
+//                        Intent intent = new Intent(getApplicationContext(), UserhomeActivity.class);
+//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                        startActivity(intent);
+//                        finish();
+                    }
+                });
+            }
+
+            private void sendOrdertoChef() {
+                String saveCurrentDate, saveCurrentTime;
+                Calendar calForDate = Calendar.getInstance();
+
+                SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+                saveCurrentDate = currentDate.format(calForDate.getTime());
+
+                SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+                saveCurrentTime = currentTime.format(calForDate.getTime());
+
+                final HashMap<String, Object> cartMap = new HashMap<>();
+
+                cartMap.put("dishName", dname);
+                cartMap.put("dishDescription", ddes);
+                cartMap.put("dishDate", saveCurrentDate);
+                cartMap.put("dishTime", saveCurrentTime);
+                cartMap.put("dishPrice", dprice);
+                cartMap.put("totalQuantity", quantity.getText().toString());
+                cartMap.put("totalPrice", totalPrice);
+                cartMap.put("durl", durl);
+                cartMap.put("orderStatus", orderStatus);
+                cartMap.put("id",ruid);
+                cartMap.put("userID",onlineUserID);
+                cartMap.put("chefID", chefID);
+                cartMap.put("latitude", latitude);
+                cartMap.put("latitude", longitude);
+
+                ChefOrderData chefOrderData = new ChefOrderData(onlineUserID, dname, saveCurrentTime, dprice, saveCurrentDate,ruid, quantity.getText().toString(), durl, ddes, chefID, orderStatus, totalPrice, latitude, longitude);
+
+                db.collection("ChefOrders").document(chefID)
+                        .collection("CurrentChef").document(ruid).set(chefOrderData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        Toast.makeText(getApplicationContext(), "Order Sent to Chef", Toast.LENGTH_SHORT).show();
+
+
                         Intent intent = new Intent(getApplicationContext(), UserhomeActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                     }
                 });
+
+
             }
         });
         increase.setOnClickListener(new View.OnClickListener() {
@@ -382,6 +432,8 @@ public class OrderFoodActivity extends AppCompatActivity {
         });
 
     }
+
+
     public void back(View view) {
         finish();
 

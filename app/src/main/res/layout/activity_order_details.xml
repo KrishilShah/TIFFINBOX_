@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schenas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   tools:context=".OrderDetailsActivity">
+<!--    first we will add cart item count-->
+<!--        &lt;!&ndash;Shop Details->-->
+        <RelativeLayout
+            android:id="@+id/shopRL"
+            android:layout_width="match_parent"
+            android:layout_height="200dp">
+            <ImageView
+                 android:id="@+id/shopIv"
+                 android:layout_width="match_parent"
+                 android:layout_height="match_parent"
+                 android:scaleType="centerCrop"
+                android:src="@color/lightgrey"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+
+                android:src="#79000000" />
+
+            <RelativeLayout
+                android:layout_alignParentTop="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <RelativeLayout
+                    android:id="@+id/toolbarRL"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:background="@color/purple"
+                    android:padding="10dp">
+
+                    <ImageButton
+                        android:id="@+id/cartBtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="@null"
+                        android:src="@drawable/ic_cart"
+                        app:tint="@color/white" />
+
+                    <ImageButton
+                        android:id="@+id/backBtn"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+
+                        android:src="@drawable/back_arrow" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:text="Shop Details"
+                        android:textColor="@color/white"
+                        android:textSize="20sp" />
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/shopNameTv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/toolbarRL"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+
+                    android:text="Shop Name"
+                    android:textSize="18sp"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/phone"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/shopNameTv"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:text="Phone"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/Email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/phone"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:textSize="12sp"
+                    android:text="Email"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/Address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/Email"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="8dp"
+                    android:textSize="12sp"
+                    android:text="Address"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/open"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/toolbarRL"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Open"
+                    android:textSize="14sp"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/fee"
+                    android:layout_alignParentEnd="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/open"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginEnd="10dp"
+                    android:text="Delivery Fee"
+                    android:layout_marginBottom="10dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/white" />
+
+
+
+            </RelativeLayout>
+        </RelativeLayout>
+</RelativeLayout>
