@@ -8,137 +8,212 @@
    tools:context=".OrderDetailsActivity">
 <!--    first we will add cart item count-->
 <!--        &lt;!&ndash;Shop Details->-->
-        <RelativeLayout
-            android:id="@+id/shopRL"
-            android:layout_width="match_parent"
-            android:layout_height="200dp">
-            <ImageView
-                 android:id="@+id/shopIv"
-                 android:layout_width="match_parent"
-                 android:layout_height="match_parent"
-                 android:scaleType="centerCrop"
-                android:src="@color/lightgrey"/>
+       <ScrollView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+           >
+           <RelativeLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content">
 
-                android:src="#79000000" />
+               <RelativeLayout
+                   android:id="@+id/shopRL"
+                   android:layout_width="match_parent"
+                   android:layout_height="200dp">
+                   <ImageView
+                       android:id="@+id/shopIv"
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
+                       android:scaleType="centerCrop"
+                       android:src="@color/lightgrey"/>
 
-            <RelativeLayout
-                android:layout_alignParentTop="true"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="10dp">
+                   <ImageView
+                       android:layout_width="match_parent"
+                       android:layout_height="match_parent"
 
-                <RelativeLayout
-                    android:id="@+id/toolbarRL"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:background="@color/purple"
-                    android:padding="10dp">
+                       android:src="#79000000" />
 
-                    <ImageButton
-                        android:id="@+id/cartBtn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_alignParentEnd="true"
-                        android:background="@null"
-                        android:src="@drawable/ic_cart"
-                        app:tint="@color/white" />
+                   <RelativeLayout
+                       android:layout_alignParentTop="true"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:padding="10dp">
 
-                    <ImageButton
-                        android:id="@+id/backBtn"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                       <RelativeLayout
+                           android:id="@+id/toolbarRL"
+                           android:layout_width="match_parent"
+                           android:layout_height="wrap_content"
+                           android:layout_alignParentTop="true"
+                           android:background="@color/purple"
+                           android:padding="10dp">
 
-                        android:src="@drawable/back_arrow" />
+                           <ImageButton
+                               android:id="@+id/cartBtn"
+                               android:layout_width="30dp"
+                               android:layout_height="30dp"
+                               android:layout_alignParentEnd="true"
+                               android:background="@null"
+                               android:src="@drawable/ic_cart"
+                               app:tint="@color/white" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerHorizontal="true"
-                        android:layout_centerVertical="true"
-                        android:text="Shop Details"
-                        android:textColor="@color/white"
-                        android:textSize="20sp" />
-                </RelativeLayout>
+                           <ImageButton
+                               android:id="@+id/backBtn"
+                               android:layout_width="30dp"
+                               android:layout_height="30dp"
 
-                <TextView
-                    android:id="@+id/shopNameTv"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/toolbarRL"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="3dp"
+                               android:src="@drawable/back_arrow" />
 
-                    android:text="Shop Name"
-                    android:textSize="18sp"
-                    android:textColor="@color/white" />
+                           <TextView
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_centerHorizontal="true"
+                               android:layout_centerVertical="true"
+                               android:text="Shop Details"
+                               android:textColor="@color/white"
+                               android:textSize="20sp" />
+                       </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/phone"
+                       <TextView
+                           android:id="@+id/shopNameTv"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/toolbarRL"
+                           android:layout_marginTop="3dp"
+                           android:layout_marginEnd="3dp"
 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/shopNameTv"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="3dp"
-                    android:text="Phone"
-                    android:textColor="@color/white"
-                    android:textSize="12sp" />
+                           android:text="Shop Name"
+                           android:textSize="18sp"
+                           android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/Email"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/phone"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="3dp"
-                    android:textSize="12sp"
-                    android:text="Email"
-                    android:textColor="@color/white" />
+                       <TextView
+                           android:id="@+id/phone"
 
-                <TextView
-                    android:id="@+id/Address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/Email"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="3dp"
-                    android:layout_marginBottom="8dp"
-                    android:textSize="12sp"
-                    android:text="Address"
-                    android:textColor="@color/white" />
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/shopNameTv"
+                           android:layout_marginTop="3dp"
+                           android:layout_marginEnd="3dp"
+                           android:text="Phone"
+                           android:textColor="@color/white"
+                           android:textSize="12sp" />
 
-                <TextView
-                    android:id="@+id/open"
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/toolbarRL"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="Open"
-                    android:textSize="14sp"
-                    android:textColor="@color/white" />
+                       <TextView
+                           android:id="@+id/Email"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/phone"
+                           android:layout_marginTop="3dp"
+                           android:layout_marginEnd="3dp"
+                           android:textSize="12sp"
+                           android:text="Email"
+                           android:textColor="@color/white" />
 
-                <TextView
-                    android:id="@+id/fee"
-                    android:layout_alignParentEnd="true"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/open"
-                    android:layout_marginTop="3dp"
-                    android:layout_marginEnd="10dp"
-                    android:text="Delivery Fee"
-                    android:layout_marginBottom="10dp"
-                    android:textSize="15sp"
-                    android:textColor="@color/white" />
+                       <TextView
+                           android:id="@+id/Address"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/Email"
+                           android:layout_marginTop="3dp"
+                           android:layout_marginEnd="3dp"
+                           android:layout_marginBottom="8dp"
+                           android:textSize="12sp"
+                           android:text="Address"
+                           android:textColor="@color/white" />
+
+                       <TextView
+                           android:id="@+id/open"
+                           android:layout_alignParentEnd="true"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/toolbarRL"
+                           android:layout_marginTop="3dp"
+                           android:layout_marginEnd="10dp"
+                           android:text="Open"
+                           android:textSize="14sp"
+                           android:textColor="@color/white" />
+
+                       <TextView
+                           android:id="@+id/fee"
+                           android:layout_alignParentEnd="true"
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_below="@+id/open"
+                           android:layout_marginTop="3dp"
+                           android:layout_marginEnd="10dp"
+                           android:text="Delivery Fee"
+                           android:layout_marginBottom="10dp"
+                           android:textSize="15sp"
+                           android:textColor="@color/white" />
+
+                       <RelativeLayout
+                           android:layout_width="wrap_content"
+                           android:layout_height="wrap_content"
+                           android:layout_centerInParent="true"
+                           android:layout_below="@+id/Address">
+
+                           <ImageButton
+                               android:layout_width="wrap_content"
+                               android:layout_height="wrap_content"
+                               android:layout_centerInParent="true"
+                               android:src="@drawable/ic_phone" />
+                       </RelativeLayout>
 
 
 
-            </RelativeLayout>
-        </RelativeLayout>
+                   </RelativeLayout>
+
+               </RelativeLayout>
+
+
+               <RelativeLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:id="@+id/belowRL"
+                   android:layout_below="@+id/shopRL">
+
+                   <ImageView
+                       android:id="@+id/view_quilt"
+                       android:layout_width="50dp"
+                       android:layout_height="50dp"
+                       android:layout_alignParentEnd="true"
+                       android:layout_marginRight="10dp"
+                       android:layout_marginTop="5dp"
+                       android:src="@drawable/ic_view_quilt" />
+
+                   <androidx.appcompat.widget.SearchView
+                       android:id="@+id/search"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginLeft="10dp"
+                       android:layout_marginTop="5dp"
+
+                       android:layout_toStartOf="@+id/view_quilt" />
+
+                   <TextView
+                       android:id="@+id/text"
+                       android:layout_below="@+id/search"
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:text="Showing all.."
+                       android:textColor="#131212"
+                       android:paddingLeft="20dp"
+                       android:layout_marginTop="5dp"
+                       android:textSize="16dp"/>
+
+                   <androidx.recyclerview.widget.RecyclerView
+                       android:layout_below="@+id/text"
+                       android:id="@+id/recyclerview"
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:layout_marginLeft="5dp"
+                       android:layout_marginTop="10dp"
+                       tools:listitem="@layout/order_detail_item"/>
+
+
+
+               </RelativeLayout>
+
+           </RelativeLayout>
+       </ScrollView>
 </RelativeLayout>
