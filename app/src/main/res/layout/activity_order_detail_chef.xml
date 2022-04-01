@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".OrderDetailCustomerActivity">
+    tools:context=".OrderDetailChefActivity">
 
     <RelativeLayout
         android:id="@+id/tool"
@@ -18,7 +18,9 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:background="@null"
-            android:src="@drawable/back_arrow"/>
+            android:onClick="back"
+            android:src="@drawable/back_arrow"
+            />
 
         <TextView
             android:layout_width="wrap_content"
@@ -33,17 +35,17 @@
             android:id="@+id/editBtn"
             android:layout_width="40dp"
             android:layout_height="40dp"
+            android:layout_alignParentEnd="true"
             android:background="@null"
-            android:src="@drawable/ic_edit"
-            android:layout_alignParentEnd="true"/>
-<!--        <ImageButton-->
-<!--            android:id="@+id/mapBtn"-->
-<!--            android:layout_width="40dp"-->
-<!--            android:layout_height="40dp"-->
-<!--            android:background="@null"-->
-<!--            android:layout_toStartOf="@+id/editBtn"-->
-<!--            android:src="@drawable/ic_edit"-->
-<!--            android:layout_alignParentEnd="true"/>-->
+            android:src="@drawable/ic_edit" />
+
+        <ImageButton
+            android:id="@+id/mapBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_toStartOf="@+id/editBtn"
+            android:background="@null"
+            android:src="@android:drawable/ic_dialog_map" />
 
     </RelativeLayout>
 
@@ -269,10 +271,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/itemsRv"
-        android:layout_below="@+id/orderDetailText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@+id/orderDetailText"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/row_orderedlist"
-        />
+        tools:listitem="@layout/row_orderedlist" />
 </RelativeLayout>

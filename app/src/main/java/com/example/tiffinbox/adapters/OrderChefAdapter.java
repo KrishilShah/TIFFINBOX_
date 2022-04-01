@@ -11,6 +11,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.tiffinbox.OrderDetailChefActivity;
 import com.example.tiffinbox.R;
 import com.example.tiffinbox.models.ChefOrderData;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -73,7 +74,7 @@ public class OrderChefAdapter extends RecyclerView.Adapter<OrderChefAdapter.Hold
         });
 
         //Setdata
-        holder.amountTv.setText("Amount $: " +orderCost);
+        holder.amountTv.setText("Amount Rs: " +orderCost);
         holder.statusTv.setText(orderStatus);
         holder.orderIdTv.setText("OrderId: " +orderId);
         // holder.chefNameTv.setText("Chef Name: " +orderChefName);
@@ -90,17 +91,17 @@ public class OrderChefAdapter extends RecyclerView.Adapter<OrderChefAdapter.Hold
             holder.statusTv.setTextColor(context.getResources().getColor(R.color.design_default_color_error));
         }
 
-//        holder.itemView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                //Open order details
-//                Intent intent = new Intent(context, OrderDetailsChefActivity.class);
-//                intent.putExtra("orderId", orderId); //To load order info
-//                intent.putExtra(("orderBy"), orderUserId); //To load info of user who placed the order
-//                context.startActivity(intent);
-//
-//            }
-//        });
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Open order details
+                Intent intent = new Intent(context, OrderDetailChefActivity.class);
+                intent.putExtra("orderId", orderId); //To load order info
+                intent.putExtra(("orderBy"), orderUserId); //To load info of user who placed the order
+                context.startActivity(intent);
+
+            }
+        });
     }
 
     @Override
