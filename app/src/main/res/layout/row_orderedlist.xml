@@ -7,8 +7,12 @@
     android:elevation="5dp"
     app:cardUseCompatPadding="true">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <RelativeLayout
+        android:id="@+id/relative"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -16,40 +20,31 @@
             android:id="@+id/orderIdTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order: 12345"
+            android:text="Item Title"
             android:textColor="@color/purple"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/dateTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/nextIv"
-            android:text="22/06/2020" />
+
 
         <TextView
+            android:layout_marginTop="5dp"
             android:id="@+id/chefNameTv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/orderIdTv"
-            android:text="ABC Chef" />
+            android:text="Price: 10" />
+
 
         <TextView
-            android:id="@+id/amountTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/chefNameTv"
-            android:text="Total Amount: $32.44" />
-
-        <TextView
-            android:id="@+id/statusTv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/chefNameTv"
             android:layout_marginTop="5dp"
-            android:layout_toStartOf="@+id/nextIv"
-            android:text="In Progress"
-            android:textColor="@color/design_default_color_secondary" />
+            android:id="@+id/dateTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/orderIdTv"
+            android:layout_marginLeft="150dp"
+            android:layout_toEndOf="@+id/chefNameTv"
+            android:text="Quantity: 2" />
+
 
         <ImageView
             android:id="@+id/nextIv"
@@ -58,6 +53,15 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"/>
 
+    </RelativeLayout>
+    <View
+        android:id="@+id/view1"
+        android:layout_width="fill_parent"
+        android:layout_height="2dp"
+        android:layout_below="@+id/relative"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="10dp"
+        android:background="@color/grey" />
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

@@ -272,7 +272,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         double tax;
         int size=cartModelList.size();
 
-        Toast.makeText(getActivity(), "list size "+size, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getActivity(), "list size "+size, Toast.LENGTH_SHORT).show();
 
 
         double price;
@@ -285,10 +285,10 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         tax=Math.round((total_price * percentax) * 100.0) / 100.0;
         double total= Math.round((total_price + tax + delivery)* 100.0) / 100.0 ;
 
-        totalCharge.setText("$ "+total_price);
-        taxCharge.setText("$ "+tax);
-        deliveryService.setText("$ "+delivery);
-        totalBill.setText("$ "+total);
+        totalCharge.setText("Rs."+total_price);
+        taxCharge.setText("Rs."+tax);
+        deliveryService.setText("Rs."+delivery);
+        totalBill.setText("Rs."+total);
     }
 
 

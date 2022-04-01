@@ -74,7 +74,7 @@ public class OrderUserAdapter extends RecyclerView.Adapter<OrderUserAdapter.Hold
         });
 
         //Setdata
-        holder.amountTv.setText("Amount $: " +orderCost);
+        holder.amountTv.setText("Amount Rs." +orderCost);
         holder.statusTv.setText(orderStatus);
         holder.orderIdTv.setText("OrderId: " +orderId);
        // holder.chefNameTv.setText("Chef Name: " +orderChefName);

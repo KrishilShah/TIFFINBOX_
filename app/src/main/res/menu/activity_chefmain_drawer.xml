@@ -13,10 +13,10 @@
             android:icon="@drawable/ic_list"
             android:title="Order List" />
 
-        <item
-            android:id="@+id/payment"
-            android:icon="@drawable/ic_payment"
-            android:title="Payment" />
+<!--        <item-->
+<!--            android:id="@+id/payment"-->
+<!--            android:icon="@drawable/ic_payment"-->
+<!--            android:title="Payment" />-->
 
         <item
             android:id="@+id/chef_account"

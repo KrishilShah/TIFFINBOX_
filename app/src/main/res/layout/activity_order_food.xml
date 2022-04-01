@@ -68,7 +68,7 @@
                     android:text="FOOD NAME"
                     android:textAllCaps="true"
                     android:textColor="#9740BF"
-                    android:textSize="30sp"
+                    android:textSize="24sp"
                     android:textStyle="bold|italic" />
 
                 <View

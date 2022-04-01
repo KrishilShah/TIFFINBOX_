@@ -80,12 +80,12 @@ public class ChefmainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefOrderlistFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-                    case R.id.payment:
-                        Toast.makeText(getApplicationContext(), "Payment Fragment", Toast.LENGTH_SHORT).show();
-                        toolbar.setTitle("Payment");
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefPaymentFragment()).commit();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        break;
+//                    case R.id.payment:
+//                        Toast.makeText(getApplicationContext(), "Payment Fragment", Toast.LENGTH_SHORT).show();
+//                        toolbar.setTitle("Payment");
+//                        getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefPaymentFragment()).commit();
+//                        drawerLayout.closeDrawer(GravityCompat.START);
+//                        break;
 
                     case R.id.chef_account:
                         Toast.makeText(getApplicationContext(), "Account Fragment", Toast.LENGTH_SHORT).show();

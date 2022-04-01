@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TiffinBox">
         <activity
+            android:name=".OrderDetailCustomerActivity"
+            android:exported="false" />
+        <activity
             android:name=".OrderDetailsActivity"
             android:exported="false" />
         <activity

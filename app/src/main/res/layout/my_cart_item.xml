@@ -114,7 +114,7 @@
                 android:layout_marginTop="45dp"
                 android:gravity="center"
                 android:paddingRight="10dp"
-                android:text="$0"
+                android:text="Rs.0"
                 android:textColor="@color/purple"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -144,7 +144,7 @@
                 android:layout_marginTop="10dp"
                 android:gravity="center"
                 android:paddingRight="10dp"
-                android:text="$0"
+                android:text="Rs.0"
                 android:textColor="@color/purple"
                 android:textSize="15sp"
                 android:textStyle="bold" />
