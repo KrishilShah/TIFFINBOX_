@@ -244,6 +244,7 @@ public class EditprofileUserActivity<string> extends AppCompatActivity implement
 
                         transaction.update(sfDocRef, "name", name);
                         transaction.update(sfDocRef, "phone", number);
+                        transaction.update(sfDocRef, "email", email);
                         transaction.update(sfDocRef, "Password", password);
                         transaction.update(sfDocRef, "gender", finalGender);
                         transaction.update(sfDocRef, "address", address);
