@@ -267,7 +267,7 @@ public class EditprofileActivity extends AppCompatActivity implements LocationLi
 
                         transaction.update(sfDocRef, "name", name);
                         transaction.update(sfDocRef, "phone", number);
-//                        transaction.update(sfDocRef, "Password", password);
+                        transaction.update(sfDocRef, "email", email);
                         transaction.update(sfDocRef, "speciality", speciality);
                         transaction.update(sfDocRef, "about", about);
                         transaction.update(sfDocRef, "gender", finalGender);

@@ -83,8 +83,8 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
 
 
         holder.name.setText(name);
-        holder.totalPrice.setText("$"+cartModelList.get(position).getTotalPrice());
-        holder.dishPrice.setText("$"+dishPrice);
+        holder.totalPrice.setText("Rs "+cartModelList.get(position).getTotalPrice());
+        holder.dishPrice.setText("Rs "+dishPrice);
         holder.totalQuantity.setText(String.valueOf(cartModelList.get(position).getTotalQuantity()));
         holder.date.setText(dishDate);
 
