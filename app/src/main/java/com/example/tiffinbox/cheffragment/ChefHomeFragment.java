@@ -1,5 +1,6 @@
 package com.example.tiffinbox.cheffragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,8 @@ import com.example.tiffinbox.PostdishActivity;
 import com.example.tiffinbox.R;
 import com.example.tiffinbox.adapters.DishAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -23,6 +26,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -43,7 +50,9 @@ public class ChefHomeFragment extends Fragment {
     private String mParam2;
 
     FloatingActionButton floatingActionButton;
+    FirebaseAuth auth=FirebaseAuth.getInstance();
     ArrayList<DishData> arrayList;
+    FirebaseFirestore firestore=FirebaseFirestore.getInstance();
     LinearLayoutManager linearLayoutManager;
 
     public ChefHomeFragment() {
@@ -127,22 +136,40 @@ public class ChefHomeFragment extends Fragment {
     }
 
     private void getRecyclerView() {
-        DatabaseReference dref = FirebaseDatabase.getInstance().getReference("Dish").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
-        dref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
-                    DishData dishData = dataSnapshot.getValue(DishData.class);
-                    arrayList.add(dishData);
+        String chefID=auth.getCurrentUser().getUid();
+        Query a =firestore.collection("dish").whereEqualTo("chefId",chefID);
+            a.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @SuppressLint("NotifyDataSetChanged")
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    for (DocumentSnapshot documentSnapshot:task.getResult().getDocuments()){
+                        DishData dish_data=documentSnapshot.toObject(DishData.class);
+//                         viewAllModels.addAll((Collection<? extends ViewAllModel>) viewAllModel);
+                        arrayList.add(dish_data);
+                        adapter.notifyDataSetChanged();
+//                         Toast.makeText(DisplayFoodActivity.this, "Type:"+Thali, Toast.LENGTH_SHORT).show();
+                    }
                 }
-                adapter.notifyDataSetChanged();
-            }
+            }) ;
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+
+//        DatabaseReference dref = FirebaseDatabase.getInstance().getReference("Dish").child(FirebaseAuth.getInstance().getCurrentUser().getUid());
+//        dref.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
+//                    DishData dishData = dataSnapshot.getValue(DishData.class);
+//                    arrayList.add(dishData);
+//                }
+//                adapter.notifyDataSetChanged();
+//            }
+//
+//            @Override
+//            public void onCancelled(@NonNull DatabaseError error) {
+//
+//            }
+//        });
     }
 
 
