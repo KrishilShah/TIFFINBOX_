@@ -444,8 +444,8 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
                 Bundle bundle=new Bundle();
                 bundle.putString("price", String.valueOf(total_price));
                 bundle.putString("userid",auth.getCurrentUser().getUid());
-                bundle.putString("orderid",orderId);
-                bundle.putString("orderto",shoplid);
+                bundle.putString("orderId",orderId);
+                bundle.putString("orderTo",shoplid);
                 Fragment UserOrdlist=new UserOrderlistFragment();
                 UserOrdlist.setArguments(bundle);
                 FragmentTransaction fm=getActivity().getSupportFragmentManager().beginTransaction();
