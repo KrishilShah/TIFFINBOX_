@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import com.example.tiffinbox.ChefmainActivity;
 import com.example.tiffinbox.EditprofileActivity;
 import com.example.tiffinbox.EditprofileUserActivity;
 import com.example.tiffinbox.R;
+import com.example.tiffinbox.activity_settings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -86,6 +88,7 @@ public class UserAccountFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+    Button settingBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -96,6 +99,7 @@ public class UserAccountFragment extends Fragment {
         documentReference = db.collection("customers").document(firebaseAuth.getCurrentUser().getUid());
         storageReference = FirebaseStorage.getInstance().getReference();
 
+
         username = view.findViewById(R.id.userName);
         userType = view.findViewById(R.id.userType);
         userUsername = view.findViewById(R.id.username);
@@ -104,6 +108,13 @@ public class UserAccountFragment extends Fragment {
         userAddress = view.findViewById(R.id.user_address);
         userImage = view.findViewById(R.id.user_image);
         floatingActionButton = view.findViewById(R.id.floatingbtn);
+        settingBtn=view.findViewById(R.id.SettingsBtn);
+        settingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), activity_settings.class));
+            }
+        });
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -15,6 +17,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.tiffinbox.EditprofileActivity;
 import com.example.tiffinbox.R;
+import com.example.tiffinbox.activity_settings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -55,6 +58,7 @@ public class ChefAccountFragment extends Fragment {
     FloatingActionButton floatingActionButton;
     CircleImageView chefImage;
     StorageReference storageReference;
+    Button settingBtn1;
 
 
     public ChefAccountFragment() {
@@ -108,6 +112,13 @@ public class ChefAccountFragment extends Fragment {
         floatingActionButton = view.findViewById(R.id.floatingbtn);
         chefSpeciality = view.findViewById(R.id.chef_speciality);
         chefAbout = view.findViewById(R.id.chef_about);
+        settingBtn1= view.findViewById(R.id.SettingsBtn1);
+        settingBtn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getContext(), activity_settings.class));
+            }
+        });
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -156,6 +167,8 @@ public class ChefAccountFragment extends Fragment {
 
                     }
                 });
+
+
 
         StorageReference profileRef = storageReference.child("chefs/"+firebaseAuth.getCurrentUser().getUid()+"/chef_profile.jpg");
         profileRef.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
