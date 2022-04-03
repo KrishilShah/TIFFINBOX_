@@ -245,8 +245,8 @@ public class OrderDetailChefActivity extends AppCompatActivity {
             //what to send
 
             notificationBodyJo.put("notificationType", NOTIFICATION_TYPE);
-            notificationBodyJo.put("buyerlid", orderBy); //since we are logged in as b
-            notificationBodyJo.put("selleruid", firebaseAuth.getUid());
+            notificationBodyJo.put("buyerUid", orderBy); //since we are logged in as b
+            notificationBodyJo.put("sellerUid", firebaseAuth.getUid());
             notificationBodyJo.put("orderId", orderId);
             notificationBodyJo.put("notificationTitle", NOTIFICATION_TITLE);
             notificationBodyJo.put("notificationMessage", NOTIFICATION_MESSAGE);
@@ -272,16 +272,6 @@ public class OrderDetailChefActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-//                String shoplid=cartModelList.get(0).getChefID();
-//                Bundle bundle=new Bundle();
-//                bundle.putString("price", String.valueOf(total_price));
-//                bundle.putString("userid",auth.getCurrentUser().getUid());
-//                bundle.putString("orderid",orderId);
-//                bundle.putString("orderto",shoplid);
-//                Fragment UserOrdlist=new UserOrderlistFragment();
-//                UserOrdlist.setArguments(bundle);
-//                FragmentTransaction fm=getActivity().getSupportFragmentManager().beginTransaction();
-//                fm.replace(R.id.container,UserOrdlist).commit();
 
             }
         }){
@@ -290,8 +280,10 @@ public class OrderDetailChefActivity extends AppCompatActivity {
                 Map<String,String >headers=new HashMap<>();
                 headers.put( "Content-Type", "application/json");
                 headers.put( "Authorization", "key=" + Constant.FCM_KEY);
-                return super.getHeaders();
+//                return super.getHeaders();
+                return  headers;
             }
+
         };
 //        Volley.newRequestQueue(getContext().add(jsonobjectRequest);
         Volley.newRequestQueue(this).add(jsonobjectRequest);

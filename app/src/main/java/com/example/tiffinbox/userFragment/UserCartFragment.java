@@ -54,6 +54,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -193,7 +194,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
                     String ruid=cartModelList.get(i).getId();
                     String orderStatus=cartModelList.get(i).getOrderStatus();
                     String durl=cartModelList.get(i).getDurl();
-                    int totalPrice=cartModelList.get(i).getTotalPrice();
+                    int  totalPrice=cartModelList.get(i).getTotalPrice();
                     String totalQuantity =cartModelList.get(i).getTotalQuantity();
                     String dprice=cartModelList.get(i).getDishPrice();
                     String ddes=cartModelList.get(i).getDishDescription();
@@ -252,8 +253,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
 
 
                 }
-                final String timestamp=""+System.currentTimeMillis();
-                prepareNotificationMessage(timestamp);
+
 //                Intent intent=new Intent(getActivity(),UserOrderlistFragment.class);
 //                intent.putExtra("price",total_price);
 //                intent.putExtra("userid",auth.getCurrentUser().getUid());
@@ -274,8 +274,10 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
 //                FragmentTransaction fm=getActivity().getSupportFragmentManager().beginTransaction();
 //                fm.replace(R.id.container,UserOrdlist).commit();
 
-
+                final String timestamp=""+System.currentTimeMillis();
+                prepareNotificationMessage(timestamp);
             }
+
         });
 
 
@@ -406,10 +408,10 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
     private void prepareNotificationMessage(String orderId){
         //When user places order, send notification to seller
         //prepare data for notification
-        String NOTIFICATION_TOPIC = "/topics/" + Constant.FCM_TOPIC; //must be same as subscribed by user
+        String NOTIFICATION_TOPIC = "/topics/" +Constant.FCM_TOPIC; //must be same as subscribed by user
         String NOTIFICATION_TITLE = "New Order "+ orderId;
         String NOTIFICATION_MESSAGE = "Congratulations...! You have new order.";
-        String NOTIFICATION_TYPE = "Neworder";
+        String NOTIFICATION_TYPE = "NewOrder";
         //prepare json (what to send and where to send)
         JSONObject notificationJo = new JSONObject();
         JSONObject notificationBodyJo = new JSONObject();
@@ -418,8 +420,8 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
             //what to send
 
             notificationBodyJo.put("notificationType", NOTIFICATION_TYPE);
-            notificationBodyJo.put("buyerlid", auth.getUid()); //since we are logged in as b
-            notificationBodyJo.put("selleruid", shoplid);
+            notificationBodyJo.put("buyerUid", auth.getUid()); //since we are logged in as b
+            notificationBodyJo.put("sellerUid", shoplid);
             notificationBodyJo.put("orderId", orderId);
             notificationBodyJo.put("notificationTitle", NOTIFICATION_TITLE);
             notificationBodyJo.put("notificationMessage", NOTIFICATION_MESSAGE);
@@ -428,7 +430,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
             notificationJo.put("data", notificationBodyJo);
         }
         catch (Exception e ){
-            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "USERCARTFRAGMENT PREPNOTIMESS FUNC "+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         sendFcmNotification(notificationJo,orderId);
@@ -469,12 +471,12 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String >headers=new HashMap<>();
+                Map<String,String > headers=new HashMap<>();
                 headers.put( "Content-Type", "application/json");
                 headers.put( "Authorization", "key=" + Constant.FCM_KEY);
-                return super.getHeaders();
+                return headers;
             }
         };
-        Volley.newRequestQueue(getContext()).add(jsonobjectRequest);
+        Volley.newRequestQueue(requireContext()).add(jsonobjectRequest);
     }
 }

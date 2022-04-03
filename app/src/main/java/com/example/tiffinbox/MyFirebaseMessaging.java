@@ -84,7 +84,7 @@ public class MyFirebaseMessaging extends FirebaseMessagingService {
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
         }
 
-        PendingIntent pendingIntent = PendingIntent.getActivity( this, 0, intent, PendingIntent. FLAG_ONE_SHOT);
+        PendingIntent pendingIntent = PendingIntent.getActivity( this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 //Large icon
         Bitmap largeIcon = BitmapFactory.decodeResource(getResources (), R.drawable.applogo);
 // sound of notification
