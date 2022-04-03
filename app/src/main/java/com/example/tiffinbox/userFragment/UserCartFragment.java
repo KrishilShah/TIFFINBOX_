@@ -18,14 +18,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.fragment.app.strictmode.SetRetainInstanceUsageViolation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.tiffinbox.Constant;
 import com.example.tiffinbox.R;
+import com.example.tiffinbox.UserhomeActivity;
 import com.example.tiffinbox.adapters.Chef_adapters;
 import com.example.tiffinbox.adapters.MyCartAdapter;
+import com.example.tiffinbox.models.ChefOrderData;
 import com.example.tiffinbox.models.MyCartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.annotations.Nullable;
@@ -36,7 +46,11 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -53,6 +67,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
     double myLatitude,myLongitude;
     String myPhone;
     private ProgressDialog progressDialog;
+
 
 
     TextView totalCharge,taxCharge,deliveryService,totalBill;
@@ -124,10 +139,11 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         totalBill=root.findViewById(R.id.totalBill);
         deliveryService=root.findViewById(R.id.deliveryService);
         btn_buynow=root.findViewById(R.id.buy_now);
-        auth=FirebaseAuth.getInstance();
+//        auth=FirebaseAuth.getInstance();
         progressDialog=new ProgressDialog(getContext());
         progressDialog.setTitle("PLease Wait......");
         progressDialog.setCanceledOnTouchOutside(false);
+
 
 
         documentReference = db.collection("customers").document(auth.getCurrentUser().getUid());
@@ -146,18 +162,18 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
             }
         });
 
+
+
+
+
         btn_buynow.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
-//                Intent intent=new Intent(getActivity(),UserOrderlistFragment.class);
-//                intent.putExtra("price",total_price);
-//                intent.putExtra("userid",auth.getCurrentUser().getUid());
-
-//                startActivity(intent);
                 if (myLatitude==0 || myLatitude==0 || myLongitude==0 || myLongitude==0){
-                //user didn't enter address in profile
-                Toast.makeText( getActivity(), "Please enter your address in you profile before placing order...", Toast.LENGTH_SHORT). show() ;
-                return;
+                    //user didn't enter address in profile
+                    Toast.makeText( getActivity(), "Please enter your address in you profile before placing order...", Toast.LENGTH_SHORT). show() ;
+                    return;
                 }
 
                 if (myPhone.equals("")|| myPhone.equals("null")) {
@@ -171,18 +187,92 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
                     return;
                 }
 
+                for(int i=0;i<cartModelList.size();i++){
+                    String onlineUserID= auth.getCurrentUser().getUid();
+                    String chefID=cartModelList.get(i).getChefID();
+                    String ruid=cartModelList.get(i).getId();
+                    String orderStatus=cartModelList.get(i).getOrderStatus();
+                    String durl=cartModelList.get(i).getDurl();
+                    int totalPrice=cartModelList.get(i).getTotalPrice();
+                    String totalQuantity =cartModelList.get(i).getTotalQuantity();
+                    String dprice=cartModelList.get(i).getDishPrice();
+                    String ddes=cartModelList.get(i).getDishDescription();
+                    String dname=cartModelList.get(i).getDishName();
+
+                    String saveCurrentDate, saveCurrentTime;
+                    Calendar calForDate = Calendar.getInstance();
+
+                    SimpleDateFormat currentDate = new SimpleDateFormat("dd/MM/yyyy");
+                    saveCurrentDate = currentDate.format(calForDate.getTime());
+
+                    SimpleDateFormat currentTime = new SimpleDateFormat("HH:mm:ss a");
+                    saveCurrentTime = currentTime.format(calForDate.getTime());
+
+                    final HashMap<String, Object> cartMap = new HashMap<>();
+
+                    cartMap.put("dishName", dname);
+                    cartMap.put("dishDescription", ddes);
+                    cartMap.put("dishDate", saveCurrentDate);
+                    cartMap.put("dishTime", saveCurrentTime);
+                    cartMap.put("dishPrice", dprice);
+                    cartMap.put("totalQuantity", totalQuantity);
+                    cartMap.put("totalPrice", totalPrice);
+                    cartMap.put("durl", durl);
+                    cartMap.put("orderStatus", orderStatus);
+                    cartMap.put("id",ruid);
+                    cartMap.put("userID",onlineUserID);
+                    cartMap.put("chefID", chefID);
+                    cartMap.put("latitude", myLatitude);
+                    cartMap.put("latitude", myLongitude);
+
+                    ChefOrderData chefOrderData = new ChefOrderData(onlineUserID, dname, saveCurrentTime, dprice, saveCurrentDate,ruid, totalQuantity, durl, ddes, chefID, orderStatus, totalPrice, myLatitude, myLongitude);
+
+                    db.collection("ChefOrders").document(chefID)
+                            .collection("CurrentChef").document(ruid).set(chefOrderData).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+//                           /Toast.makeText(getActivity(), "Order Sent to Chef", Toast.LENGTH_SHORT).show();
+//                            Bundle bundle=new Bundle();
+//                            bundle.putString("price", String.valueOf(total_price));
+//                            bundle.putString("userid",auth.getCurrentUser().getUid());
+//                            Fragment UserOrdlist=new UserOrderlistFragment();
+//                            UserOrdlist.setArguments(bundle);
+//                            FragmentTransaction fm=getActivity().getSupportFragmentManager().beginTransaction();
+//                            fm.replace(R.id.container,UserOrdlist).commit();
+
+//
+//                            Intent intent = new Intent(getActivity(), UserhomeActivity.class);
+//                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                            startActivity(intent);
+//                            finish();
+                        }
+                    });
+
+
+
+
+                }
+                final String timestamp=""+System.currentTimeMillis();
+                prepareNotificationMessage(timestamp);
+//                Intent intent=new Intent(getActivity(),UserOrderlistFragment.class);
+//                intent.putExtra("price",total_price);
+//                intent.putExtra("userid",auth.getCurrentUser().getUid());
+
+//                startActivity(intent);
+
                // submitOrder();
 
 
 
 
-                Bundle bundle=new Bundle();
-                bundle.putString("price", String.valueOf(total_price));
-                bundle.putString("userid",auth.getCurrentUser().getUid());
-                Fragment UserOrdlist=new UserOrderlistFragment();
-                UserOrdlist.setArguments(bundle);
-                FragmentTransaction fm=getActivity().getSupportFragmentManager().beginTransaction();
-                fm.replace(R.id.container,UserOrdlist).commit();
+
+//                Bundle bundle=new Bundle();
+//                bundle.putString("price", String.valueOf(total_price));
+//                bundle.putString("userid",auth.getCurrentUser().getUid());
+//                Fragment UserOrdlist=new UserOrderlistFragment();
+//                UserOrdlist.setArguments(bundle);
+//                FragmentTransaction fm=getActivity().getSupportFragmentManager().beginTransaction();
+//                fm.replace(R.id.container,UserOrdlist).commit();
 
 
             }
@@ -233,6 +323,9 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         });
 
     }
+
+
+
 
 
 //    public void trying(){
@@ -294,6 +387,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
 
 
 
+
     @Override
     public void onDelete() {
             getRecyclerView();
@@ -309,5 +403,78 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         getRecyclerView();
 
     }
+    private void prepareNotificationMessage(String orderId){
+        //When user places order, send notification to seller
+        //prepare data for notification
+        String NOTIFICATION_TOPIC = "/topics/" + Constant.FCM_TOPIC; //must be same as subscribed by user
+        String NOTIFICATION_TITLE = "New Order "+ orderId;
+        String NOTIFICATION_MESSAGE = "Congratulations...! You have new order.";
+        String NOTIFICATION_TYPE = "Neworder";
+        //prepare json (what to send and where to send)
+        JSONObject notificationJo = new JSONObject();
+        JSONObject notificationBodyJo = new JSONObject();
+        try {
+            String shoplid=cartModelList.get(0).getChefID();
+            //what to send
 
+            notificationBodyJo.put("notificationType", NOTIFICATION_TYPE);
+            notificationBodyJo.put("buyerlid", auth.getUid()); //since we are logged in as b
+            notificationBodyJo.put("selleruid", shoplid);
+            notificationBodyJo.put("orderId", orderId);
+            notificationBodyJo.put("notificationTitle", NOTIFICATION_TITLE);
+            notificationBodyJo.put("notificationMessage", NOTIFICATION_MESSAGE);
+            //where to send
+            notificationJo.put("to", NOTIFICATION_TOPIC); //to all who subscribed to this topic
+            notificationJo.put("data", notificationBodyJo);
+        }
+        catch (Exception e ){
+            Toast.makeText(getContext(), ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+        sendFcmNotification(notificationJo,orderId);
+}
+
+    private void sendFcmNotification(JSONObject notificationJo, String orderId) {
+        JsonObjectRequest jsonobjectRequest = new JsonObjectRequest("https://fcm.googleapis.com/fcm/send", notificationJo, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                String shoplid=cartModelList.get(0).getChefID();
+                Bundle bundle=new Bundle();
+                bundle.putString("price", String.valueOf(total_price));
+                bundle.putString("userid",auth.getCurrentUser().getUid());
+                bundle.putString("orderid",orderId);
+                bundle.putString("orderto",shoplid);
+                Fragment UserOrdlist=new UserOrderlistFragment();
+                UserOrdlist.setArguments(bundle);
+                FragmentTransaction fm=getActivity().getSupportFragmentManager().beginTransaction();
+                fm.replace(R.id.container,UserOrdlist).commit();
+
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                String shoplid=cartModelList.get(0).getChefID();
+                Bundle bundle=new Bundle();
+                bundle.putString("price", String.valueOf(total_price));
+                bundle.putString("userid",auth.getCurrentUser().getUid());
+                bundle.putString("orderid",orderId);
+                bundle.putString("orderto",shoplid);
+                Fragment UserOrdlist=new UserOrderlistFragment();
+                UserOrdlist.setArguments(bundle);
+                FragmentTransaction fm=getActivity().getSupportFragmentManager().beginTransaction();
+                fm.replace(R.id.container,UserOrdlist).commit();
+
+            }
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String >headers=new HashMap<>();
+                headers.put( "Content-Type", "application/json");
+                headers.put( "Authorization", "key=" + Constant.FCM_KEY);
+                return super.getHeaders();
+            }
+        };
+        Volley.newRequestQueue(getContext()).add(jsonobjectRequest);
+    }
 }

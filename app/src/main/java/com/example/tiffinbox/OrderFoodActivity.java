@@ -299,7 +299,8 @@ public class OrderFoodActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 addedToCart();
-                sendOrdertoChef();
+//                sendOrdertoChef();
+
 
             }
 
@@ -353,10 +354,10 @@ public class OrderFoodActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), "Dish added successfully", Toast.LENGTH_SHORT).show();
 
 
-//                        Intent intent = new Intent(getApplicationContext(), UserhomeActivity.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                        startActivity(intent);
-//                        finish();
+                        Intent intent = new Intent(getApplicationContext(), UserhomeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
                     }
                 });
             }
