@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".AddCouponCodesActivity">
+
+    <androidx.appcompat.widget.Toolbar
+
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="10dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/Theme.TiffinBox.PopupOverlay">
+
+        <ImageButton
+            android:id="@+id/Back"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/purple"
+            android:contextClickable="true"
+            android:src="@drawable/back_arrow" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="70dp"
+            android:text="Add Coupons"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold|italic" />
+
+    </androidx.appcompat.widget.Toolbar>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/AddCoupon"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:backgroundTint="@color/white"
+            android:contextClickable="true"
+            android:src="@drawable/coupon"
+            android:scaleType="centerInside"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/WriteCode"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/WriteCode"
+            android:drawableStart="@drawable/ic_discount_gray"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Coupon Code"
+            android:padding="10dp"
+            android:drawablePadding="5dp"
+            app:layout_constraintBottom_toTopOf="@+id/CouponPrice"
+            app:layout_constraintTop_toBottomOf="@+id/AddCoupon"
+            android:layout_margin="10dp">
+        </EditText>
+
+        <EditText
+            android:id="@+id/CouponPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/ic_discount_gray"
+            android:drawablePadding="5dp"
+            android:hint="Coupon Price in Percentage"
+            android:padding="10dp"
+            app:layout_constraintBottom_toTopOf="@+id/CouponDescription"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/WriteCode"></EditText>
+
+        <EditText
+            android:id="@+id/CouponDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/ic_discount_gray"
+            android:drawablePadding="5dp"
+            android:hint="Coupon Description"
+            android:padding="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/MinimumOrderPrice"
+            app:layout_constraintTop_toBottomOf="@+id/CouponPrice"></EditText>
+
+        <EditText
+            android:id="@+id/MinimumOrderPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:drawableStart="@drawable/ic_cart"
+            android:drawablePadding="5dp"
+            android:hint="Minimum Order Price"
+            app:layout_constraintBottom_toTopOf="@+id/ExpiryDate"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/CouponDescription"></EditText>
+
+        <TextView
+            android:id="@+id/ExpiryDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_calendar"
+            android:drawablePadding="5dp"
+            android:padding="10dp"
+            android:hint=" Expiry Date"
+            app:layout_constraintBottom_toTopOf="@+id/AddIT"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MinimumOrderPrice"></TextView>
+
+        <Button
+            android:id="@+id/AddIT"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="50dp"
+            android:text="Add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ExpiryDate">
+
+        </Button>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>
+

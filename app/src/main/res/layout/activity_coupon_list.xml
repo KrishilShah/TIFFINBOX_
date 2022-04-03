@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#673AB7"
+    android:elevation="5dp"
+    android:foregroundTint="#673AB7"
+    app:cardCornerRadius="5dp"
+    app:cardUseCompatPadding="true">
+
+    <RelativeLayout
+        android:id="@+id/relative"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/coupon_pic"
+            android:layout_width="90dp"
+            android:layout_height="130dp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/coupon2"
+            app:civ_border_color="#FF000000"
+            app:civ_border_width="2dp" />
+
+        <RelativeLayout
+            android:layout_toEndOf="@id/coupon_pic"
+            android:id="@+id/detail_coupon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <androidx.cardview.widget.CardView
+                android:id="@+id/orderDetail"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:text="Code:"
+                            android:textColor="@color/purple"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/coupon_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            android:text="hadshasvbakvg"
+                            android:textColor="@color/grey"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:layout_gravity=""
+                            android:text="Coupon Price:"
+                            android:textColor="@color/purple"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/coupon_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            android:text="01/04/2002"
+                            android:textColor="@color/grey"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:text="Minimum Price"
+                            android:textColor="@color/purple"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/minimum_order_price"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            android:text="In Progress"
+                            android:textColor="@color/grey"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+                    <TableRow>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="10dp"
+                            android:layout_marginStart="10dp"
+                            android:text="ExpiryDate:"
+                            android:textColor="@color/purple"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+                        <TextView
+                            android:id="@+id/coupon_expiry_date"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="5dp"
+                            android:layout_marginEnd="5dp"
+                            android:layout_weight="1"
+                            android:text="abc@gmail.com"
+                            android:textColor="@color/grey"
+                            android:textSize="16sp"
+                            android:textStyle="bold" />
+
+                    </TableRow>
+                    <TextView
+                        android:id="@+id/coupon_Description"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginStart="10dp"
+                        android:text="Add some Description about coupon"
+                        android:textColor="@color/purple"
+                        android:textSize="16sp"
+                        android:textStyle="italic" />
+
+                    <ImageView
+                        android:id="@+id/delete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="#673AB7"
+                        android:backgroundTint="#673AB7"
+                        android:src="@drawable/ic_delete" />
+
+                </TableLayout>
+
+            </androidx.cardview.widget.CardView>
+        </RelativeLayout>
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/coupon_expiry_date"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/minimum_order_price"-->
+        <!--            android:layout_marginStart="4dp"-->
+        <!--            android:layout_toEndOf="@+id/coupon_expiry_date_label"-->
+        <!--            android:paddingTop="5dp"-->
+        <!--            android:text="02-05-2020"-->
+        <!--            android:textColor="@color/purple"-->
+        <!--            android:textSize="16dp"-->
+        <!--            android:visibility="visible" />-->
+
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/coupon_expiry_date_label"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/minimum_order_label"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginTop="3dp"-->
+        <!--            android:layout_toEndOf="@id/coupon_pic"-->
+        <!--            android:text="Expiry Date:"-->
+        <!--            android:textColor="@color/grey"-->
+        <!--            android:textSize="16sp"-->
+        <!--            android:visibility="visible" />-->
+
+
+        <!--                    <Button-->
+        <!--                        android:id="@+id/add"-->
+        <!--                        android:layout_width="wrap_content"-->
+        <!--                        android:layout_height="wrap_content"-->
+        <!--                        android:layout_below="@+id/price"-->
+        <!--                        android:layout_alignParentEnd="true"-->
+        <!--                        android:layout_marginTop="0dp"-->
+        <!--                        android:text="Add"-->
+        <!--                        android:visibility="visible" />-->
+
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/coupon_name"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginTop="10sp"-->
+        <!--            android:layout_toEndOf="@+id/coupon_pic"-->
+        <!--            android:text="Coupon Name"-->
+        <!--            android:textColor="@color/purple"-->
+        <!--            android:textSize="18sp"-->
+        <!--            android:textStyle="bold" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/coupon_price_label"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/coupon_name"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:layout_toEndOf="@+id/coupon_pic"-->
+        <!--            android:text="Coupon Price: $"-->
+        <!--            android:textColor="@color/grey"-->
+        <!--            android:textSize="16sp" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/coupon_price"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/coupon_name"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_toEndOf="@+id/coupon_price_label"-->
+        <!--            android:text="10"-->
+        <!--            android:textColor="@color/purple"-->
+        <!--            android:textSize="16dp" />-->
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/minimum_order_label"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/coupon_price_label"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:layout_marginTop="2dp"-->
+        <!--            android:layout_toEndOf="@+id/coupon_pic"-->
+        <!--            android:text="Minimum Order Price: $"-->
+        <!--            android:textColor="@color/grey"-->
+        <!--            android:textSize="18sp" />-->
+
+        <!--        <TextView-->
+
+        <!--            android:id="@+id/minimum_order_price"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@+id/coupon_price"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:layout_marginTop="2dp"-->
+        <!--            android:layout_toEndOf="@+id/minimum_order_label"-->
+        <!--            android:text="10"-->
+        <!--            android:textColor="@color/purple"-->
+        <!--            android:textSize="16dp" />-->
+
+
+        <!--        <TextView-->
+        <!--            android:id="@+id/coupon_Description"-->
+        <!--            android:layout_width="wrap_content"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:layout_below="@id/coupon_expiry_date_label"-->
+        <!--            android:layout_marginStart="10dp"-->
+        <!--            android:layout_marginLeft="10dp"-->
+        <!--            android:layout_marginTop="5sp"-->
+        <!--            android:layout_toEndOf="@+id/coupon_pic"-->
+        <!--            android:maxLines="2"-->
+        <!--            android:text="Put Description Here for maximum of two lines only not \n,more than that"-->
+        <!--            android:textColor="@color/purple"-->
+        <!--            android:textSize="16sp"-->
+        <!--            android:textStyle="italic" />-->
+
+
+
+
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>

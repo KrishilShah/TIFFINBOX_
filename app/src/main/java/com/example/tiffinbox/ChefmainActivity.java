@@ -3,7 +3,6 @@ package com.example.tiffinbox;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -14,10 +13,9 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.tiffinbox.cheffragment.ChefAccountFragment;
+import com.example.tiffinbox.cheffragment.ChefCouponFragment;
 import com.example.tiffinbox.cheffragment.ChefHomeFragment;
 import com.example.tiffinbox.cheffragment.ChefOrderlistFragment;
-import com.example.tiffinbox.cheffragment.ChefPaymentFragment;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -48,7 +46,12 @@ public class ChefmainActivity extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefHomeFragment()).commit();
         }
         else if(value.equals("account")){
+            toolbar.setTitle("Profile");
             getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefAccountFragment()).commit();
+        }
+        else if(value.equals("coupon")){
+            toolbar.setTitle("Coupon");
+            getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefCouponFragment()).commit();
         }
 
 //        floatingActionButton.setOnClickListener(new View.OnClickListener() {
@@ -80,18 +83,26 @@ public class ChefmainActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefOrderlistFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
-//                    case R.id.payment:
-//                        Toast.makeText(getApplicationContext(), "Payment Fragment", Toast.LENGTH_SHORT).show();
-//                        toolbar.setTitle("Payment");
-//                        getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefPaymentFragment()).commit();
-//                        drawerLayout.closeDrawer(GravityCompat.START);
-//                        break;
+                    case R.id.chef_coupon:
+                        Toast.makeText(getApplicationContext(), "Payment Fragment", Toast.LENGTH_SHORT).show();
+                        toolbar.setTitle("Coupon");
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefCouponFragment()).commit();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                       break;
 
                     case R.id.chef_account:
                         Toast.makeText(getApplicationContext(), "Account Fragment", Toast.LENGTH_SHORT).show();
                         toolbar.setTitle("Profile");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefAccountFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        break;
+
+                    case R.id.chef_setting:
+                        Toast.makeText(getApplicationContext(), "Setting", Toast.LENGTH_SHORT).show();
+                        toolbar.setTitle("Profile");
+
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        startActivity(new Intent(getApplicationContext(), activity_settings.class));
                         break;
 
                     case R.id.chef_logout:

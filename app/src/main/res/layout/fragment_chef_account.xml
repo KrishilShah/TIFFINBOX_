@@ -349,16 +349,16 @@
         </RelativeLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/SettingsBtn1"
-        android:layout_width="136dp"
-        android:layout_height="60dp"
-        android:layout_alignParentBottom="true"
+<!--    <Button-->
+<!--        android:id="@+id/SettingsBtn1"-->
+<!--        android:layout_width="136dp"-->
+<!--        android:layout_height="60dp"-->
+<!--        android:layout_alignParentBottom="true"-->
 
-        android:layout_marginBottom="671dp"
-        android:contentDescription="TODO"
+<!--        android:layout_marginBottom="671dp"-->
+<!--        android:contentDescription="TODO"-->
 
-        android:text="settings" />
+<!--        android:text="settings" />-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingbtn"

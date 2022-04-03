@@ -7,9 +7,10 @@
     tools:context=".activity_settings">
 
     <RelativeLayout
+        android:id="@+id/tool"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/grey"
+        android:background="@color/purple"
         android:padding="10dp">
 
         <ImageButton
@@ -31,6 +32,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:layout_below="@+id/tool"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -40,8 +42,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="96dp"
+            android:layout_marginBottom="30dp"
             android:background="@color/white"
+            android:gravity="center"
             android:paddingStart="10dp"
             android:paddingEnd="10dp"
             android:paddingBottom="10dp"
@@ -52,22 +55,21 @@
             android:id="@+id/fcmSwitch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/notificationstatusTv"
-            android:layout_marginBottom="152dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="30dp"
             android:background="@color/white"
             android:paddingStart="10dp"
             android:paddingTop="10dp"
             android:paddingEnd="10dp"
             android:text="Push Notifications" />
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/grey"
-            android:layout_below="@id/notificationstatusTv">
+            android:layout_below="@id/notificationstatusTv"
+            android:background="@color/grey">
 
         </View>
-
 
 
     </RelativeLayout>

@@ -63,7 +63,7 @@ public class activity_settings extends AppCompatActivity {
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                finish();
             }
         });
     }
@@ -82,12 +82,13 @@ public class activity_settings extends AppCompatActivity {
                         spEditor.putBoolean("FCM_ENABLED",true);
                         spEditor.apply();
                         Toast.makeText(activity_settings.this, ""+enabledMessage, Toast.LENGTH_SHORT).show();
+                        notificationStatusTv.setText(enabledMessage);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 Toast.makeText(activity_settings.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
-                notificationStatusTv.setText(enabledMessage);
+
 
             }
         });

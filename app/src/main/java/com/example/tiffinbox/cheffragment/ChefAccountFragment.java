@@ -112,13 +112,8 @@ public class ChefAccountFragment extends Fragment {
         floatingActionButton = view.findViewById(R.id.floatingbtn);
         chefSpeciality = view.findViewById(R.id.chef_speciality);
         chefAbout = view.findViewById(R.id.chef_about);
-        settingBtn1= view.findViewById(R.id.SettingsBtn1);
-        settingBtn1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getContext(), activity_settings.class));
-            }
-        });
+//        settingBtn1= view.findViewById(R.id.SettingsBtn1);
+
 
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
