@@ -43,6 +43,7 @@ public class ChefmainActivity extends AppCompatActivity {
         String value = getIntent().getStringExtra("fragment");
 
         if(value.equals("home")){
+            toolbar.setTitle("TiffinBox");
         getSupportFragmentManager().beginTransaction().add(R.id.container,new ChefHomeFragment()).commit();
         }
         else if(value.equals("account")){
@@ -84,7 +85,7 @@ public class ChefmainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawer(GravityCompat.START);
                         break;
                     case R.id.chef_coupon:
-                        Toast.makeText(getApplicationContext(), "Payment Fragment", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Coupon Fragment", Toast.LENGTH_SHORT).show();
                         toolbar.setTitle("Coupon");
                         getSupportFragmentManager().beginTransaction().replace(R.id.container,new ChefCouponFragment()).commit();
                         drawerLayout.closeDrawer(GravityCompat.START);
@@ -99,7 +100,6 @@ public class ChefmainActivity extends AppCompatActivity {
 
                     case R.id.chef_setting:
                         Toast.makeText(getApplicationContext(), "Setting", Toast.LENGTH_SHORT).show();
-                        toolbar.setTitle("Profile");
 
                         drawerLayout.closeDrawer(GravityCompat.START);
                         startActivity(new Intent(getApplicationContext(), activity_settings.class));
