@@ -416,7 +416,8 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         JSONObject notificationJo = new JSONObject();
         JSONObject notificationBodyJo = new JSONObject();
         try {
-            String shoplid=cartModelList.get(0).getChefID();
+//            String shoplid=cartModelList.get(0).getChefID();
+            String shoplid="JE0rwJWzWmYkjqAoX2p1KVHaXMa2";
             //what to send
 
             notificationBodyJo.put("notificationType", NOTIFICATION_TYPE);

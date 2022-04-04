@@ -241,12 +241,12 @@ public class OrderDetailChefActivity extends AppCompatActivity {
         JSONObject notificationJo = new JSONObject();
         JSONObject notificationBodyJo = new JSONObject();
         try {
-            String userid=cartModelList.get(0).getId();
+//            String userid=orderBy;
             //what to send
 
             notificationBodyJo.put("notificationType", NOTIFICATION_TYPE);
             notificationBodyJo.put("buyerUid", orderBy); //since we are logged in as b
-            notificationBodyJo.put("sellerUid", firebaseAuth.getUid());
+            notificationBodyJo.put("sellerUid", onlineUserID);
             notificationBodyJo.put("orderId", orderId);
             notificationBodyJo.put("notificationTitle", NOTIFICATION_TITLE);
             notificationBodyJo.put("notificationMessage", NOTIFICATION_MESSAGE);
@@ -255,7 +255,7 @@ public class OrderDetailChefActivity extends AppCompatActivity {
             notificationJo.put("data", notificationBodyJo);
         }
         catch (Exception e ){
-            Toast.makeText(OrderDetailChefActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(OrderDetailChefActivity.this, "orderdetchefact preparenoti"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
 
         sendFcmNotification(notificationJo);
