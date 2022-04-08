@@ -60,7 +60,7 @@ public class coupon extends RecyclerView.Adapter<coupon.ViewHolder>{
 
         //set data:
         holder.coupon_Description.setText(couponDescription);
-//        holder.coupon_expiry_date.setText(couponExpiry);
+//      holder.coupon_expiry_date.setText(couponExpiry);
         holder.coupon_price.setText(couponPrice);
         holder.coupon_expiry_date.setText(couponExpiry);
         holder.coupon_name.setText(couponCode);
@@ -112,13 +112,6 @@ public class coupon extends RecyclerView.Adapter<coupon.ViewHolder>{
 
             }
         });
-
-
-
-
-
-
-
     }
 
     private void delete(int position){

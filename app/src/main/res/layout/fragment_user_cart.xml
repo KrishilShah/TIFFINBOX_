@@ -60,236 +60,231 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
-        <RelativeLayout
-            android:id="@+id/relativeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="350dp"
-            android:background="@drawable/grey_bg"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            >
+<!--                <RelativeLayout-->
+<!--                    android:id="@+id/relativeLayout"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="350dp"-->
+<!--                    android:background="@drawable/grey_bg"-->
+<!--                    app:layout_constraintTop_toTopOf="parent"-->
+<!--                    app:layout_constraintVertical_bias="0.5"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    >-->
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerview"
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerview"
 
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="7dp"
-                android:layout_marginRight="7dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintVertical_bias="0" />
-
-
-
-        </RelativeLayout>
-
-                <View
-                    android:id="@+id/view1"
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_below="@+id/relativeLayout"
-                    android:layout_alignParentRight="true"
-                    android:background="@color/grey"
-                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="7dp"
+                    android:layout_marginRight="7dp"
+                    app:layout_constraintBaseline_toTopOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/buy_now"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/btn_bg"
-            android:text="             Proceed To Pay            "
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.491"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
-
-        <EditText
-            android:background="@drawable/bg"
-            android:id="@+id/Choice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:hint="Add Your Preferences..If Any"
-            android:padding="15dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
-            android:textColor="@color/grey"
-            android:textColorHint="@color/grey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />
-
-        <TextView
-            android:background="@drawable/bg"
-            android:id="@+id/Coupon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="Coupon"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:padding="20dp"
-            android:textSize="18dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            android:textColor="@color/purple"
-
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Choice" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/Choice"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="20dp"
-                android:text="Add"
-                android:textColor="@color/grey"
-                android:padding="16dp"
-                android:textSize="18dp"
-                android:textStyle="bold"
-                android:layout_marginRight="20dp"
-                />
+                    app:layout_constraintStart_toStartOf="parent" />
 
 
-        <RelativeLayout
-            android:id="@+id/relativeLayout2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Coupon">
 
-            <TextView
-                android:id="@+id/txt_totalcharge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:text="Total Charge:"
-                android:textColor="@color/grey"
-                android:textSize="18sp"
-                android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/totalCharge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:paddingRight="20dp"
-                android:text="Rs.0.0"
-                android:textColor="@color/purple"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+<!--                </RelativeLayout>-->
 
-            <TextView
-                android:id="@+id/txt_taxcharge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_totalcharge"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:text="Tax:"
-                android:textColor="@color/grey"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+<!--                <View-->
+<!--                    android:id="@+id/view1"-->
+<!--                    android:layout_width="fill_parent"-->
+<!--                    android:layout_height="2dp"-->
+<!--                    android:layout_below="@+id/relativeLayout"-->
+<!--                    android:layout_alignParentRight="true"-->
+<!--                    android:background="@color/grey"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout" />-->
 
-            <TextView
-                android:id="@+id/taxCharge"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/totalCharge"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/buy_now"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/btn_bg"
+                    android:text="             Proceed To Pay            "
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.491"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout2" />
 
-                android:paddingRight="20dp"
-                android:text="Rs.0.0"
-                android:textColor="@color/purple"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                <EditText
+                    android:background="@drawable/bg"
+                    android:id="@+id/Choice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:hint="Add Your Preferences..If Any"
+                    android:padding="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:textColor="@color/grey"
+                    android:textColorHint="@color/grey"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerview" />
 
-            <TextView
-                android:id="@+id/txt_deliveryService"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_taxcharge"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:text="Delivery Service:"
-                android:textColor="@color/grey"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                <EditText
+                    android:background="@drawable/bg"
+                    android:id="@+id/Coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:hint="Add Promo Code"
 
-            <TextView
-                android:id="@+id/deliveryService"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/taxCharge"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:padding="20dp"
+                    android:textSize="18dp"
 
-                android:paddingRight="20dp"
-                android:text="Rs.0.0"
-                android:textColor="@color/purple"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:textColor="@color/purple"
 
-            <TextView
-                android:id="@+id/txt_totalBill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/txt_deliveryService"
-                android:layout_alignParentStart="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
-                android:paddingLeft="20dp"
-                android:text="Total Bill:"
-                android:textColor="@color/grey"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Choice" />
 
-            <TextView
-                android:id="@+id/totalBill"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/deliveryService"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginBottom="10dp"
-                android:paddingRight="20dp"
-                android:text="Rs.0.0"
-                android:textColor="@color/purple"
-                android:textSize="24sp"
-                android:textStyle="bold" />
+                <ImageButton
+                    android:layout_width="51dp"
+                    android:layout_height="52dp"
+                    android:src="@drawable/ic_send_primary"
+                    app:layout_constraintBottom_toBottomOf="@+id/Coupon"
+                    app:layout_constraintEnd_toEndOf="@+id/Coupon"
+                    app:layout_constraintTop_toTopOf="@+id/Coupon" />
 
-        </RelativeLayout>
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Coupon">
+
+                    <TextView
+                        android:id="@+id/txt_totalcharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:paddingLeft="20dp"
+                        android:text="Total Charge:"
+                        android:textColor="@color/grey"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/totalCharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:paddingRight="20dp"
+                        android:text="Rs.0.0"
+                        android:textColor="@color/purple"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_taxcharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_totalcharge"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:paddingLeft="20dp"
+                        android:text="Tax:"
+                        android:textColor="@color/grey"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/taxCharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/totalCharge"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+
+                        android:paddingRight="20dp"
+                        android:text="Rs.0.0"
+                        android:textColor="@color/purple"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_deliveryService"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_taxcharge"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:paddingLeft="20dp"
+                        android:text="Delivery Service:"
+                        android:textColor="@color/grey"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/deliveryService"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/taxCharge"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+
+                        android:paddingRight="20dp"
+                        android:text="Rs.0.0"
+                        android:textColor="@color/purple"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txt_totalBill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_deliveryService"
+                        android:layout_alignParentStart="true"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="15dp"
+                        android:paddingLeft="20dp"
+                        android:text="Total Bill:"
+                        android:textColor="@color/grey"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/totalBill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/deliveryService"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginTop="15dp"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:paddingRight="20dp"
+                        android:text="Rs.0.0"
+                        android:textColor="@color/purple"
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
