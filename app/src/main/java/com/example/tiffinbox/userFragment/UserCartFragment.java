@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -69,15 +70,14 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
     String myPhone;
     private ProgressDialog progressDialog;
 
-
-
     TextView totalCharge,taxCharge,deliveryService,totalBill;
 
     public MyCartAdapter.OnItemClickListener onItemClickListener;
 
     RecyclerView recyclerView;
-    MyCartAdapter cartAdapter;
-    List<MyCartModel> cartModelList;
+    MyCartAdapter MyCartAdapter;
+    List<MyCartModel> cartModelList,cartModelListSize;
+    ConstraintLayout constrain1,constrain2;
     Button btn_buynow;
 
     private double totalAmountIncome = 0;
@@ -128,9 +128,43 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View root = inflater.inflate(R.layout.fragment_user_cart, container, false);
-
+        constrain1=(ConstraintLayout) root.findViewById(R.id.constraint1);
+        constrain2=(ConstraintLayout) root.findViewById(R.id.constraint2);
         db= FirebaseFirestore.getInstance();
         auth = FirebaseAuth.getInstance();
+
+
+            getModelList();
+
+            int size = cartModelListSize.size();
+
+//        trying();
+            if (size == 0) {
+                constrain1.setVisibility(View.GONE);
+                constrain2.setVisibility(View.VISIBLE);
+
+                visibleCart(root);
+            } else {
+                constrain2.setVisibility(View.GONE);
+                constrain1.setVisibility(View.VISIBLE);
+
+            }
+
+
+
+
+
+        return root;
+
+    }
+//
+//    private void submitOrder(){
+//        progressDialog.setMessage("Placing Order....");
+//        progressDialog.show();
+//    }
+
+    public void visibleCart(View root){
+
         recyclerView=root.findViewById(R.id.recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setHasFixedSize(true);
@@ -260,7 +294,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
 
 //                startActivity(intent);
 
-               // submitOrder();
+                // submitOrder();
 
 
 
@@ -282,29 +316,32 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
 
 
         getRecyclerView();
-
-
-//        trying();
-
-
-
-        return root;
-
     }
-//
-//    private void submitOrder(){
-//        progressDialog.setMessage("Placing Order....");
-//        progressDialog.show();
-//    }
 
+    public void getModelList(){
+        cartModelListSize=new ArrayList<>();
 
+        db.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                .collection("CurrentUser").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if(task.isSuccessful()){
+                    for(DocumentSnapshot documentSnapshot : task.getResult().getDocuments()){
+                        MyCartModel cartModel=documentSnapshot.toObject(MyCartModel.class);
+                        cartModelListSize.add(cartModel);
+
+                    }
+                }
+            }
+        });
+    }
 
 
     public void getRecyclerView(){
 
         cartModelList=new ArrayList<>();
-        cartAdapter=new MyCartAdapter(getActivity(),cartModelList, onItemClickListener);
-        recyclerView.setAdapter(cartAdapter);
+        MyCartAdapter=new MyCartAdapter(getActivity(),cartModelList, onItemClickListener,totalCharge,taxCharge,deliveryService,totalBill,constrain1,constrain2);
+        recyclerView.setAdapter(MyCartAdapter);
 
 
         db.collection("AddToCart").document(auth.getCurrentUser().getUid())
@@ -316,7 +353,7 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
                         MyCartModel cartModel=documentSnapshot.toObject(MyCartModel.class);
                         cartModelList.add(cartModel);
 
-                        cartAdapter.notifyDataSetChanged();
+                        MyCartAdapter.notifyDataSetChanged();
                         calculateCart();
 
                     }
@@ -367,23 +404,20 @@ public class UserCartFragment extends Fragment  implements MyCartAdapter.OnItemC
         double tax;
         int size=cartModelList.size();
 
-        Toast.makeText(getActivity(), "list size "+size, Toast.LENGTH_SHORT).show();
+            double price;
+            for (int i = 0; i < size; i++) {
+                price = cartModelList.get(i).getTotalPrice();
+                total_price = total_price + price;
+            }
 
+            tax = Math.round((total_price * percentax) * 100.0) / 100.0;
+            double total = Math.round((total_price + tax + delivery) * 100.0) / 100.0;
 
-        double price;
-        for(int i=0; i<size;i++)
-        {
-            price=cartModelList.get(i).getTotalPrice();
-            total_price=total_price+price;
-        }
+            totalCharge.setText("Rs " + total_price);
+            taxCharge.setText("Rs " + tax);
+            deliveryService.setText("Rs " + delivery);
+            totalBill.setText("Rs " + total);
 
-        tax=Math.round((total_price * percentax) * 100.0) / 100.0;
-        double total= Math.round((total_price + tax + delivery)* 100.0) / 100.0 ;
-
-        totalCharge.setText("Rs "+total_price);
-        taxCharge.setText("Rs "+tax);
-        deliveryService.setText("Rs "+delivery);
-        totalBill.setText("Rs "+total);
     }
 
 

@@ -15,6 +15,7 @@ import java.util.*;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -46,14 +47,23 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
     List<MyCartModel> cartModelList;
     int totalView=1;
     int totalPrice=0;
+    double total_price=0;
+    ConstraintLayout constrain1,constrain2;
+    TextView totalCharge,totalBill,taxCharge,deliveryService;
     public OnItemClickListener onItemClickListener;
 
     String name,dishDate,durl,totalQuantity,dishPrice,orderStatus;
 
-    public MyCartAdapter(Context context, List<MyCartModel> cartModelList, MyCartAdapter.OnItemClickListener onItemClickListener){
+    public MyCartAdapter(Context context, List<MyCartModel> cartModelList, MyCartAdapter.OnItemClickListener onItemClickListener,TextView totalCharge,TextView taxCharge,TextView deliveryService,TextView totalBill,ConstraintLayout constrain1,ConstraintLayout constrain2){
         this.context = context;
         this.cartModelList = cartModelList;
         this.onItemClickListener = onItemClickListener;
+        this.totalBill=totalBill;
+        this.totalCharge=totalCharge;
+        this.deliveryService=deliveryService;
+        this.taxCharge=taxCharge;
+        this.constrain1=constrain1;
+        this.constrain2=constrain2;
     }
 
     @NonNull
@@ -71,15 +81,15 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
 
         durl=cartModelList.get(position).getDurl();
 
-          Glide.with(holder.itemView)
+        Glide.with(holder.itemView)
                 .load(durl)
                 .into(holder.dishImage);
 
 
-          name=cartModelList.get(position).getDishName();
-          dishPrice=cartModelList.get(position).getDishPrice();
-          dishDate=cartModelList.get(position).getDishDate();
-          orderStatus="In Progress";
+        name=cartModelList.get(position).getDishName();
+        dishPrice=cartModelList.get(position).getDishPrice();
+        dishDate=cartModelList.get(position).getDishDate();
+        orderStatus="In Progress";
 
 
         holder.name.setText(name);
@@ -135,7 +145,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
 
     private void update(String dishName, int totalPrice, String dishDate, String dishTime, String durl, String totalQuantity, String dishPrice, String dishDescription, String id, String chefID, String orderStatus){
 
-         MyCartModel cartModel= new MyCartModel(dishName,totalPrice,dishDate,dishTime,durl,totalQuantity,dishPrice,dishDescription,id,chefID,orderStatus);
+        MyCartModel cartModel= new MyCartModel(dishName,totalPrice,dishDate,dishTime,durl,totalQuantity,dishPrice,dishDescription,id,chefID,orderStatus);
 
         db.collection("AddToCart").document(auth.getCurrentUser().getUid())
                 .collection("CurrentUser").document(id).
@@ -196,7 +206,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
 
 
 
-                                db.collection("AddToCart").document(auth.getCurrentUser().getUid())
+                db.collection("AddToCart").document(auth.getCurrentUser().getUid())
                         .collection("CurrentUser").document(cartModelList.get(getAdapterPosition()).getId()).
                         delete()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -212,7 +222,8 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
                 });
 
                 myCartAdapter.cartModelList.remove(getAdapterPosition());
-                myCartAdapter.notifyItemRemoved(getAdapterPosition());
+                myCartAdapter.notifyDataSetChanged();
+                updateBill();
 
                 //onItemClickListener.changed();
 
@@ -226,6 +237,42 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
 
 
         }
+
+
+        public void updateBill(){
+            double percentax = 0.02;
+            total_price=0;
+            double delivery = 10;
+            double tax;
+            int size=cartModelList.size();
+
+
+            if(size==0){
+                totalCharge.setText("Rs 0");
+                taxCharge.setText("Rs 0");
+                deliveryService.setText("Rs 0");
+                totalBill.setText("Rs 0");
+                constrain2.setVisibility(View.GONE);
+                constrain1.setVisibility(View.VISIBLE);
+
+            }
+            else {
+                double price;
+                for (int i = 0; i < size; i++) {
+                    price = cartModelList.get(i).getTotalPrice();
+                    total_price = total_price + price;
+                }
+
+                tax = Math.round((total_price * percentax) * 100.0) / 100.0;
+                double total = Math.round((total_price + tax + delivery) * 100.0) / 100.0;
+
+                totalCharge.setText("Rs " + total_price);
+                taxCharge.setText("Rs " + tax);
+                deliveryService.setText("Rs " + delivery);
+                totalBill.setText("Rs " + total);
+            }
+        }
+
 
         public viewHolder linkAdapter(MyCartAdapter myCartAdapter){
             this.myCartAdapter=myCartAdapter;

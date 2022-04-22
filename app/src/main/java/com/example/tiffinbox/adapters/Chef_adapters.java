@@ -25,10 +25,14 @@ public class Chef_adapters extends RecyclerView.Adapter<Chef_adapters.ViewHolder
     private Context context;
     private List<ChefData> chefData;
 
+
+
     public Chef_adapters(Context context, List<ChefData> chefData, OnItemClickListener onItemClickListener) {
         this.context = context;
         this.chefData = chefData;
         this.onItemClickListener=onItemClickListener;
+
+
     }
 
     @NonNull
