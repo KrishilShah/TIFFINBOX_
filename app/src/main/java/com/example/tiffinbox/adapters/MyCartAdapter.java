@@ -74,12 +74,47 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
 
     }
 
+    public void Bill(){
+        double percentax = 0.02;
+        double tprice=0;
+        double delivery = 10;
+        double tax;
+        int size=cartModelList.size();
 
+
+        if(size==0){
+            totalCharge.setText("Rs 0");
+            taxCharge.setText("Rs 0");
+            deliveryService.setText("Rs 0");
+            totalBill.setText("Rs 0");
+            constrain2.setVisibility(View.GONE);
+            constrain1.setVisibility(View.VISIBLE);
+
+        }
+        else {
+            double price;
+            for (int i = 0; i < size; i++) {
+                price = cartModelList.get(i).getTotalPrice();
+                tprice = tprice + price;
+            }
+
+            tax = Math.round((tprice * percentax) * 100.0) / 100.0;
+            double total = Math.round((tprice + tax + delivery) * 100.0) / 100.0;
+
+            totalCharge.setText("Rs " + tprice);
+            taxCharge.setText("Rs " + tax);
+            deliveryService.setText("Rs " + delivery);
+            totalBill.setText("Rs " + total);
+        }
+    }
 
     @Override
     public void onBindViewHolder(@NonNull viewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         durl=cartModelList.get(position).getDurl();
+
+
+
 
         Glide.with(holder.itemView)
                 .load(durl)
@@ -97,15 +132,6 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
         holder.dishPrice.setText("Rs "+dishPrice);
         holder.totalQuantity.setText(String.valueOf(cartModelList.get(position).getTotalQuantity()));
         holder.date.setText(dishDate);
-
-//        holder.removeItem.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-
-////                cartModelList.remove(position);
-//            }
-//        });
 
         holder.remove.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -153,6 +179,7 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
+//Bill();
 //                        Toast.makeText(getActivity(), "Profile Updated", Toast.LENGTH_SHORT).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
@@ -164,6 +191,8 @@ public class MyCartAdapter extends RecyclerView.Adapter<MyCartAdapter.viewHolder
 
 
     }
+
+
 
     public interface OnItemClickListener {
         void onDelete();
